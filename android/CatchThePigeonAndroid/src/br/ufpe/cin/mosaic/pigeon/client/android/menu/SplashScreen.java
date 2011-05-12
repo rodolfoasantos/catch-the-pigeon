@@ -14,7 +14,7 @@ public class SplashScreen extends Activity implements Runnable{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		Handler h = new Handler();
-		h.postDelayed(this, 5000);
+		h.postDelayed(this, 2000);
 	}
 	
 	@Override

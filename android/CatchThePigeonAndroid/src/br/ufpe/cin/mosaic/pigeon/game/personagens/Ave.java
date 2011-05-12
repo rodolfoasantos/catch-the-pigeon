@@ -10,6 +10,8 @@ public abstract class Ave extends AnimatedSprite {
 	
 	protected final PhysicsHandler mPhysicsHandler;
 	private final TiledTextureRegion pTextureRegion;
+	
+	protected boolean alive = true;
 
 	public Ave(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
 		super(pX, pY, pTextureRegion);
@@ -34,4 +36,13 @@ public abstract class Ave extends AnimatedSprite {
 	 * @return Velocidade da Ave
 	 */
 	public abstract float getVelocity();
+	
+
+	public boolean isAlive() {
+		return alive;
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
 }

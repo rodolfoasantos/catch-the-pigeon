@@ -5,17 +5,22 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 public class BadPigeon extends Ave {
 	
 	/** Velocidade da Ave */	
-	private float velocity = 20.0f;
+	private float velocity = 60.0f;
 	
 	/** Posicao da ave na tela no eixo x*/
 	private float posX = 0;
 	/** Posicao da ave na tela no eixo y*/
 	private float posY = 0;
 	
-	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
+	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnimation, int endAnimation) {
 		super(pX, pY, pTextureRegion);
 		this.posX = pX;
 		this.posY = pY;
+		this.animate(new long[]{200, 200, 200}, startAnimation, endAnimation, true);
+	}
+	
+	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
+		this(pX, pY, pTextureRegion, 0, 2);
 	}
 
 	@Override

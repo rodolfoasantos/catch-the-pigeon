@@ -16,55 +16,17 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
-    >
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="20dip"
-        android:layout_marginBottom="5dip"
-        android:text="@string/welcome"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="5dip"
-        android:text="@string/explain2"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="20dip"
-        android:text="@string/explain1"
-        />
-    <Button android:layout_width="wrap_content" android:id="@+id/start_player" android:layout_height="wrap_content" android:text="@string/start_player"></Button>
-    <Button
-        android:id="@+id/start_comp"
-        android:text="@string/start_comp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"
-        />
-
-    <ImageView
-        android:id="@+id/ImageView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon"
-        />
+    android:gravity="center_horizontal" android:orientation="vertical">
+    <ImageView android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_width="wrap_content" android:id="@+id/ImageView01"></ImageView>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/start_player" android:id="@+id/start_player" android:layout_gravity="center"></Button>
+    <Button android:layout_width="wrap_content" android:layout_marginBottom="10dip" android:layout_height="wrap_content" android:text="@string/start_comp" android:id="@+id/start_comp" android:layout_gravity="center"></Button>
 	
 	<Button
         android:id="@+id/connect_facebook"
         android:background="@drawable/facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"
-        android:layout_gravity="left"/>
+        android:layout_marginBottom="10dip" android:layout_gravity="center"/>
 </LinearLayout>

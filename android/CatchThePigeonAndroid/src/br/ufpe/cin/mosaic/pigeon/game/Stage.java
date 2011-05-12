@@ -25,8 +25,10 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.content.Intent;
 import br.ufpe.cin.mosaic.pigeon.business.android.facebook.LoginFacebook;
+import br.ufpe.cin.mosaic.pigeon.game.personagens.Ave;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.BadPigeon;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.Pigeon;
+import br.ufpe.cin.mosaic.pigeon.game.personagens.animations.BirdExplosion;
 
 public class Stage extends BaseGameActivity {
 
@@ -46,6 +48,7 @@ public class Stage extends BaseGameActivity {
 	private Texture mTexture;
 	public static TiledTextureRegion mPlayerTextureRegion;
 	public static TiledTextureRegion mEnemyTextureRegion1;
+	public static TiledTextureRegion mExplosionPlayerTexture;
 
 	private Texture mAutoParallaxBackgroundTexture;
 
@@ -65,7 +68,8 @@ public class Stage extends BaseGameActivity {
 	public void onLoadResources() {
 		this.mTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		this.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/badpig.png", 97, 0, 3, 4);
+		this.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		this.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 
 		//----- Background ------
 		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024, TextureOptions.DEFAULT);
@@ -108,17 +112,17 @@ public class Stage extends BaseGameActivity {
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 		
-		final Pigeon pigeon = new Pigeon(playerX + 200, playerY, Stage.mPlayerTextureRegion);
+		final Pigeon pigeon = new Pigeon(playerX + 100, playerY, Stage.mPlayerTextureRegion);
 		
 		final BadPigeon badPigeon1 = new BadPigeon(playerX - 120, playerY, Stage.mEnemyTextureRegion1);
 		final BadPigeon badPigeon2 = new BadPigeon(playerX - 130, playerY + 100, Stage.mEnemyTextureRegion1);
-		final BadPigeon badPigeon3 = new BadPigeon(playerX - 140, playerY - 100, Stage.mEnemyTextureRegion1);
+		final BadPigeon badPigeon3 = new BadPigeon(playerX - 140, playerY - 100, Stage.mEnemyTextureRegion1);		
 		
 		scene.getLastChild().attachChild(pigeon);
 				
 		scene.getLastChild().attachChild(badPigeon1);
 		scene.getLastChild().attachChild(badPigeon2);
-		scene.getLastChild().attachChild(badPigeon3);
+		scene.getLastChild().attachChild(badPigeon3);		
 		
 		scene.registerTouchArea(badPigeon1);
 		scene.registerTouchArea(badPigeon2);
@@ -126,12 +130,12 @@ public class Stage extends BaseGameActivity {
 		scene.setOnAreaTouchListener(new IOnAreaTouchListener() {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final ITouchArea pTouchArea, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {				
-				if(pSceneTouchEvent.isActionDown()) {
+				/*if(pSceneTouchEvent.isActionDown()) {
 					final RunnableHandler runnableHandler = new RunnableHandler();
 			        Stage.this.mEngine.getScene().registerUpdateHandler(runnableHandler);
-			        /*Log.d("AreaLocalX", String.valueOf(pTouchAreaLocalX));
-			        Log.d("badPigeon1.getX()", String.valueOf(badPigeon1.getX()));*/
-                    runnableHandler.postRunnable(new Runnable() {
+			        
+
+			        runnableHandler.postRunnable(new Runnable() {
                         @Override
                         public void run() {
                         	final float margem = 20;
@@ -152,7 +156,16 @@ public class Stage extends BaseGameActivity {
                         }
                     });
 				}				
-				return true;
+				return true;*/
+				if(pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					scene.unregisterTouchArea((ITouchArea)pTouchArea);
+					scene.getLastChild().detachChild((Ave)pTouchArea);
+                    
+                    return true;
+            }
+
+            return false;
+
 			}
 		});
 		scene.setTouchAreaBindingEnabled(true);
@@ -170,9 +183,13 @@ public class Stage extends BaseGameActivity {
 					startActivity(i);
 				}
 				
-				if(badPigeon1.collidesWith(pigeon)) {
+				if(((badPigeon1.collidesWith(pigeon)) /*|| (badPigeon2.collidesWith(pigeon)) || (badPigeon3.collidesWith(pigeon))*/) &&
+				 (pigeon.isAlive())){
 					//Stage.mExplosionSound.play();
-					System.exit(0);
+					scene.getLastChild().detachChild(pigeon);
+					final BirdExplosion explosion1 = new BirdExplosion(Pigeon.posX, Pigeon.posY, Stage.mExplosionPlayerTexture);
+					scene.getLastChild().attachChild(explosion1);
+					pigeon.setAlive(false);
 				}
 			}
 		});
