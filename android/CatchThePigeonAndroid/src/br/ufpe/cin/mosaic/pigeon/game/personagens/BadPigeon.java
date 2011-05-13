@@ -2,20 +2,17 @@ package br.ufpe.cin.mosaic.pigeon.game.personagens;
 
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
+import android.util.Log;
+
 public class BadPigeon extends Ave {
 	
 	/** Velocidade da Ave */	
-	private float velocity = 60.0f;
-	
-	/** Posicao da ave na tela no eixo x*/
-	private float posX = 0;
-	/** Posicao da ave na tela no eixo y*/
-	private float posY = 0;
+	public static float velocity = 60.0f;
+
 	
 	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnimation, int endAnimation) {
 		super(pX, pY, pTextureRegion);
-		this.posX = pX;
-		this.posY = pY;
+		this.setPosition(pX, pY);
 		this.animate(new long[]{200, 200, 200}, startAnimation, endAnimation, true);
 	}
 	
@@ -25,11 +22,9 @@ public class BadPigeon extends Ave {
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) { 
-		this.mPhysicsHandler.setVelocityX(this.velocity);
-		//A perseguicao e feita calculando a diferenca de altura entre o pombo mau e o bom e em seguindo diminuindo a distancia entre eles com a porcentagem entre a distancia do pombo mau e o bom
-		//this.mPhysicsHandler.setVelocityY((Pigeon.posY - this.posY) * (this.posX/Pigeon.posX));
-		this.mPhysicsHandler.setVelocityY((Pigeon.posY - this.posY) * (this.posX/Pigeon.posX));
-		
+		this.mPhysicsHandler.setVelocityX(this.velocity * (Pigeon.posX < this.getX() ? - 1: 1));
+		//A perseguicao e feita calculando a diferenca de altura entre o pombo mau e o bom e em seguindo diminuindo a distancia entre eles com a porcentagem entre a distancia do pombo mau e o bom		
+		this.mPhysicsHandler.setVelocityY((Pigeon.posY - this.getY()) * (this.getX()/Pigeon.posX));		
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 	

@@ -16,15 +16,14 @@
         <activity android:label="@string/app_name" android:name=".menu.MainActivity">
         </activity>
 
-        <!-- This is defined in TicTacToeLib. Right now we need to manually       
-             copy it here. Eventually it should get merged automatically. -->
         <activity android:name="br.ufpe.cin.mosaic.pigeon.business.android.facebook.LoginFacebook"></activity>
-        <activity android:name="br.ufpe.cin.mosaic.pigeon.game.Stage">
+        <activity android:name="br.ufpe.cin.mosaic.pigeon.game.Stage1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="br.ufpe.cin.mosaic.pigeon.game.Stage2"> </activity>
 
 
     </application>

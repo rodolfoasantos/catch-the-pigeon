@@ -4,7 +4,7 @@ import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
-import br.ufpe.cin.mosaic.pigeon.game.Stage;
+import br.ufpe.cin.mosaic.pigeon.game.Stage1;
 
 public abstract class Ave extends AnimatedSprite {
 	
@@ -17,7 +17,7 @@ public abstract class Ave extends AnimatedSprite {
 		super(pX, pY, pTextureRegion);
 		this.pTextureRegion = pTextureRegion;
 		
-		this.setScaleCenterY(Stage.mPlayerTextureRegion.getTileHeight());
+		this.setScaleCenterY(Stage1.mPlayerTextureRegion.getTileHeight());
 		this.setScale(2);
 		this.animate(new long[]{200, 200, 200}, 3, 5, true);
 

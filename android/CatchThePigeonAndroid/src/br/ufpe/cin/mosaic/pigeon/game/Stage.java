@@ -1,5 +1,8 @@
 package br.ufpe.cin.mosaic.pigeon.game;
 
+import java.util.Iterator;
+import java.util.Vector;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.handler.IUpdateHandler;
@@ -30,25 +33,20 @@ import br.ufpe.cin.mosaic.pigeon.game.personagens.BadPigeon;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.Pigeon;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.animations.BirdExplosion;
 
-public class Stage extends BaseGameActivity {
-
-	// ===========================================================
-	// Constants-
-	// ===========================================================
+public abstract class Stage extends BaseGameActivity {
 
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-
 	private Camera mCamera;
+		
+	private boolean nextStage = false;
 
 	private Texture mTexture;
 	public static TiledTextureRegion mPlayerTextureRegion;
 	public static TiledTextureRegion mEnemyTextureRegion1;
 	public static TiledTextureRegion mExplosionPlayerTexture;
+	public static TiledTextureRegion mInvertedEnemyTextureRegion;
 
 	private Texture mAutoParallaxBackgroundTexture;
 
@@ -58,6 +56,10 @@ public class Stage extends BaseGameActivity {
 	
 	//public static Sound mExplosionSound;
 
+	protected Vector<BadPigeon> badPigeons = new Vector();
+	protected Scene scene;
+	protected Pigeon pigeon;
+	
 	@Override
 	public Engine onLoadEngine() {
 		this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -66,9 +68,11 @@ public class Stage extends BaseGameActivity {
 
 	@Override
 	public void onLoadResources() {
+		this.scene = new Scene(1);
 		this.mTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		this.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		this.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		this.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 
 		//----- Background ------
@@ -79,6 +83,8 @@ public class Stage extends BaseGameActivity {
 
 		this.mEngine.getTextureManager().loadTextures(this.mTexture, this.mAutoParallaxBackgroundTexture);
 		//-----------------------
+		
+		createCharacters();
 				
 		/*try {
 			Stage.mExplosionSound = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "mfx/explosion.ogg");
@@ -91,8 +97,7 @@ public class Stage extends BaseGameActivity {
 	public Scene onLoadScene() {
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 
-		//--------------- Criando a Cena e inserindo o background ---------------
-		final Scene scene = new Scene(1);
+		//--------------- Criando a Cena e inserindo o background ---------------		
 		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0, 0, 0, 5);
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(0.0f, new Sprite(0, CAMERA_HEIGHT - this.mParallaxLayerBack.getHeight(), this.mParallaxLayerBack)));
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f, new Sprite(0, 80, this.mParallaxLayerMid)));
@@ -107,52 +112,16 @@ public class Stage extends BaseGameActivity {
 		//colisionRectangle.registerEntityModifier(new LoopEntityModifier(new ParallelEntityModifier(new RotationModifier(6, 0, 360), new SequenceEntityModifier(new ScaleModifier(3, 1, 1.5f), new ScaleModifier(3, 1.5f, 1)))));		
 		scene.getLastChild().attachChild(colisionLine);
 		//-------------------------------------------------------------------
-
-		/* Calculate the coordinates for the face, so its centered on the camera. */
-		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
-		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 		
-		final Pigeon pigeon = new Pigeon(playerX + 100, playerY, Stage.mPlayerTextureRegion);
-		
-		final BadPigeon badPigeon1 = new BadPigeon(playerX - 120, playerY, Stage.mEnemyTextureRegion1);
-		final BadPigeon badPigeon2 = new BadPigeon(playerX - 130, playerY + 100, Stage.mEnemyTextureRegion1);
-		final BadPigeon badPigeon3 = new BadPigeon(playerX - 140, playerY - 100, Stage.mEnemyTextureRegion1);		
-		
-		scene.getLastChild().attachChild(pigeon);
-				
-		scene.getLastChild().attachChild(badPigeon1);
-		scene.getLastChild().attachChild(badPigeon2);
-		scene.getLastChild().attachChild(badPigeon3);		
-		
-		scene.registerTouchArea(badPigeon1);
-		scene.registerTouchArea(badPigeon2);
-		scene.registerTouchArea(badPigeon3);		
 		scene.setOnAreaTouchListener(new IOnAreaTouchListener() {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final ITouchArea pTouchArea, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {				
 				/*if(pSceneTouchEvent.isActionDown()) {
 					final RunnableHandler runnableHandler = new RunnableHandler();
-			        Stage.this.mEngine.getScene().registerUpdateHandler(runnableHandler);
-			        
-
+			        Stage.this.mEngine.getScene().registerUpdateHandler(runnableHandler);			        
 			        runnableHandler.postRunnable(new Runnable() {
                         @Override
-                        public void run() {
-                        	final float margem = 20;
-                        	float x = pSceneTouchEvent.getX();
-                        	float y = pSceneTouchEvent.getY();
-                        	if (((x + margem > badPigeon1.getX()) && (x + margem < badPigeon1.getX() + badPigeon1.getWidth())) && 
-                        		((y + margem > badPigeon1.getY()) && (y + margem < badPigeon1.getY() + badPigeon1.getHeight())))  {
-                        			scene.getLastChild().detachChild(badPigeon1);
-                        	} 
-                        	if (((x + margem > badPigeon2.getX()) && (x + margem < badPigeon2.getX() + badPigeon2.getWidth())) && 
-                                ((y + margem > badPigeon2.getY()) && (y + margem < badPigeon2.getY() + badPigeon2.getHeight())))  {
-                                	scene.getLastChild().detachChild(badPigeon2);
-                        	} 
-                        	if (((x + margem > badPigeon3.getX()) && (x + margem < badPigeon3.getX() + badPigeon3.getWidth())) && 
-                        		((y + margem > badPigeon3.getY()) && (y + margem < badPigeon3.getY() + badPigeon3.getHeight())))  {
-                        			scene.getLastChild().detachChild(badPigeon3);
-                        	}
+                        public void run() {                    
                         }
                     });
 				}				
@@ -179,11 +148,15 @@ public class Stage extends BaseGameActivity {
 			public void onUpdate(final float pSecondsElapsed) {				
 				if(colisionLine.collidesWith(pigeon)) {
 					/*Chama a tela de login do facebook quando o pombo alcanca o final da tela*/
-					Intent i = new Intent(getBaseContext(),LoginFacebook.class);
-					startActivity(i);
+					//Intent i = new Intent(getBaseContext(),LoginFacebook.class);					
+					//startActivity(i);
+					if(!nextStage) {
+						nextStage();
+						nextStage = true; //Feito para não criar mais de uma instância de Stage já que onUpdate é chaamdo várias vezes
+					}
 				}
 				
-				if(((badPigeon1.collidesWith(pigeon)) /*|| (badPigeon2.collidesWith(pigeon)) || (badPigeon3.collidesWith(pigeon))*/) &&
+				if(((badPigeons.elementAt(0).collidesWith(pigeon)) /*|| (badPigeon2.collidesWith(pigeon)) || (badPigeon3.collidesWith(pigeon))*/) &&
 				 (pigeon.isAlive())){
 					//Stage.mExplosionSound.play();
 					scene.getLastChild().detachChild(pigeon);
@@ -199,5 +172,8 @@ public class Stage extends BaseGameActivity {
 
 	@Override
 	public void onLoadComplete() {}
+	
+	protected abstract void createCharacters();
+	protected abstract void nextStage();
 	
 }

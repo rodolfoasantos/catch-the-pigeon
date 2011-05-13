@@ -5,7 +5,7 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 public class Pigeon extends Ave {
 	
 	/** Velocidade da Ave */
-	private float velocity = 30.0f;
+	public static float velocity = 30.0f;
 	
 	/** Posicao do pombo na tela no eixo x*/
 	public static float posX = 0;
@@ -14,9 +14,7 @@ public class Pigeon extends Ave {
 	
 	public Pigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
 		super(pX, pY, pTextureRegion);
-		Pigeon.posX = pX;
-		Pigeon.posY = pY;
-		
+		this.setPosition(pX, pY);		
 		this.animate(new long[]{200, 200, 200}, 3, 5, true);
 	}
 
@@ -25,7 +23,6 @@ public class Pigeon extends Ave {
 		this.mPhysicsHandler.setVelocityX(this.velocity);
 		Pigeon.posX = this.getX();
 		Pigeon.posY = this.getY();
-		//Pigeon.posX += this.velocity;
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 	
