@@ -7,7 +7,7 @@ import android.util.Log;
 public class BadPigeon extends Ave {
 	
 	/** Velocidade da Ave */	
-	public static float velocity = 60.0f;
+	public static float velocity = 70.0f;
 
 	
 	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnimation, int endAnimation) {

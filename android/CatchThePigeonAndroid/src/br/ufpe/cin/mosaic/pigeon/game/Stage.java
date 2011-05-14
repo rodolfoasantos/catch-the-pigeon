@@ -116,20 +116,16 @@ public abstract class Stage extends BaseGameActivity {
 		scene.setOnAreaTouchListener(new IOnAreaTouchListener() {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final ITouchArea pTouchArea, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {				
-				/*if(pSceneTouchEvent.isActionDown()) {
+				if(pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 					final RunnableHandler runnableHandler = new RunnableHandler();
 			        Stage.this.mEngine.getScene().registerUpdateHandler(runnableHandler);			        
 			        runnableHandler.postRunnable(new Runnable() {
                         @Override
-                        public void run() {                    
+                        public void run() {
+                        	scene.unregisterTouchArea((ITouchArea)pTouchArea);
+        					scene.getLastChild().detachChild((Ave)pTouchArea);
                         }
                     });
-				}				
-				return true;*/
-				if(pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					scene.unregisterTouchArea((ITouchArea)pTouchArea);
-					scene.getLastChild().detachChild((Ave)pTouchArea);
-                    
                     return true;
             }
 
@@ -156,13 +152,14 @@ public abstract class Stage extends BaseGameActivity {
 					}
 				}
 				
-				if(((badPigeons.elementAt(0).collidesWith(pigeon)) /*|| (badPigeon2.collidesWith(pigeon)) || (badPigeon3.collidesWith(pigeon))*/) &&
-				 (pigeon.isAlive())){
+				if(/*colissionWithPigeon()*/badPigeons.elementAt(0).collidesWith(pigeon)){
 					//Stage.mExplosionSound.play();
-					scene.getLastChild().detachChild(pigeon);
-					final BirdExplosion explosion1 = new BirdExplosion(Pigeon.posX, Pigeon.posY, Stage.mExplosionPlayerTexture);
-					scene.getLastChild().attachChild(explosion1);
-					pigeon.setAlive(false);
+					if (pigeon.isAlive()) {
+						scene.getLastChild().detachChild(pigeon);
+						final BirdExplosion explosion1 = new BirdExplosion(Pigeon.posX, Pigeon.posY, Stage.mExplosionPlayerTexture);
+						scene.getLastChild().attachChild(explosion1);
+						pigeon.setAlive(false);
+					}
 				}
 			}
 		});
@@ -170,10 +167,17 @@ public abstract class Stage extends BaseGameActivity {
 		return scene;
 	}
 
+
+	protected boolean colissionWithPigeon() {
+		for (BadPigeon bp: badPigeons) {
+			if(bp.collidesWith(this.pigeon)) return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public void onLoadComplete() {}
 	
 	protected abstract void createCharacters();
 	protected abstract void nextStage();
-	
 }

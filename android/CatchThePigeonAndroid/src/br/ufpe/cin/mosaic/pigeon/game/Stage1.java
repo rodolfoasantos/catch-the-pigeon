@@ -20,9 +20,10 @@ public class Stage1 extends Stage {
 		this.pigeon = new Pigeon(playerX + 100, playerY, Stage1.mPlayerTextureRegion);
 		
 		badPigeons.add(new BadPigeon(1, playerY, Stage1.mEnemyTextureRegion1));
-		badPigeons.add(new BadPigeon(1, playerY + 100, Stage1.mEnemyTextureRegion1));
-		badPigeons.add(new BadPigeon(1, playerY - 100, Stage1.mEnemyTextureRegion1));
-		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage1.mInvertedEnemyTextureRegion, 9, 11));		
+		badPigeons.add(new BadPigeon(100, playerY + 100, Stage1.mEnemyTextureRegion1));
+		badPigeons.add(new BadPigeon(-100, playerY - 100, Stage1.mEnemyTextureRegion1));
+		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage1.mInvertedEnemyTextureRegion, 9, 11));
+		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage1.mInvertedEnemyTextureRegion, 9, 11));		
 		
 		scene.getLastChild().attachChild(pigeon);
 
@@ -38,6 +39,5 @@ public class Stage1 extends Stage {
 		startActivity(i);
 		
 		BadPigeon.velocity *= 1.3; 
-	}
-	
+	}	
 }
