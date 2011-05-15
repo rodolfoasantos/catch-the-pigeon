@@ -45,6 +45,10 @@ public abstract class Ave extends AnimatedSprite {
 		life++;
 	}
 	
+	public int getLife() {
+		return life;
+	}
+	
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {

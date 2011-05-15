@@ -17,8 +17,10 @@ import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
 import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
 import org.anddev.andengine.entity.sprite.Sprite;
+import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.input.touch.TouchEvent;
+import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -27,6 +29,8 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import br.ufpe.cin.mosaic.pigeon.business.android.facebook.LoginFacebook;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.Ave;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.BadPigeon;
@@ -54,6 +58,9 @@ public abstract class Stage extends BaseGameActivity {
 	private TextureRegion mParallaxLayerMid;
 	private TextureRegion mParallaxLayerFront;
 	
+	private Texture mFontTexture;
+	private Font mFont;
+	
 	//public static Sound mExplosionSound;
 
 	protected Vector<BadPigeon> badPigeons = new Vector();
@@ -75,6 +82,14 @@ public abstract class Stage extends BaseGameActivity {
 		this.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		this.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 
+		//-------- Texto -------		
+		this.mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 36, true, Color.WHITE);
+		this.mEngine.getTextureManager().loadTexture(this.mFontTexture);
+		this.mEngine.getFontManager().loadFont(this.mFont);
+		//---------------------
+		
+		
 		//----- Background ------
 		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024, TextureOptions.DEFAULT);
 		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this, "gfx/parallax_background_layer_front.png", 0, 0);
@@ -105,6 +120,12 @@ public abstract class Stage extends BaseGameActivity {
 		scene.setBackground(autoParallaxBackground);
 		//---------------------------------------------------------------------
 
+		//--------------- Criando texto exibido ---------------
+		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
+		scene.getLastChild().attachChild(lifeText);
+		
+		//-----------------------------------------------------
+		
 		// -------------- Criando Retangulo para colisão --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
 		final int rectangleY = (CAMERA_HEIGHT);		
@@ -154,7 +175,7 @@ public abstract class Stage extends BaseGameActivity {
 				
 				if(colissionWithPigeon()){
 					//Stage.mExplosionSound.play();
-					if (pigeon.isAlive()) {	
+					if (pigeon.isAlive()) {						
 						if(pigeon.sufferDamage()) {
 							//the bird died														
 							scene.getLastChild().detachChild(pigeon);
@@ -164,6 +185,7 @@ public abstract class Stage extends BaseGameActivity {
 							Pigeon.posX = 1000;
 							pigeon.setAlive(false); 
 						}
+						lifeText.setText("♥: " + pigeon.getLife());
 					}
 				}
 			}
