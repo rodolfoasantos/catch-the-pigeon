@@ -152,13 +152,18 @@ public abstract class Stage extends BaseGameActivity {
 					}
 				}
 				
-				if(/*colissionWithPigeon()*/badPigeons.elementAt(0).collidesWith(pigeon)){
+				if(colissionWithPigeon()){
 					//Stage.mExplosionSound.play();
-					if (pigeon.isAlive()) {
-						scene.getLastChild().detachChild(pigeon);
-						final BirdExplosion explosion1 = new BirdExplosion(Pigeon.posX, Pigeon.posY, Stage.mExplosionPlayerTexture);
-						scene.getLastChild().attachChild(explosion1);
-						pigeon.setAlive(false);
+					if (pigeon.isAlive()) {	
+						if(pigeon.sufferDamage()) {
+							//the bird died
+							pigeon.setPosition(1000, -1000);
+							Pigeon.posX = 1000;
+							scene.getLastChild().detachChild(pigeon);
+							final BirdExplosion explosion1 = new BirdExplosion(Pigeon.posX, Pigeon.posY, Stage.mExplosionPlayerTexture);
+							scene.getLastChild().attachChild(explosion1);
+							pigeon.setAlive(false); 
+						}
 					}
 				}
 			}
@@ -170,7 +175,16 @@ public abstract class Stage extends BaseGameActivity {
 
 	protected boolean colissionWithPigeon() {
 		for (BadPigeon bp: badPigeons) {
-			if(bp.collidesWith(this.pigeon)) return true;
+			if((bp.isAlive()) && (bp.collidesWith(this.pigeon))) {
+				if(bp.sufferDamage()) {
+					//the bird died
+					bp.setAlive(false);
+					scene.getLastChild().detachChild(bp);
+					final BirdExplosion explosion1 = new BirdExplosion(bp.getX(), bp.getY(), Stage.mExplosionPlayerTexture);
+					scene.getLastChild().attachChild(explosion1);
+				}
+				return true;
+			}
 		}
 		return false;
 	}

@@ -4,6 +4,7 @@ import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
+import android.util.Log;
 import br.ufpe.cin.mosaic.pigeon.game.Stage1;
 
 public abstract class Ave extends AnimatedSprite {
@@ -12,9 +13,12 @@ public abstract class Ave extends AnimatedSprite {
 	private final TiledTextureRegion pTextureRegion;
 	
 	protected boolean alive = true;
+	
+	private int life;
 
-	public Ave(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
+	public Ave(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
 		super(pX, pY, pTextureRegion);
+		this.life = life;
 		this.pTextureRegion = pTextureRegion;
 		
 		this.setScaleCenterY(Stage1.mPlayerTextureRegion.getTileHeight());
@@ -24,7 +28,23 @@ public abstract class Ave extends AnimatedSprite {
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 	}
-
+	
+	/**
+	 * Quando a ave sofrer dano esse método será chamado.
+	 * @return O personagem morreu?
+	 */
+	public boolean sufferDamage() {
+		Log.d("Pigeon", "sofreu dano");
+		return (--life == 0);
+	}
+	
+	/**
+	 * Quando a ave encontra algum item que aumente q quantidade de danos que ela pode sofrer
+	 */
+	protected void incLife() {
+		life++;
+	}
+	
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {

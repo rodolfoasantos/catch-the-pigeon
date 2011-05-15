@@ -12,8 +12,9 @@ public class Pigeon extends Ave {
 	/** Posicao do pombo na tela no eixo y*/
 	public static float posY = 0;
 	
-	public Pigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
-		super(pX, pY, pTextureRegion);
+	
+	public Pigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
+		super(pX, pY, pTextureRegion, life);
 		this.setPosition(pX, pY);		
 		this.animate(new long[]{200, 200, 200}, 3, 5, true);
 	}
