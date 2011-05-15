@@ -156,12 +156,12 @@ public abstract class Stage extends BaseGameActivity {
 					//Stage.mExplosionSound.play();
 					if (pigeon.isAlive()) {	
 						if(pigeon.sufferDamage()) {
-							//the bird died
-							pigeon.setPosition(1000, -1000);
-							Pigeon.posX = 1000;
+							//the bird died														
 							scene.getLastChild().detachChild(pigeon);
 							final BirdExplosion explosion1 = new BirdExplosion(Pigeon.posX, Pigeon.posY, Stage.mExplosionPlayerTexture);
 							scene.getLastChild().attachChild(explosion1);
+							pigeon.setPosition(1000, -1000);
+							Pigeon.posX = 1000;
 							pigeon.setAlive(false); 
 						}
 					}
