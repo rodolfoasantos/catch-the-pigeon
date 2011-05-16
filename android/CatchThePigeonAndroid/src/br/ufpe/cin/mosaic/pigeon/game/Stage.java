@@ -3,6 +3,8 @@ package br.ufpe.cin.mosaic.pigeon.game;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.anddev.andengine.audio.sound.Sound;
+import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.handler.IUpdateHandler;
@@ -31,6 +33,8 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
+import android.view.KeyEvent;
 import br.ufpe.cin.mosaic.pigeon.business.android.facebook.LoginFacebook;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.Ave;
 import br.ufpe.cin.mosaic.pigeon.game.personagens.BadPigeon;
@@ -61,7 +65,7 @@ public abstract class Stage extends BaseGameActivity {
 	private Texture mFontTexture;
 	private Font mFont;
 	
-	//public static Sound mExplosionSound;
+	public static Sound mExplosionSound;
 
 	protected Vector<BadPigeon> badPigeons = new Vector();
 	protected Scene scene;
@@ -77,10 +81,10 @@ public abstract class Stage extends BaseGameActivity {
 	public void onLoadResources() {
 		this.scene = new Scene(1);
 		this.mTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		this.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		this.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		this.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		Stage.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		Stage.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 
 		//-------- Texto -------		
 		this.mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -101,11 +105,11 @@ public abstract class Stage extends BaseGameActivity {
 		
 		createCharacters();
 				
-		/*try {
+		try {
 			Stage.mExplosionSound = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "mfx/explosion.ogg");
 		} catch (final Exception e) {
 			Log.d("Erro: ", e.toString());
-		}*/
+		}
 	}
 
 	@Override
@@ -173,8 +177,7 @@ public abstract class Stage extends BaseGameActivity {
 					}
 				}
 				
-				if(colissionWithPigeon()){
-					//Stage.mExplosionSound.play();
+				if(colissionWithPigeon()){					
 					if (pigeon.isAlive()) {						
 						if(pigeon.sufferDamage()) {
 							//the bird died														
@@ -183,7 +186,8 @@ public abstract class Stage extends BaseGameActivity {
 							scene.getLastChild().attachChild(explosion1);
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
-							pigeon.setAlive(false); 
+							pigeon.setAlive(false);
+							Stage.mExplosionSound.play();
 						}
 						lifeText.setText("♥: " + pigeon.getLife());
 					}
@@ -201,6 +205,7 @@ public abstract class Stage extends BaseGameActivity {
 				if(bp.sufferDamage()) {
 					//the bird died
 					bp.setAlive(false);
+					Stage.mExplosionSound.play();
 					scene.getLastChild().detachChild(bp);
 					final BirdExplosion explosion1 = new BirdExplosion(bp.getX(), bp.getY(), Stage.mExplosionPlayerTexture);
 					scene.getLastChild().attachChild(explosion1);
@@ -209,6 +214,42 @@ public abstract class Stage extends BaseGameActivity {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+	        if(pEvent.getAction() == KeyEvent.ACTION_DOWN) 	        {
+	                switch(pKeyCode) 	                {      
+	                        case KeyEvent.KEYCODE_MENU: {
+	                                //do something here
+	                                return true; //this indicates that the key was processed       
+	                        } 
+	                        case KeyEvent.KEYCODE_BACK: {
+	                                System.exit(0);
+	                                return true;
+	                        }
+	                        case KeyEvent.KEYCODE_DPAD_LEFT: {
+	                                //react on left key press
+	                                return true;
+	                        }
+	                        case KeyEvent.KEYCODE_DPAD_RIGHT: {
+	                                //react on right key press
+	                                return true;
+	                        }
+	                        case KeyEvent.KEYCODE_DPAD_UP: {
+	                                //react on up key press
+	                                return true;
+	                        }
+	                        case KeyEvent.KEYCODE_DPAD_DOWN: {
+	                                //react on down key press
+	                                return true;
+	                        }
+	                        default:
+	                                return super.onKeyDown(pKeyCode, pEvent); //this will allow keypesses other than that to be processed in other places, for example by android OS
+	                }
+	        }
+	        else
+	                return super.onKeyDown(pKeyCode, pEvent); //similarily, this will allow actions other than key press to be processed elsewhere.
 	}
 	
 	@Override
