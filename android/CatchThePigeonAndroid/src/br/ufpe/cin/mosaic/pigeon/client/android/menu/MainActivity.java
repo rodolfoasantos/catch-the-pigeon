@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import br.ufpe.cin.mosaic.pigeon.business.android.facebook.LoginFacebook;
 import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.ufpe.cin.mosaic.pigeon.game.Stage;
 import br.ufpe.cin.mosaic.pigeon.game.Stage1;
 
 public class MainActivity extends Activity {
@@ -32,6 +33,9 @@ public class MainActivity extends Activity {
 	}
 	
 	private void startGame(boolean startWithHuman) {
+		//call the dialog to set a message
+		this.showDialog(Stage.DIALOG_CHOOSE_MESSAGE);
+		
 		Intent i = new Intent(this, Stage1.class);
 		startActivity(i);
 	}

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.ufpe.cin.mosaic.pigeon.game.Stage;
 
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.Facebook;
@@ -54,6 +55,8 @@ public class LoginFacebook extends Activity {
     }
     
     public void postWallFacebook() {
+    	Bundle parameters = new Bundle();
+    	parameters.putString("message", Stage.message);
     	mFacebook.dialog(LoginFacebook.this, "feed", new SampleDialogListener());
     }
             
