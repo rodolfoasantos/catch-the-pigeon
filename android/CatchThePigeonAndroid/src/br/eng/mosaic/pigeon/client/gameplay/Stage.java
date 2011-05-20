@@ -45,7 +45,7 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
-import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.eng.mosaic.pigeon.client.R;
 
 public abstract class Stage extends BaseGameActivity {
 

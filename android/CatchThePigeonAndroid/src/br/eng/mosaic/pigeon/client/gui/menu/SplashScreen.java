@@ -1,6 +1,6 @@
 package br.eng.mosaic.pigeon.client.gui.menu;
 
-import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.eng.mosaic.pigeon.client.R;
 
 import android.app.Activity;
 import android.content.Intent;

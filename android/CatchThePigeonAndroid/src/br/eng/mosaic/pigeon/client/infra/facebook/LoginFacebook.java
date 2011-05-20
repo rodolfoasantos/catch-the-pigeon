@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
-import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.eng.mosaic.pigeon.client.R;
 
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.Facebook;

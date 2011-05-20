@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.gameplay.Stage1;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
-import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.eng.mosaic.pigeon.client.R;
 
 public class MainActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -18,25 +18,31 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		findViewById(R.id.start_player).setOnClickListener(
+		findViewById(R.id.start_game).setOnClickListener(
 				new OnClickListener() {
 					public void onClick(View v) {
-						startGame(true);
+						startGame();
 					}
 				});
 
-		findViewById(R.id.start_comp).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				startGame(false);
+				showTopFive();
 			}
 		});
 	}
 	
-	private void startGame(boolean startWithHuman) {
+	private void startGame() {
 		//call the dialog to set a message
 		this.showDialog(Stage.DIALOG_CHOOSE_MESSAGE);
 		
 		Intent i = new Intent(this, Stage1.class);
+		startActivity(i);
+	}
+	
+	private void showTopFive() {
+		
+		Intent i = new Intent(this, TopFiveActivity.class);
 		startActivity(i);
 	}
     

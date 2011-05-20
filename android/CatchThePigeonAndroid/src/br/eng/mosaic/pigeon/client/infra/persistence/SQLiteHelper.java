@@ -12,7 +12,7 @@ import android.util.Log;
  */
 class SQLiteHelper extends SQLiteOpenHelper {
 
-	private static final String CATEGORY = "EASY";
+	//private static final String CATEGORY = "EASY";
 
 	private String[] scriptSQLCreate;
 	private String scriptSQLDelete;
@@ -39,12 +39,12 @@ class SQLiteHelper extends SQLiteOpenHelper {
 	 *  @param SQLiteDatabase - Database reference 
 	 */
 	public void onCreate(SQLiteDatabase db) {
-		Log.i(CATEGORY, "Creating SQL DB");
+		System.out.println("Creating SQL DB");
 		int qtdeScripts = scriptSQLCreate.length;
 
 		for (int i = 0; i < qtdeScripts; i++) {
 			String sql = scriptSQLCreate[i];
-			Log.i(CATEGORY, sql);
+			System.out.println(sql);
 			db.execSQL(sql);
 		}
 	}
@@ -58,8 +58,8 @@ class SQLiteHelper extends SQLiteOpenHelper {
 	 *  @param newVersion - Database new verison 
 	 */
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.w(CATEGORY, "Version Update: " + oldVersion + " to " + newVersion + ". All registries will be deleted.");
-		Log.i(CATEGORY, scriptSQLDelete);
+		System.out.println("Version Update: " + oldVersion + " to " + newVersion + ". All registries will be deleted.");
+		System.out.println(scriptSQLDelete);
 		db.execSQL(scriptSQLDelete);
 		onCreate(db);
 	}

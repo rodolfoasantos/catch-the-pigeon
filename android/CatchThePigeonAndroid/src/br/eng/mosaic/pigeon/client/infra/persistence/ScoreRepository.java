@@ -20,7 +20,7 @@ import android.util.Log;
  * 
  * To visualize the database in shell:
  * 
- * &gt;&gt; sqlite3 /data/br.eng.mosaic.pigeon.client.infra.persistence/databases/ScoreDB
+ * &gt;&gt; sqlite3 /data/data/br.eng.mosaic.pigeon.client.infra.persistence/databases/ScoreDB
  * 
  * &gt;&gt; More info: http://www.sqlite.org/sqlite.html
  * 
@@ -145,12 +145,11 @@ public class ScoreRepository {
 			return null;
 		}
 	}
-
-	public List<Score> list() {
-		Cursor c = getCursor();
-
-		List<Score> carros = new ArrayList<Score>();
-
+	
+	public List<Score> listTopFive() {
+		// SELECT * from SCORE ORDER BY points LIMIT 5
+		Cursor c = db.query(true, TABLE_NAME, Score.columns, null, null, null, null, Scores.POINTS + " DESC", "5");
+		List<Score> scores = new ArrayList<Score>();
 		if (c.moveToFirst()) {
 
 			int idxId = c.getColumnIndex(Scores._ID);
@@ -160,7 +159,7 @@ public class ScoreRepository {
 
 			do {
 				Score score = new Score();
-				carros.add(score);
+				scores.add(score);
 
 				score.id = c.getLong(idxId);
 				score.userId = c.getString(idxNome);
@@ -170,7 +169,7 @@ public class ScoreRepository {
 			} while (c.moveToNext());
 		}
 
-		return carros;
+		return scores;
 	}
 
 	public Score searchByName(String name) {

@@ -36,7 +36,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import br.ufpe.cin.mosaic.pigeon.client.android.R;
+import br.eng.mosaic.pigeon.client.R;
 
 import com.facebook.android.Facebook.DialogListener;
 
