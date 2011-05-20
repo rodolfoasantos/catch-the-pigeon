@@ -12,7 +12,7 @@ import android.provider.BaseColumns;
  */
 public class Score {
 
-	public static String[] columns = new String[] { Carros._ID, Carros.NOME, Carros.PLACA, Carros.ANO };
+	public static String[] columns = new String[] { Scores._ID, Scores.USERID, Scores.DATE, Scores.POINTS };
 
 	/**
 	 * Pacote do Content Provider. Precisa ser único.
@@ -47,9 +47,9 @@ public class Score {
 	 * 
 	 * Implements BaseColumns according to Android guides (already define _id e _count)
 	 */
-	public static final class Carros implements BaseColumns {
+	public static final class Scores implements BaseColumns {
 	
-		private Carros() {
+		private Scores() {
 		}
 	
 		public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/scores");
@@ -69,19 +69,17 @@ public class Score {
 		 */
 		public static final String DEFAULT_SORT_ORDER = "_id ASC";
 	
-		public static final String NOME = "nome";
-		public static final String ANO = "ano";
-		public static final String PLACA = "placa";
-	
-		// Método que constrói uma Uri para um Carro específico, com o seu id
-		// A Uri é no formato "content://br.livro.android.provider.carro/carros/id"
-		// Adiciona o id na URI default do /carros
+		public static final String USERID = "userId";
+		public static final String DATE = "date";
+		public static final String POINTS = "points";
 
+	
 		/**
 		 * Make an URI to specific Score and this id
+		 * URI format: "content://br.eng.mosaic.pigeon.client.infra.provider.score/scores/id"
 		 */
 		public static Uri getUriId(long id) {
-			Uri uriScore = ContentUris.withAppendedId(Carros.CONTENT_URI, id);
+			Uri uriScore = ContentUris.withAppendedId(Scores.CONTENT_URI, id);
 			return uriScore;
 		}
 	}
