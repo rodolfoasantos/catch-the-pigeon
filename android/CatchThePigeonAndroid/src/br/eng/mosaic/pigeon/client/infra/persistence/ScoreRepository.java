@@ -146,6 +146,34 @@ public class ScoreRepository {
 		}
 	}
 	
+	public List<Score> list() {
+		Cursor c = db.query(true, TABLE_NAME, Score.columns, null, null, null, null, Scores.POINTS + " DESC", null);
+
+
+		List<Score> scores = new ArrayList<Score>();
+
+		if (c.moveToFirst()) {
+
+			int idxId = c.getColumnIndex(Scores._ID);
+			int idxNome = c.getColumnIndex(Scores.USERID);
+			int idxPlaca = c.getColumnIndex(Scores.DATE);
+			int idxAno = c.getColumnIndex(Scores.POINTS);
+
+			do {
+				Score score = new Score();
+				scores.add(score);
+
+				score.id = c.getLong(idxId);
+				score.userId = c.getString(idxNome);
+				score.date = c.getString(idxPlaca);
+				score.points = c.getInt(idxAno);
+
+			} while (c.moveToNext());
+		}
+
+		return scores;
+	}
+	
 	public List<Score> listTopFive() {
 		// SELECT * from SCORE ORDER BY points LIMIT 5
 		Cursor c = db.query(true, TABLE_NAME, Score.columns, null, null, null, null, Scores.POINTS + " DESC", "5");

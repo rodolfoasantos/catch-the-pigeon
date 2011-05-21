@@ -30,6 +30,12 @@ public class MainActivity extends Activity {
 				showTopFive();
 			}
 		});
+		
+		findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				showHighScore();
+			}
+		});
 	}
 	
 	private void startGame() {
@@ -43,6 +49,12 @@ public class MainActivity extends Activity {
 	private void showTopFive() {
 		
 		Intent i = new Intent(this, TopFiveActivity.class);
+		startActivity(i);
+	}
+	
+	private void showHighScore() {
+		
+		Intent i = new Intent(this, HighScoreActivity.class);
 		startActivity(i);
 	}
     
