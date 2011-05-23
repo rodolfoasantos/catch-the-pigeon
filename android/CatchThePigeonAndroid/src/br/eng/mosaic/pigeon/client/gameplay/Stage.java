@@ -174,13 +174,14 @@ public abstract class Stage extends BaseGameActivity {
 		// ----------------------------------------------------------------------
 
 		// --------------- Criando texto exibido ---------------
-		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont,
-				"Life: " + pigeon.getLife(), "S2: X".length());
+		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
+		//final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont,
+				//"Life: " + pigeon.getLife(), "S2: X".length());
 		scene.getLastChild().attachChild(lifeText);
 
 		// -----------------------------------------------------
 
-		// -------------- Criando Retangulo para colisão --------------------
+		// -------------- Criando Retangulo para colis√£o --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
 		final int rectangleY = (CAMERA_HEIGHT);
 		final Rectangle colisionLine = new Rectangle(rectangleX, 0,
@@ -237,9 +238,9 @@ public abstract class Stage extends BaseGameActivity {
 						startActivity(i);
 						
 						nextStage();
-						nextStage = true; // Feito para não criar mais de uma
-											// instância de Stage já que
-											// onUpdate é chaamdo várias vezes
+						nextStage = true; // Feito para n√£o criar mais de uma
+											// inst√¢ncia de Stage j√° que
+											// onUpdate √© chaamdo v√°rias vezes
 					}
 				}
 
