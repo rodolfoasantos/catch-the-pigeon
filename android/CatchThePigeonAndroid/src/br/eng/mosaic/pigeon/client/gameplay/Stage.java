@@ -18,6 +18,7 @@ import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
 import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
+import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.util.FPSLogger;
@@ -40,12 +41,13 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
+import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
+import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
-import br.eng.mosaic.pigeon.client.R;
 
 public abstract class Stage extends BaseGameActivity {
 
@@ -101,11 +103,11 @@ public abstract class Stage extends BaseGameActivity {
 		Stage.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(
 				this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory
-				.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
-						0, 3, 4);
+		.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
+				0, 3, 4);
 		Stage.mExplosionPlayerTexture = TextureRegionFactory
-				.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
-						0, 3, 4);
+		.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
+				0, 3, 4);
 
 		// --pause scene
 		// this.mPausedTextureRegion =
@@ -175,8 +177,6 @@ public abstract class Stage extends BaseGameActivity {
 
 		// --------------- Criando texto exibido ---------------
 		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
-		//final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont,
-				//"Life: " + pigeon.getLife(), "S2: X".length());
 		scene.getLastChild().attachChild(lifeText);
 
 		// -----------------------------------------------------
@@ -205,8 +205,10 @@ public abstract class Stage extends BaseGameActivity {
 					runnableHandler.postRunnable(new Runnable() {
 						@Override
 						public void run() {
-							scene.unregisterTouchArea((ITouchArea) pTouchArea);
-							scene.getLastChild().detachChild((Ave) pTouchArea);
+							AnimatedSprite face = (AnimatedSprite) pTouchArea;
+							scene.unregisterTouchArea(face);
+							scene.getLastChild().detachChild(face);
+							badPigeons.remove(face);
 						}
 					});
 					return true;
@@ -227,20 +229,20 @@ public abstract class Stage extends BaseGameActivity {
 			@Override
 			public void onUpdate(final float pSecondsElapsed) {
 				if (colisionLine.collidesWith(pigeon)) {
-					
+
 					if (!nextStage) {
-						
+
 						/*
 						 * Chama a tela de login do facebook quando o pombo alcanca
 						 * o final da tela
 						 */
 						Intent i = new Intent(getBaseContext(), LoginFacebook.class);
 						startActivity(i);
-						
+
 						nextStage();
 						nextStage = true; // Feito para n√£o criar mais de uma
-											// inst√¢ncia de Stage j√° que
-											// onUpdate √© chaamdo v√°rias vezes
+						// inst√¢ncia de Stage j√° que
+						// onUpdate √© chaamdo v√°rias vezes
 					}
 				}
 
@@ -258,7 +260,15 @@ public abstract class Stage extends BaseGameActivity {
 							pigeon.setAlive(false);
 							Stage.mExplosionSound.play();
 						}
-						lifeText.setText("Life: " + pigeon.getLife());
+						lifeText.setText("♥: " + pigeon.getLife());
+					}
+				}
+
+				if(badPigeons.size() == 1){
+					for (BadPigeon bad : GameUtil.genEnemies(3, CAMERA_WIDTH, CAMERA_HEIGHT, Stage1.mEnemyTextureRegion1)) {
+						badPigeons.add(bad);
+						scene.getLastChild().attachChild(bad);
+						scene.registerTouchArea(bad);
 					}
 				}
 			}
@@ -321,18 +331,18 @@ public abstract class Stage extends BaseGameActivity {
 			}
 			default:
 				return super.onKeyDown(pKeyCode, pEvent); // this will allow
-															// keypesses other
-															// than that to be
-															// processed in
-															// other places, for
-															// example by
-															// android OS
+				// keypesses other
+				// than that to be
+				// processed in
+				// other places, for
+				// example by
+				// android OS
 			}
 		} else
 			return super.onKeyDown(pKeyCode, pEvent); // similarily, this will
-														// allow actions other
-														// than key press to be
-														// processed elsewhere.
+		// allow actions other
+		// than key press to be
+		// processed elsewhere.
 	}
 
 	protected Dialog onCreateDialog(final int pID) {
@@ -341,21 +351,21 @@ public abstract class Stage extends BaseGameActivity {
 			final EditText ipEditText = new EditText(this);
 			ipEditText.setText(message);
 			return new AlertDialog.Builder(this)
-					.setIcon(R.drawable.facebook_icon)
-					.setTitle("Your Message").setCancelable(false)
-					.setView(ipEditText)
-					.setPositiveButton("Send", new OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface pDialog,
-								final int pWhich) {
-							message = ipEditText.getText().toString();
-						}
-					}).setNegativeButton("Cancel", new OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface pDialog, final int pWhich) {
-							Stage.this.onResume();
-						}
-					}).create();
+			.setIcon(R.drawable.facebook_icon)
+			.setTitle("Your Message").setCancelable(false)
+			.setView(ipEditText)
+			.setPositiveButton("Send", new OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface pDialog,
+						final int pWhich) {
+					message = ipEditText.getText().toString();
+				}
+			}).setNegativeButton("Cancel", new OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface pDialog, final int pWhich) {
+					Stage.this.onResume();
+				}
+			}).create();
 		default:
 			return super.onCreateDialog(pID);
 		}
@@ -364,7 +374,9 @@ public abstract class Stage extends BaseGameActivity {
 	@Override
 	public void onLoadComplete() {
 	}
-
+	
+	protected abstract void gameOver();
+	
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
