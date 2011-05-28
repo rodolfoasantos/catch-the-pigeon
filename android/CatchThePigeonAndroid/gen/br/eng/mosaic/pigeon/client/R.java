@@ -8,35 +8,47 @@
 package br.eng.mosaic.pigeon.client;
 
 public final class R {
+    public static final class anim {
+        public static final int fade_in=0x7f040000;
+        public static final int fade_out=0x7f040001;
+    }
     public static final class attr {
     }
     public static final class drawable {
-        public static final int facebook=0x7f020000;
-        public static final int facebook_icon=0x7f020001;
-        public static final int icon=0x7f020002;
-        public static final int logo=0x7f020003;
+        public static final int background=0x7f020000;
+        public static final int background_character_selection=0x7f020001;
+        public static final int facebook=0x7f020002;
+        public static final int facebook_icon=0x7f020003;
+        public static final int figean_noselection=0x7f020004;
+        public static final int figeon_noselection=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int logo=0x7f020007;
+        public static final int messege_box=0x7f020008;
+        public static final int mosaic_logo=0x7f020009;
+        public static final int sigeon_noselection=0x7f02000a;
     }
     public static final class id {
-        public static final int ImageView01=0x7f050000;
-        public static final int date=0x7f050006;
-        public static final int high_score=0x7f050003;
-        public static final int imageView1=0x7f050008;
-        public static final int points=0x7f050007;
-        public static final int progressBar1=0x7f050009;
-        public static final int social_confg=0x7f050004;
-        public static final int start_game=0x7f050001;
-        public static final int top_five=0x7f050002;
-        public static final int userId=0x7f050005;
+        public static final int ImageView01=0x7f060000;
+        public static final int date=0x7f060006;
+        public static final int high_score=0x7f060003;
+        public static final int imageView1=0x7f060008;
+        public static final int points=0x7f060007;
+        public static final int progressBar1=0x7f060009;
+        public static final int social_confg=0x7f060004;
+        public static final int start_game=0x7f060001;
+        public static final int top_five=0x7f060002;
+        public static final int userId=0x7f060005;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int score_table=0x7f030001;
-        public static final int splash=0x7f030002;
+        public static final int help=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int score_table=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int high_score=0x7f040003;
-        public static final int start_game=0x7f040001;
-        public static final int top_five=0x7f040002;
+        public static final int app_name=0x7f050000;
+        public static final int high_score=0x7f050003;
+        public static final int start_game=0x7f050001;
+        public static final int top_five=0x7f050002;
     }
 }
