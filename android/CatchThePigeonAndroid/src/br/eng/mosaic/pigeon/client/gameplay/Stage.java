@@ -2,6 +2,7 @@ package br.eng.mosaic.pigeon.client.gameplay;
 
 import java.util.Vector;
 
+import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.sound.Sound;
 import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
@@ -46,6 +47,7 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
+import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
@@ -74,6 +76,7 @@ public abstract class Stage extends BaseGameActivity {
 	private Font mFont;
 
 	public static Sound mExplosionSound;
+	public static Music mMainMusic;
 
 	protected Vector<BadPigeon> badPigeons = new Vector();
 	protected Scene scene;
@@ -90,7 +93,7 @@ public abstract class Stage extends BaseGameActivity {
 		this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new Engine(new EngineOptions(true, ScreenOrientation.LANDSCAPE,
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT),
-				this.mCamera).setNeedsSound(true));
+				this.mCamera).setNeedsSound(true).setNeedsMusic(true));
 	}
 
 	@Override
@@ -142,12 +145,10 @@ public abstract class Stage extends BaseGameActivity {
 
 		createCharacters();
 
-		try {
-			Stage.mExplosionSound = SoundFactory.createSoundFromAsset(
-					this.mEngine.getSoundManager(), this, "mfx/explosion.ogg");
-		} catch (final Exception e) {
-			Log.d("Erro: ", e.toString());
-		}
+		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/explosion.ogg");
+		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
+		mMainMusic.play();
+	
 	}
 
 	@Override
@@ -372,7 +373,7 @@ public abstract class Stage extends BaseGameActivity {
 	}
 
 	@Override
-	public void onLoadComplete() {
+	public void onLoadComplete() {		
 	}
 	
 	protected abstract void gameOver();
