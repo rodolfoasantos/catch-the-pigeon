@@ -15,18 +15,39 @@
  * limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center_horizontal" android:orientation="vertical">
-    <ImageView android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_width="wrap_content" android:id="@+id/ImageView01"></ImageView>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="@string/start_game" android:id="@+id/start_game"></Button>
-    <Button android:layout_width="wrap_content" android:layout_marginBottom="10dip" android:layout_height="wrap_content" android:layout_gravity="center" android:text="@string/top_five" android:id="@+id/top_five"></Button>
-    <Button android:layout_height="wrap_content" android:id="@+id/high_score" android:layout_width="wrap_content" android:text="@string/high_score"></Button>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/TableLayout02" 
+	android:layout_width="fill_parent" 
+	android:background="@drawable/opening_screen_background" android:layout_height="fill_parent">
 	
-	<Button
-        android:background="@drawable/facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip" android:layout_gravity="center" android:id="@+id/social_confg"/>
-</LinearLayout>
+	<TableRow>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pos1" android:id="@+id/bt_pos1" android:background="@drawable/picture_of_avatar" android:layout_margin="5px"></Button>			
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/bt_pos2" android:background="@drawable/picture_of_avatar" android:layout_margin="5px" android:text="@string/pos2"></Button>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5px" android:background="@drawable/picture_of_avatar" android:id="@+id/bt_pos3" android:text="@string/pos3"></Button>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:id="@+id/bt_pos4" android:layout_margin="5px" android:text="@string/pos4"></Button>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:id="@+id/bt_pos5" android:layout_margin="5px" android:text="@string/pos5"></Button>
+</TableRow>
+	
+	<TableRow>
+		<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content"  android:layout_height="wrap_content">	    	
+			<TableRow>
+				<TableLayout android:id="@+id/TableLayout03" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					
+					<TableRow>
+						<Button android:background="@drawable/facebook" android:layout_width="wrap_content"	android:layout_height="wrap_content" android:layout_marginBottom="10dip" android:id="@+id/social_confg" android:layout_gravity="top|center"/>
+					</TableRow>
+					<TableRow>
+						<Button android:layout_width="wrap_content" android:layout_marginBottom="10dip" android:layout_height="wrap_content" android:text="@string/top_five" android:id="@+id/top_five"></Button>
+					</TableRow>
+					<TableRow>
+			    		<Button android:layout_height="wrap_content" android:id="@+id/high_score" android:layout_width="wrap_content" android:text="@string/high_score"></Button>
+					</TableRow>
+				</TableLayout>
+			</TableRow>			
+		</TableLayout>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/start_game" android:enabled="true" android:background="@drawable/bnt_start" android:height="40px" android:width="40px" android:layout_gravity="center_vertical|center_horizontal"></Button>	
+		
+	</TableRow>
+	
+
+</TableLayout>
