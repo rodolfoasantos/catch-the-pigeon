@@ -2,10 +2,12 @@ package br.eng.mosaic.pigeon.client.gameplay.cast;
 
 import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
+import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 import android.util.Log;
-import br.eng.mosaic.pigeon.client.gameplay.Stage1;
+import br.eng.mosaic.pigeon.client.gameplay.Stage;
 
 public abstract class Ave extends AnimatedSprite {
 	
@@ -21,7 +23,7 @@ public abstract class Ave extends AnimatedSprite {
 		this.life = life;
 		this.pTextureRegion = pTextureRegion;
 		
-		this.setScaleCenterY(Stage1.mPlayerTextureRegion.getTileHeight());
+		//this.setScaleCenterY(Stage1.mPlayerTextureRegion.getTileHeight());
 		this.setScale(2);
 		this.animate(new long[]{200, 200, 200}, 3, 5, true);
 
