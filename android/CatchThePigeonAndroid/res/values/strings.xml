@@ -17,10 +17,10 @@
 
 <resources>
     <string name="pos1">Paulo</string>
-	<string name="pos2">Josenildo</string>
-	<string name="pos3">Maria</string>
-	<string name="pos4">Chico</string>
-	<string name="pos5">Josicleide</string>
+	<string name="pos2">Dhiego</string>
+	<string name="pos3">Fernanda</string>
+	<string name="pos4">Lenin</string>
+	<string name="pos5">João</string>
     <string name="app_name">Catch the Pigeon</string>
     <string name="start_game">Start Game</string> 
     <string name="top_five">Top Five</string>

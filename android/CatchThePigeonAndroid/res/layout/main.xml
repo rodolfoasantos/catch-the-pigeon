@@ -14,40 +14,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -->
-
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-	android:id="@+id/TableLayout02" 
-	android:layout_width="fill_parent" 
-	android:background="@drawable/opening_screen_background" android:layout_height="fill_parent">
-	
-	<TableRow>
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pos1" android:id="@+id/bt_pos1" android:background="@drawable/picture_of_avatar" android:layout_margin="5px"></Button>			
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/bt_pos2" android:background="@drawable/picture_of_avatar" android:layout_margin="5px" android:text="@string/pos2"></Button>
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5px" android:background="@drawable/picture_of_avatar" android:id="@+id/bt_pos3" android:text="@string/pos3"></Button>
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:id="@+id/bt_pos4" android:layout_margin="5px" android:text="@string/pos4"></Button>
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:id="@+id/bt_pos5" android:layout_margin="5px" android:text="@string/pos5"></Button>
-</TableRow>
-	
-	<TableRow>
-		<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content"  android:layout_height="wrap_content">	    	
-			<TableRow>
-				<TableLayout android:id="@+id/TableLayout03" android:layout_width="wrap_content" android:layout_height="wrap_content">
-					
-					<TableRow>
-						<Button android:background="@drawable/facebook" android:layout_width="wrap_content"	android:layout_height="wrap_content" android:layout_marginBottom="10dip" android:id="@+id/social_confg" android:layout_gravity="top|center"/>
-					</TableRow>
-					<TableRow>
-						<Button android:layout_width="wrap_content" android:layout_marginBottom="10dip" android:layout_height="wrap_content" android:text="@string/top_five" android:id="@+id/top_five"></Button>
-					</TableRow>
-					<TableRow>
-			    		<Button android:layout_height="wrap_content" android:id="@+id/high_score" android:layout_width="wrap_content" android:text="@string/high_score"></Button>
-					</TableRow>
-				</TableLayout>
-			</TableRow>			
-		</TableLayout>
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/start_game" android:enabled="true" android:background="@drawable/bnt_start" android:height="40px" android:width="40px" android:layout_gravity="center_vertical|center_horizontal"></Button>	
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/background">
+	<TableLayout  
+		android:id="@+id/TableLayout02" 
+		android:layout_width="fill_parent" 
+		android:background="@drawable/opening_screen_background" android:layout_height="fill_parent">
 		
-	</TableRow>
+		<TableRow>
+			<LinearLayout android:id="@+id/LinearLayoutPos1">				
+			</LinearLayout>
+			<LinearLayout android:id="@+id/LinearLayoutPos6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:orientation="vertical" android:layout_margin="4px">
+				<ImageView android:id="@+id/ImageViewPos6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/paulo" android:layout_margin="6px"></ImageView>
+				<TextView android:text="@string/pos1" android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/LinearLayoutPos2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:orientation="vertical" android:layout_margin="4px">
+				<ImageView android:id="@+id/ImageViewPos2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/dhiego" android:layout_margin="6px"></ImageView>
+				<TextView android:text="@string/pos2" android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/LinearLayoutPos3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:orientation="vertical" android:layout_margin="4px">
+				<ImageView android:id="@+id/ImageViewPos3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/fernanda" android:layout_margin="6px"></ImageView>
+				<TextView android:text="@string/pos3" android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/LinearLayoutPos4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:orientation="vertical" android:layout_margin="4px">
+				<ImageView android:id="@+id/ImageViewPos4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/lenin" android:layout_margin="6px"></ImageView>
+				<TextView android:text="@string/pos4" android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/LinearLayoutPos5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/picture_of_avatar" android:orientation="vertical" android:layout_margin="4px">
+				<ImageView android:id="@+id/ImageViewPos5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/joao" android:layout_margin="6px"></ImageView>
+				<TextView android:text="@string/pos5" android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>			
+</TableRow>
+		
+		<TableRow android:layout_height="fill_parent">
+			<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content"  android:layout_height="wrap_content" >	    	
+				<TableRow>
+					<TableLayout android:id="@+id/TableLayout03" android:layout_width="wrap_content" android:layout_height="wrap_content">
+						
+						<TableRow>
+							<Button android:background="@drawable/facebook" android:layout_width="wrap_content"	android:layout_height="wrap_content" android:layout_marginBottom="10dip" android:id="@+id/social_confg" android:layout_gravity="top|center"/>
+						</TableRow>
+						<TableRow>
+							<Button android:layout_width="wrap_content" android:layout_marginBottom="10dip" android:layout_height="wrap_content" android:text="@string/top_five" android:id="@+id/top_five"></Button>
+						</TableRow>
+						<TableRow>
+				    		<Button android:layout_height="wrap_content" android:id="@+id/high_score" android:layout_width="wrap_content" android:text="@string/high_score"></Button>
+						</TableRow>
+					</TableLayout>
+				</TableRow>			
+			</TableLayout>
+			<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent">
+				<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/start_game" android:enabled="true" android:background="@drawable/bnt_start" android:height="40px" android:width="40px" android:layout_gravity="left|center_vertical"></Button>	
+			</LinearLayout>
+		</TableRow>
+		
 	
-
-</TableLayout>
+	</TableLayout>
+</LinearLayout>
