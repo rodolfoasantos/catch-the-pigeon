@@ -55,6 +55,7 @@ public abstract class Stage extends BaseGameActivity {
 
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
+	
 
 	public String backgroundBack;
 	public String backgroundFront;
@@ -199,6 +200,8 @@ public abstract class Stage extends BaseGameActivity {
 						@Override
 						public void run() {
 							AnimatedSprite face = (AnimatedSprite) pTouchArea;
+							BirdExplosion bird = new BirdExplosion(face.getX(), face.getY(), mExplosionPlayerTexture, scene);
+							scene.getLastChild().attachChild(bird);
 							scene.unregisterTouchArea(face);
 							scene.getLastChild().detachChild(face);
 							badPigeons.remove(face);
@@ -246,7 +249,7 @@ public abstract class Stage extends BaseGameActivity {
 							scene.getLastChild().detachChild(pigeon);
 							final BirdExplosion explosion1 = new BirdExplosion(
 									Pigeon.posX, Pigeon.posY,
-									Stage.mExplosionPlayerTexture);
+									Stage.mExplosionPlayerTexture, scene);
 							scene.getLastChild().attachChild(explosion1);
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
@@ -279,7 +282,7 @@ public abstract class Stage extends BaseGameActivity {
 					Stage.mExplosionSound.play();
 					scene.getLastChild().detachChild(bp);
 					final BirdExplosion explosion1 = new BirdExplosion(
-							bp.getX(), bp.getY(), Stage.mExplosionPlayerTexture);
+							bp.getX(), bp.getY(), Stage.mExplosionPlayerTexture, scene);
 					scene.getLastChild().attachChild(explosion1);
 				}
 				return true;
@@ -343,7 +346,7 @@ public abstract class Stage extends BaseGameActivity {
 		this.mEngine.getTextureManager().loadTextures(this.mTexture,
 				this.mAutoParallaxBackgroundTexture);
 	}
-	
+		
 	protected abstract void setBackgroundParameter();
 	
 	protected abstract void gameOver();
