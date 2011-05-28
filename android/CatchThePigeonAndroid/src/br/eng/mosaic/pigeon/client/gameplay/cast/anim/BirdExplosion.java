@@ -1,5 +1,6 @@
 package br.eng.mosaic.pigeon.client.gameplay.cast.anim;
 
+import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 import android.util.Log;
@@ -9,12 +10,13 @@ public class BirdExplosion extends Ave {
 	
 	/** Velocidade da Ave */	
 	private float velocity = 0.0f;
-	
+	private Scene scene;
 	private int smokeFrame = 0;
 	
-	public BirdExplosion(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {
+	public BirdExplosion(final float pX, final float pY, final TiledTextureRegion pTextureRegion, Scene scene) {
 		super(pX, pY, pTextureRegion, 50);
 		this.animate(new long[]{200, 200, 200}, 6, 8, 1);
+		this.scene = scene;
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public class BirdExplosion extends Ave {
 		if(++smokeFrame > 10) {
 			this.setVisible(false);
 			this.setPosition(-50, -50);
-			Log.d("exp", "tirar exp da tela");
+			this.scene.detachChild(this);
 		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
