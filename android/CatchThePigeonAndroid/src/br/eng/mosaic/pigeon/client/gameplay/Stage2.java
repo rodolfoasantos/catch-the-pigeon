@@ -39,4 +39,11 @@ public class Stage2 extends Stage {
 		
 	}
 
+	@Override
+	protected void setBackgroundParameter() {
+		setBackgroundBack("gfx/parallax_background_layer_back.png");
+		setBackgroundFront("gfx/parallax_background_layer_front.png");
+		setBackgroundMid("gfx/parallax_background_layer_mid.png");		
+	}	
+
 }

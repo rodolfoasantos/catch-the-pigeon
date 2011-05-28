@@ -11,6 +11,7 @@ import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 
 public class Stage1 extends Stage {
 
+	
 	@Override
 	protected void createCharacters() {
 		/* Calculate the coordinates for the face, so its centered on the camera. */
@@ -67,5 +68,12 @@ public class Stage1 extends Stage {
 			}
 		});
 		
+	}
+
+	@Override
+	protected void setBackgroundParameter() {
+		setBackgroundBack("gfx/parallax_background_layer_back.png");
+		setBackgroundFront("gfx/parallax_background_layer_front.png");
+		setBackgroundMid("gfx/parallax_background_layer_mid.png");		
 	}	
 }
