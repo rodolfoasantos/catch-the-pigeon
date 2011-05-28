@@ -40,7 +40,12 @@ public class MainActivity extends Activity {
 	
 	private void startGame() {
 		//call the dialog to set a message
-		this.showDialog(Stage.DIALOG_CHOOSE_MESSAGE);
+		try {
+		
+			this.showDialog(Stage.DIALOG_CHOOSE_MESSAGE);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 		
 		Intent i = new Intent(this, Stage1.class);
 		startActivity(i);

@@ -31,6 +31,8 @@ import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
+import sun.font.CreatedFontTracker;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -54,6 +56,10 @@ public abstract class Stage extends BaseGameActivity {
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
 
+	public String backgroundBack;
+	public String backgroundFront;
+	public String backgroundMid;
+	
 	private Camera mCamera;
 
 	private boolean nextStage = false;
@@ -123,23 +129,10 @@ public abstract class Stage extends BaseGameActivity {
 		this.mEngine.getFontManager().loadFont(this.mFont);
 		// ---------------------
 
-		// ----- Background ------
-		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
-				TextureOptions.DEFAULT);
-		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,
-				"gfx/parallax_background_layer_front.png", 0, 0);
-		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,
-				"gfx/parallax_background_layer_back.png", 0, 188);
-		this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,
-				"gfx/parallax_background_layer_mid.png", 0, 669);
-
-		this.mEngine.getTextureManager().loadTextures(this.mTexture,
-				this.mAutoParallaxBackgroundTexture);
-		// -----------------------
-
+		setBackgroundParameter();
+		
+		createBackground(backgroundBack, backgroundMid, backgroundFront);
+		
 		createCharacters();
 
 		try {
@@ -295,56 +288,6 @@ public abstract class Stage extends BaseGameActivity {
 		return false;
 	}
 
-	@Override
-	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
-		if (pEvent.getAction() == KeyEvent.ACTION_DOWN) {
-			switch (pKeyCode) {
-			case KeyEvent.KEYCODE_MENU: {
-				if (this.mEngine.isRunning()) {
-					this.mEngine.stop();
-					this.showDialog(DIALOG_CHOOSE_MESSAGE);
-				} else {
-					this.scene.clearChildScene();
-					this.mEngine.start();
-				}
-				return true;
-			}
-			case KeyEvent.KEYCODE_BACK: {
-				System.exit(0);
-				return true;
-			}
-			case KeyEvent.KEYCODE_DPAD_LEFT: {
-				// react on left key press
-				return true;
-			}
-			case KeyEvent.KEYCODE_DPAD_RIGHT: {
-				// react on right key press
-				return true;
-			}
-			case KeyEvent.KEYCODE_DPAD_UP: {
-				// react on up key press
-				return true;
-			}
-			case KeyEvent.KEYCODE_DPAD_DOWN: {
-				// react on down key press
-				return true;
-			}
-			default:
-				return super.onKeyDown(pKeyCode, pEvent); // this will allow
-				// keypesses other
-				// than that to be
-				// processed in
-				// other places, for
-				// example by
-				// android OS
-			}
-		} else
-			return super.onKeyDown(pKeyCode, pEvent); // similarily, this will
-		// allow actions other
-		// than key press to be
-		// processed elsewhere.
-	}
-
 	protected Dialog onCreateDialog(final int pID) {
 		switch (pID) {
 		case DIALOG_CHOOSE_MESSAGE:
@@ -374,6 +317,34 @@ public abstract class Stage extends BaseGameActivity {
 	@Override
 	public void onLoadComplete() {
 	}
+	
+	public void setBackgroundBack(String backgroundBack) {
+		this.backgroundBack = backgroundBack;
+	}
+
+	public void setBackgroundFront(String backgroundFront) {
+		this.backgroundFront = backgroundFront;
+	}
+
+	public void setBackgroundMid(String backgroundMid) {
+		this.backgroundMid = backgroundMid;
+	}
+	
+	public void createBackground(String back, String mid, String front){
+		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
+				TextureOptions.DEFAULT);
+		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
+		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
+		this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
+
+		this.mEngine.getTextureManager().loadTextures(this.mTexture,
+				this.mAutoParallaxBackgroundTexture);
+	}
+	
+	protected abstract void setBackgroundParameter();
 	
 	protected abstract void gameOver();
 	
