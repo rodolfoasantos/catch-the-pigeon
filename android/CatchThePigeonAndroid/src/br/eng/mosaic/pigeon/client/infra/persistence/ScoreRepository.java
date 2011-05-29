@@ -3,8 +3,8 @@ package br.eng.mosaic.pigeon.client.infra.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.eng.mosaic.pigeon.common.dto.Score;
-import br.eng.mosaic.pigeon.common.dto.Score.Scores;
+import br.eng.mosaic.pigeon.common.domain.Score;
+import br.eng.mosaic.pigeon.common.domain.Score.Scores;
 
 import android.content.ContentValues;
 import android.content.Context;

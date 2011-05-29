@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.eng.mosaic.pigeon.client.infra.persistence.ScoreRepository;
 import br.eng.mosaic.pigeon.client.infra.persistence.ScoreRepositoryScript;
-import br.eng.mosaic.pigeon.common.dto.Score;
+import br.eng.mosaic.pigeon.common.domain.Score;
 import android.app.ListActivity;
 import android.os.Bundle;
 
@@ -31,7 +31,6 @@ public class TopFiveActivity extends ListActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 
-		// Fecha o banco
 		repository.close();
 	}
 	
