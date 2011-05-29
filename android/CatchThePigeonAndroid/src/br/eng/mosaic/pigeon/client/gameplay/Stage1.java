@@ -34,10 +34,11 @@ public class Stage1 extends Stage {
 
 	@Override
 	protected void nextStage() {
+		super.profile.setScore(1);
 		Intent i = new Intent(getBaseContext(), Stage2.class);
 		startActivity(i);
 
-		BadPigeon.velocity *= 1.3; 
+		BadPigeon.velocity *= 1.3;
 	}
 
 	@Override

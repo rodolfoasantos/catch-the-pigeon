@@ -51,10 +51,16 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
 import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
+import br.eng.mosaic.pigeon.client.infra.Config;
+import br.eng.mosaic.pigeon.client.infra.ConfigIF;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public abstract class Stage extends BaseGameActivity {
 
+	public ConfigIF profile = Config.getInstance();
+	
+	private ChangeableText scoreText;
+	
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
 	
@@ -106,6 +112,8 @@ public abstract class Stage extends BaseGameActivity {
 	@Override
 	public void onLoadResources() {
 		this.scene = new Scene(1);
+		
+	
 		this.mTexture = new Texture(256, 128,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(
@@ -170,11 +178,14 @@ public abstract class Stage extends BaseGameActivity {
 
 		// ----------------------------------------------------------------------
 
-		// --------------- Criando texto exibido ---------------
+		// --------------- Criando texto de vida ---------------
 		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
 		scene.getLastChild().attachChild(lifeText);
 
-		// -----------------------------------------------------
+		// --------------- Criando texto de score ---------------
+		this.scoreText = new ChangeableText(500, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
+		scene.getLastChild().attachChild(scoreText);
+
 
 		// -------------- Criando Retangulo para colis√£o --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
@@ -268,7 +279,9 @@ public abstract class Stage extends BaseGameActivity {
 	 * Called when a bird die
 	 * @param bird Bird that went to hell
 	 */
-	private void birdDied(Ave bird) {
+	private void birdDied(Ave bird) {	
+		this.profile.setScore(1);
+		scoreText.setText("Highscore: " + profile.getScore());
 		BirdExplosion explosion = new BirdExplosion(bird.getX(), bird.getY(), mExplosionPlayerTexture, scene);
 		scene.getLastChild().attachChild(explosion);
 		scene.unregisterTouchArea(bird);
@@ -293,32 +306,6 @@ public abstract class Stage extends BaseGameActivity {
 			}
 		}
 		return false;
-	}
-
-	protected Dialog onCreateDialog(final int pID) {
-		switch (pID) {
-		case DIALOG_CHOOSE_MESSAGE:
-			final EditText ipEditText = new EditText(this);
-			ipEditText.setText(message);
-			return new AlertDialog.Builder(this)
-			.setIcon(R.drawable.facebook_icon)
-			.setTitle("Your Message").setCancelable(false)
-			.setView(ipEditText)
-			.setPositiveButton("Send", new OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface pDialog,
-						final int pWhich) {
-					message = ipEditText.getText().toString();
-				}
-			}).setNegativeButton("Cancel", new OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface pDialog, final int pWhich) {
-					Stage.this.onResume();
-				}
-			}).create();
-		default:
-			return super.onCreateDialog(pID);
-		}
 	}
 
 	@Override
@@ -349,6 +336,32 @@ public abstract class Stage extends BaseGameActivity {
 
 		this.mEngine.getTextureManager().loadTextures(this.mTexture,
 				this.mAutoParallaxBackgroundTexture);
+	}
+	
+	protected Dialog onCreateDialog(final int pID) {
+		switch (pID) {
+		case DIALOG_CHOOSE_MESSAGE:
+			final EditText ipEditText = new EditText(this);
+			ipEditText.setText(message);
+			return new AlertDialog.Builder(this)
+			.setIcon(R.drawable.facebook_icon)
+			.setTitle("Your Message").setCancelable(false)
+			.setView(ipEditText)
+			.setPositiveButton("Send", new OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface pDialog,
+						final int pWhich) {
+					message = ipEditText.getText().toString();
+				}
+			}).setNegativeButton("Cancel", new OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface pDialog, final int pWhich) {
+					Stage.this.onResume();
+				}
+			}).create();
+		default:
+			return super.onCreateDialog(pID);
+		}
 	}
 		
 	protected abstract void setBackgroundParameter();

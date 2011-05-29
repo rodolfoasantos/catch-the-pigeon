@@ -22,7 +22,8 @@ public class SplashScreen extends Activity implements Runnable {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ConfigIF profile = Config.getInstance();	
+		ConfigIF profile = Config.getInstance();
+		profile.setContext(this);
 		profile.login();
 		
 		setContentView(R.layout.splash);

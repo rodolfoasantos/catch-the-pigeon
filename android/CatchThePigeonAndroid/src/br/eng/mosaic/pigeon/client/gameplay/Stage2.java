@@ -28,7 +28,8 @@ public class Stage2 extends Stage {
 	}
 
 	@Override
-	protected void nextStage() {
+	protected void nextStage() {	
+		super.profile.setScore(1);
 		Intent i = new Intent(getBaseContext(), Stage2.class);
 		startActivity(i);		
 	}

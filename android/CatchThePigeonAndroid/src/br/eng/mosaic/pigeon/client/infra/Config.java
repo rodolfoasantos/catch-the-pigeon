@@ -12,9 +12,11 @@ public class Config implements ConfigIF{
 
 	private static final String PREFS_NAME = "CatchThePigeonProfile";
 	
-	private Activity context = null;
-
 	private static ConfigIF singleton = null;
+	
+	private Activity context = null;
+	
+	private SharedPreferences settings;
 
 	private Config() {
 	}
@@ -28,14 +30,14 @@ public class Config implements ConfigIF{
 	
 	public void setContext(Activity context) {
 		this.context = context;
+		this.settings = context.getSharedPreferences(PREFS_NAME, 0);
 	}
 
 	public void login() {
 		
-		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString("user", "srlm");
-		editor.putFloat("score", 0.0f);
+		editor.putInt("score", 0);
 
 		// Commit the edits!
 		editor.commit();
@@ -55,6 +57,23 @@ public class Config implements ConfigIF{
 	@Override
 	public void login(String user, String email) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public int getScore() {
+		return settings.getInt("score", 0);
+		
+		
+	}
+
+	@Override
+	public void setScore(int count) {
+		SharedPreferences.Editor editor = settings.edit();
+		int score = settings.getInt("score", 0) + count;
+		editor.putInt("score", score);
+		// Commit the edits!
+		editor.commit();
 		
 	}
 

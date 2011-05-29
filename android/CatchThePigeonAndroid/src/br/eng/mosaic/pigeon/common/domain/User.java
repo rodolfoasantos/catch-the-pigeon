@@ -8,7 +8,7 @@ public class User {
 	private String name;
 	private String email;
 	private List<Credential> socialNetworks;
-	private double score;
+	private int score;
 
 	public User(){
 		this.name = "";
@@ -17,7 +17,7 @@ public class User {
 		this.score = 0;
 	}
 	
-	public User(String name, String email, List<Credential> socialNetworks, double score){
+	public User(String name, String email, List<Credential> socialNetworks, int score){
 		this.name = name;
 		this.email = email;
 		this.socialNetworks = socialNetworks;
@@ -76,7 +76,7 @@ public class User {
 	 * 
 	 * @return Returns the User's game score.
 	 */
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 
@@ -84,7 +84,7 @@ public class User {
 	 * Sum the points gained to user game score.
 	 * @param points Points gained in last play game.
 	 */
-	public void incrementScore(double points) {
+	public void incrementScore(int points) {
 		this.score = points;
 	}
 
