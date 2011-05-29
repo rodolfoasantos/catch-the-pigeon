@@ -366,24 +366,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		}
 	}
 	
-	protected MenuScene createMenuScene() {
-		final MenuScene menuScene = new MenuScene(this.mCamera);
-
-		final IMenuItem resetMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_RESET, this.mFont, "RESET"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
-		resetMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-		menuScene.addMenuItem(resetMenuItem);
-
-		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, this.mFont, "QUIT"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
-		quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-		menuScene.addMenuItem(quitMenuItem);
-
-		menuScene.buildAnimations();
-
-		menuScene.setBackgroundEnabled(false);
-
-		menuScene.setOnMenuItemClickListener(this);
-		return menuScene;
-	}
 	
 	public void setBackgroundBack(String backgroundBack) {
 		this.backgroundBack = backgroundBack;
@@ -435,6 +417,25 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		default:
 			return super.onCreateDialog(pID);
 		}
+	}
+	
+	protected MenuScene createMenuScene() {
+		final MenuScene menuScene = new MenuScene(this.mCamera);
+
+		final IMenuItem resetMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_RESET, this.mFont, "RESET"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
+		resetMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		menuScene.addMenuItem(resetMenuItem);
+
+		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, this.mFont, "QUIT"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
+		quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		menuScene.addMenuItem(quitMenuItem);
+
+		menuScene.buildAnimations();
+
+		menuScene.setBackgroundEnabled(false);
+
+		menuScene.setOnMenuItemClickListener(this);
+		return menuScene;
 	}
 		
 	protected abstract void setBackgroundParameter();
