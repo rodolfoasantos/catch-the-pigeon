@@ -165,7 +165,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		createCharacters();
 
-		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/explosion.ogg");
+		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_puch.ogg");
 		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
 		mMainMusic.play();
 	
