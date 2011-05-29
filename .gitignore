@@ -2,3 +2,4 @@
 .DS_Store
 server/build/*
 R.java
+android/CatchThePigeonAndroid/default.properties
