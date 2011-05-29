@@ -1,18 +1,25 @@
 package br.eng.mosaic.pigeon.client.infra.facebook;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import br.eng.mosaic.pigeon.client.gameplay.Stage;
-import br.eng.mosaic.pigeon.client.R;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.LinearLayout;
 
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.Facebook;
-import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
 
 public class LoginFacebook extends Activity {
@@ -35,148 +42,55 @@ public class LoginFacebook extends Activity {
                     "specified before running this example: see Example.java");
         }
 
-        setContentView(R.layout.main);
-        /*mLoginButton = (LoginButton) findViewById(R.id.login);
-        mText = (TextView) Example.this.findViewById(R.id.txt);
-        mRequestButton = (Button) findViewById(R.id.requestButton);
-        mPostButton = (Button) findViewById(R.id.postButton);
-        mDeleteButton = (Button) findViewById(R.id.deletePostButton);
-        mUploadButton = (Button) findViewById(R.id.uploadButton);*/
-
-       	mFacebook = new Facebook(APP_ID);
-       	mAsyncRunner = new AsyncFacebookRunner(mFacebook);
-
-        SessionStore.restore(mFacebook, this);
-        //SessionEvents.addAuthListener(new SampleAuthListener());
-        //SessionEvents.addLogoutListener(new SampleLogoutListener());
-        //mLoginButton.init(this, mFacebook);
-
-        postWallFacebook();
+        View view = null;
+		try {
+			view = getBrowser();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        setContentView( view );
     }
     
-    public void postWallFacebook() {
-    	Bundle parameters = new Bundle();
-    	parameters.putString("message", Stage.message);
-    	mFacebook.dialog(LoginFacebook.this, "feed", new SampleDialogListener());
+    public View getBrowser() throws ClientProtocolException, IOException {
+    	LinearLayout layout = new LinearLayout(this);
+    	layout.setOrientation(LinearLayout.VERTICAL);
+    	
+    	HttpClient client = new DefaultHttpClient();
+		String url = "http://m.facebook.com/dialog/oauth/?scope=email,user_about_me,publish_stream&client_id=150586265008036&redirect_uri=http://mosaic.eng.br:8080/server/oauth/facebook/callback.do";
+		
+		HttpUriRequest request = new HttpGet( url );
+		HttpResponse response = client.execute( request );
+		BufferedReader reader = getReader( response.getEntity().getContent() );
+		String content = extract(reader);
+		
+    	WebView mWebView = new WebView(this);
+        mWebView.setVerticalScrollBarEnabled(false);
+        mWebView.setHorizontalScrollBarEnabled(false);
+        mWebView.setWebViewClient( null ); // TODO pendente
+        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.loadUrl( "http://m.facebook.com/dialog/oauth/?scope=email,user_about_me,publish_stream&client_id=150586265008036&redirect_uri=http://mosaic.eng.br:8080/server/oauth/facebook/callback.do" );
+//        String xx = "https://graph.facebook.com/oauth/authorize?client_id=150586265008036&redirect_uri=http://locahost:8080/pigeon/oauth/facebook/callback.do?&scope=email,user_about_me,publish_stream";
+//        mWebView.loadUrl( xx );
+        
+        mWebView.loadData(content, "text/html", "UTF-8");
+        
+        layout.addView(mWebView);
+        
+        return layout;
     }
-            
     
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        mFacebook.authorizeCallback(requestCode, resultCode, data);
-    }
-/*
-    public class SampleRequestListener extends BaseRequestListener {
-
-        public void onComplete(final String response, final Object state) {
-            try {
-                // process the response here: executed in background thread
-                Log.d("Facebook-Example", "Response: " + response.toString());
-                JSONObject json = Util.parseJson(response);
-                final String name = json.getString("name");
-
-                // then post the processed result back to the UI thread
-                // if we do not do this, an runtime exception will be generated
-                // e.g. "CalledFromWrongThreadException: Only the original
-                // thread that created a view hierarchy can touch its views."
-                Example.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        mText.setText("Hello there, " + name + "!");
-                    }
-                });
-            } catch (JSONException e) {
-                Log.w("Facebook-Example", "JSON Error in response");
-            } catch (FacebookError e) {
-                Log.w("Facebook-Example", "Facebook Error: " + e.getMessage());
-            }
-        }
-    }
-
-    public class SampleUploadListener extends BaseRequestListener {
-
-        public void onComplete(final String response, final Object state) {
-            try {
-                // process the response here: (executed in background thread)
-                Log.d("Facebook-Example", "Response: " + response.toString());
-                JSONObject json = Util.parseJson(response);
-                final String src = json.getString("src");
-
-                // then post the processed result back to the UI thread
-                // if we do not do this, an runtime exception will be generated
-                // e.g. "CalledFromWrongThreadException: Only the original
-                // thread that created a view hierarchy can touch its views."
-                Example.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        mText.setText("Hello there, photo has been uploaded at \n" + src);
-                    }
-                });
-            } catch (JSONException e) {
-                Log.w("Facebook-Example", "JSON Error in response");
-            } catch (FacebookError e) {
-                Log.w("Facebook-Example", "Facebook Error: " + e.getMessage());
-            }
-        }
-    }*/
-    public class WallPostRequestListener extends BaseRequestListener {
-
-        public void onComplete(final String response, final Object state) {
-            Log.d("Facebook-Example", "Got response: " + response);
-            String message = "<empty>";
-            try {
-                JSONObject json = Util.parseJson(response);
-                message = json.getString("message");
-            } catch (JSONException e) {
-                Log.w("Facebook-Example", "JSON Error in response");
-            } catch (FacebookError e) {
-                Log.w("Facebook-Example", "Facebook Error: " + e.getMessage());
-            }
-            final String text = "Your Wall Post: " + message;
-            LoginFacebook.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    //mText.setText(text);
-                }
-            });
-        }
-    }
-
-/*    public class WallPostDeleteListener extends BaseRequestListener {
-
-        public void onComplete(final String response, final Object state) {
-            if (response.equals("true")) {
-                Log.d("Facebook-Example", "Successfully deleted wall post");
-                Example.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        mDeleteButton.setVisibility(View.INVISIBLE);
-                        mText.setText("Deleted Wall Post");
-                    }
-                });
-            } else {
-                Log.d("Facebook-Example", "Could not delete wall post");
-            }
-        }
-    }*/
-
-    public class SampleDialogListener extends BaseDialogListener {
-
-        public void onComplete(Bundle values) {
-            final String postId = values.getString("post_id");
-            if (postId != null) {
-                Log.d("Facebook-Example", "Dialog Success! post_id=" + postId);
-                mAsyncRunner.request(postId, new WallPostRequestListener());
-/*                mDeleteButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        mAsyncRunner.request(postId, new Bundle(), "DELETE",
-                                new WallPostDeleteListener(), null);
-                    }
-                });
-                mDeleteButton.setVisibility(View.VISIBLE);*/
-            } else {
-                Log.d("Facebook-Example", "No wall post made");
-                SessionEvents.onLoginError("Action Canceled");
-            }
-        }
-    }
-
+    private static BufferedReader getReader( InputStream is ) throws IOException {
+		InputStreamReader reader = new InputStreamReader( is ); 
+		return new BufferedReader( reader );
+	}
+	
+	private static String extract(BufferedReader reader) throws IOException {
+		StringBuilder content = new StringBuilder();
+		String line;
+		while ((line = reader.readLine()) != null)
+			content.append(line);
+		reader.close();
+		return content.toString();
+	}
 
 }

@@ -17,23 +17,27 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
 		findViewById(R.id.start_game).setOnClickListener(
-				new OnClickListener() {
-					public void onClick(View v) {
-						startGame();
-					}
-				});
+                new OnClickListener() {
+                    public void onClick(View v) {
+                        startGame();
+                    }
+                });
 
-		findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showTopFive();
+            }
+        });
+        
+        findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showHighScore();
+            }
+        });
+		findViewById(R.id.social_confg).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				showTopFive();
-			}
-		});
-		
-		findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				showHighScore();
+				loginFacebook();
 			}
 		});
 	}
