@@ -2,6 +2,8 @@ package br.eng.mosaic.pigeon.client.gameplay;
 
 import java.util.Vector;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.sound.Sound;
 import org.anddev.andengine.audio.sound.SoundFactory;
@@ -19,6 +21,11 @@ import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
 import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
+import org.anddev.andengine.entity.scene.menu.MenuScene;
+import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
+import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.TextMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.decorator.ColorMenuItemDecorator;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
@@ -49,13 +56,14 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
+import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
 import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
 import br.eng.mosaic.pigeon.client.infra.Config;
 import br.eng.mosaic.pigeon.client.infra.ConfigIF;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
-public abstract class Stage extends BaseGameActivity {
+public abstract class Stage extends BaseGameActivity implements IOnMenuItemClickListener {
 
 	public ConfigIF profile = Config.getInstance();
 	
@@ -64,6 +72,10 @@ public abstract class Stage extends BaseGameActivity {
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
 	
+	protected static final int MENU_RESET = 0;
+	protected static final int MENU_QUIT = MENU_RESET + 1;
+	
+	protected MenuScene mMenuScene;
 
 	public String backgroundBack;
 	public String backgroundFront;
@@ -80,6 +92,7 @@ public abstract class Stage extends BaseGameActivity {
 	public static TiledTextureRegion mEnemyTextureRegion1;
 	public static TiledTextureRegion mExplosionPlayerTexture;
 	public static TiledTextureRegion mInvertedEnemyTextureRegion;
+	public static TiledTextureRegion mFetherTexture;
 
 	private Texture mAutoParallaxBackgroundTexture;
 
@@ -118,8 +131,7 @@ public abstract class Stage extends BaseGameActivity {
 		this.scene = new Scene(1);
 		
 	
-		this.mTexture = new Texture(256, 128,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(
 				this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(
@@ -130,6 +142,8 @@ public abstract class Stage extends BaseGameActivity {
 		Stage.mExplosionPlayerTexture = TextureRegionFactory
 		.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
 				0, 3, 4);
+		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, 
+				"gfx/bird_feather.png", 0, 0, 3, 5);
 
 		// --pause scene
 		// this.mPausedTextureRegion =
@@ -159,6 +173,9 @@ public abstract class Stage extends BaseGameActivity {
 
 	@Override
 	public Scene onLoadScene() {
+		
+		this.mMenuScene = this.createMenuScene();
+		
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 
 		// --------------- Criando a Cena e inserindo o background
@@ -199,7 +216,7 @@ public abstract class Stage extends BaseGameActivity {
 		scene.getLastChild().attachChild(lifeText);
 
 		// --------------- Criando texto de score ---------------
-		this.scoreText = new ChangeableText(500, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
+		this.scoreText = new ChangeableText(470, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(scoreText);
 
 
@@ -256,11 +273,15 @@ public abstract class Stage extends BaseGameActivity {
 						 * Chama a tela de login do facebook quando o pombo alcanca
 						 * o final da tela
 						 */
+						/*
+						 * trecho comentado por causar problemas
+						 * quando executa.
 						Intent i = new Intent(getBaseContext(), LoginFacebook.class);
 						startActivity(i);
-
+						*/
+						nextStage = true;
 						nextStage();
-						nextStage = true; // Feito para não criar mais de uma
+						 // Feito para não criar mais de uma
 						// instância de Stage já que
 						// onUpdate é chamado várias vezes
 					}
@@ -274,6 +295,8 @@ public abstract class Stage extends BaseGameActivity {
 							Pigeon.posX = 1000;
 							birdDied(pigeon);
 						}
+						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene);
+						scene.getLastChild().attachChild(feather);
 						lifeText.setText("♥: " + pigeon.getLife());
 					}
 				}
@@ -327,6 +350,43 @@ public abstract class Stage extends BaseGameActivity {
 	@Override
 	public void onLoadComplete() {		
 	}
+	
+	@Override
+	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
+			if(this.scene.hasChildScene()) {
+				/* Remove the menu and reset it. */
+				this.mMenuScene.back();
+			} else {
+				/* Attach the menu. */
+				this.scene.setChildScene(this.mMenuScene, false, true, true);
+			}
+			return true;
+		} else {
+			return super.onKeyDown(pKeyCode, pEvent);
+		}
+	}
+
+	@Override
+	public boolean onMenuItemClicked(final MenuScene pMenuScene, final IMenuItem pMenuItem, final float pMenuItemLocalX, final float pMenuItemLocalY) {
+		switch(pMenuItem.getID()) {
+			case MENU_RESET:
+				/* Restart the animation. */
+				this.scene.reset();
+
+				/* Remove the menu and reset it. */
+				this.scene.clearChildScene();
+				this.mMenuScene.reset();
+				return true;
+			case MENU_QUIT:
+				/* End Activity. */
+				this.finish();
+				return true;
+			default:
+				return false;
+		}
+	}
+	
 	
 	public void setBackgroundBack(String backgroundBack) {
 		this.backgroundBack = backgroundBack;
@@ -395,6 +455,25 @@ public abstract class Stage extends BaseGameActivity {
 			return super.onCreateDialog(pID);
 		}
 	}
+	
+	protected MenuScene createMenuScene() {
+		final MenuScene menuScene = new MenuScene(this.mCamera);
+
+		final IMenuItem resetMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_RESET, this.mFont, "RESET"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
+		resetMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		menuScene.addMenuItem(resetMenuItem);
+
+		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, this.mFont, "QUIT"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
+		quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		menuScene.addMenuItem(quitMenuItem);
+
+		menuScene.buildAnimations();
+
+		menuScene.setBackgroundEnabled(false);
+
+		menuScene.setOnMenuItemClickListener(this);
+		return menuScene;
+	}
 		
 	protected abstract void setBackgroundParameter();
 	
@@ -403,4 +482,5 @@ public abstract class Stage extends BaseGameActivity {
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
+
 }
