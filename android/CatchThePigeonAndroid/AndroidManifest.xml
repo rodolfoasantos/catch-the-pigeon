@@ -25,7 +25,7 @@
         <activity android:name=".gui.menu.HighScoreActivity" android:label="@string/high_score"></activity>
         <activity android:name=".gameplay.Stage1"></activity>
         <activity android:name=".gameplay.Stage2"> </activity>
-        <activity android:name=".infra.facebook.LoginFacebook"></activity>
+        <activity android:name="infra.facebook.LoginFacebook"></activity>
         
         
     </application>	
