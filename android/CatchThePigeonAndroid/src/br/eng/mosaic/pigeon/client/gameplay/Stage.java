@@ -67,6 +67,8 @@ public abstract class Stage extends BaseGameActivity {
 
 	public String backgroundBack;
 	public String backgroundFront;
+	public String backgroundFront2;
+	public String backgroundFront3;
 	public String backgroundMid;
 	
 	private Camera mCamera;
@@ -82,8 +84,10 @@ public abstract class Stage extends BaseGameActivity {
 	private Texture mAutoParallaxBackgroundTexture;
 
 	private TextureRegion mParallaxLayerBack;
-	private TextureRegion mParallaxLayerMid;
+	//private TextureRegion mParallaxLayerMid;
 	private TextureRegion mParallaxLayerFront;
+	private TextureRegion mParallaxLayerFront2;
+	private TextureRegion mParallaxLayerFront3;
 
 	private Texture mFontTexture;
 	private Font mFont;
@@ -143,7 +147,7 @@ public abstract class Stage extends BaseGameActivity {
 
 		setBackgroundParameter();
 		
-		createBackground(backgroundBack, backgroundMid, backgroundFront);
+		createBackground(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 		
 		createCharacters();
 
@@ -161,16 +165,28 @@ public abstract class Stage extends BaseGameActivity {
 		// ---------------
 		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(
 				0, 0, 0, 5);
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(0.0f,
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f,
 				new Sprite(0, CAMERA_HEIGHT
 						- this.mParallaxLayerBack.getHeight(),
 						this.mParallaxLayerBack)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f,
-				new Sprite(0, 80, this.mParallaxLayerMid)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-10.0f,
+		
+		//autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-10.0f,
+			//	new Sprite(0, 80, this.mParallaxLayerMid)));
+		
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-15.0f,
 				new Sprite(0, CAMERA_HEIGHT
 						- this.mParallaxLayerFront.getHeight(),
 						this.mParallaxLayerFront)));
+		
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-20.0f,
+				new Sprite(0, CAMERA_HEIGHT 
+						- this.mParallaxLayerFront2.getHeight(),
+						this.mParallaxLayerFront2)));
+		
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-25.0f,
+				new Sprite(0, CAMERA_HEIGHT 
+						- this.mParallaxLayerFront3.getHeight(),
+						this.mParallaxLayerFront3)));
 		scene.setBackground(autoParallaxBackground);
 		// ---------------------------------------------------------------------
 
@@ -319,20 +335,36 @@ public abstract class Stage extends BaseGameActivity {
 	public void setBackgroundFront(String backgroundFront) {
 		this.backgroundFront = backgroundFront;
 	}
-
-	public void setBackgroundMid(String backgroundMid) {
-		this.backgroundMid = backgroundMid;
-	}
 	
-	public void createBackground(String back, String mid, String front){
+	public void setBackgroundFront2(String backgroundFront2)
+	{
+		this.backgroundFront2 = backgroundFront2;
+	}
+	public void setBackgroundFront3(String backgroundFront3)
+	{
+		this.backgroundFront3 = backgroundFront3;
+	}
+	//public void setBackgroundMid(String backgroundMid) {
+		//this.backgroundMid = backgroundMid;
+	//}
+	
+	public void createBackground(String back, String mid, String front, String front2, String front3){
 		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
-				TextureOptions.DEFAULT);
+				TextureOptions.DEFAULT);			
+		
 		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
 				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
+		
 		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
 				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
-		this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
+		
+		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
+		
+		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
+	//	this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
+		//		this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
 
 		this.mEngine.getTextureManager().loadTextures(this.mTexture,
 				this.mAutoParallaxBackgroundTexture);

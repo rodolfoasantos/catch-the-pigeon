@@ -73,8 +73,11 @@ public class Stage1 extends Stage {
 
 	@Override
 	protected void setBackgroundParameter() {
-		setBackgroundBack("gfx/parallax_background_layer_back.png");
-		setBackgroundFront("gfx/parallax_background_layer_front.png");
-		setBackgroundMid("gfx/parallax_background_layer_mid.png");		
+		setBackgroundBack("gfx/mosaic_pigeon_ima_stage01_layer01.png");
+		setBackgroundFront("gfx/mosaic_pigeon_ima_stage01_layer02.png");
+		setBackgroundFront2("gfx/mosaic_pigeon_ima_stage01_layer03.png");
+		setBackgroundFront3("gfx/mosaic_pigeon_ima_stage01_layer04.png");
+				
+		//setBackgroundMid("gfx/parallax_background_layer_mid.png");		
 	}	
 }

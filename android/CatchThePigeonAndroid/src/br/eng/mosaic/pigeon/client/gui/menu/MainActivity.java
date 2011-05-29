@@ -9,6 +9,8 @@ import android.view.View.OnClickListener;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.gameplay.Stage1;
+import br.eng.mosaic.pigeon.client.gameplay.Stage2;
+import br.eng.mosaic.pigeon.client.gameplay.Stage3;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
@@ -49,6 +51,8 @@ public class MainActivity extends Activity {
 		}
 
 		Intent i = new Intent(this, Stage1.class);
+		//Intent i = new Intent(this, Stage2.class);
+		//Intent i = new Intent(this, Stage3.class);
 		startActivity(i);
 	}
 
