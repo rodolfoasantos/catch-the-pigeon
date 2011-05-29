@@ -107,6 +107,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	public static Sound mExplosionSound;
 	public static Music mMainMusic;
+	public static Music mPigeonDieSound;
 
 	protected Vector<BadPigeon> badPigeons = new Vector();
 	protected Scene scene;
@@ -165,9 +166,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		createCharacters();
 
-		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_puch.ogg");
+		
+		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
 		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
-		mMainMusic.play();
+		mPigeonDieSound = AudioFactory.createMusic(mEngine, this, "mfx/mosaic_pigeon_snd_sigeon.ogg");
+
 	
 	}
 
@@ -294,6 +297,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
 							birdDied(pigeon);
+							Stage.mPigeonDieSound.play();
+							Stage.mPigeonDieSound.setLooping(false);
 						}
 						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene);
 						scene.getLastChild().attachChild(feather);
@@ -349,6 +354,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	@Override
 	public void onLoadComplete() {		
+		
+		Stage.mMainMusic.play();
+		
 	}
 	
 	@Override
