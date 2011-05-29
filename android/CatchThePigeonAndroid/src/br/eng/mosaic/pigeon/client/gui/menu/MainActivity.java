@@ -10,7 +10,6 @@ import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.gameplay.Stage1;
 import br.eng.mosaic.pigeon.client.gameplay.Stage2;
-import br.eng.mosaic.pigeon.client.gameplay.Stage3;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
@@ -21,25 +20,32 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		findViewById(R.id.start_game).setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				startGame();
-			}
-		});
 
-		findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				showTopFive();
-			}
-		});
+		findViewById(R.id.start_game).setOnClickListener(
+                new OnClickListener() {
+                    public void onClick(View v) {
+                        startGame();
+                    }
+                });
 
-		findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showTopFive();
+            }
+        });
+        
+        findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showHighScore();
+            }
+        });
+		findViewById(R.id.social_confg).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				showHighScore();
+				loginFacebook();
 			}
 		});
 	}
+		
 
 	private void startGame() {
 		// call the dialog to set a message
