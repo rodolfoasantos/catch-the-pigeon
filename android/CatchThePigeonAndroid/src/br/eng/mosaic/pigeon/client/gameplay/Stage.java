@@ -56,6 +56,7 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
+import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
 import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
 import br.eng.mosaic.pigeon.client.infra.Config;
@@ -89,6 +90,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public static TiledTextureRegion mEnemyTextureRegion1;
 	public static TiledTextureRegion mExplosionPlayerTexture;
 	public static TiledTextureRegion mInvertedEnemyTextureRegion;
+	public static TiledTextureRegion mFetherTexture;
 
 	private Texture mAutoParallaxBackgroundTexture;
 
@@ -125,8 +127,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.scene = new Scene(1);
 		
 	
-		this.mTexture = new Texture(256, 128,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(
 				this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(
@@ -137,6 +138,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		Stage.mExplosionPlayerTexture = TextureRegionFactory
 		.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
 				0, 3, 4);
+		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, 
+				"gfx/bird_feather.png", 0, 0, 3, 5);
 
 		// --pause scene
 		// this.mPausedTextureRegion =
@@ -197,7 +200,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		scene.getLastChild().attachChild(lifeText);
 
 		// --------------- Criando texto de score ---------------
-		this.scoreText = new ChangeableText(500, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
+		this.scoreText = new ChangeableText(470, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(scoreText);
 
 
@@ -276,6 +279,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							Pigeon.posX = 1000;
 							birdDied(pigeon);
 						}
+						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene);
+						scene.getLastChild().attachChild(feather);
 						lifeText.setText("♥: " + pigeon.getLife());
 					}
 				}
@@ -445,4 +450,5 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
+
 }
