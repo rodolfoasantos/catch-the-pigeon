@@ -200,12 +200,8 @@ public abstract class Stage extends BaseGameActivity {
 					runnableHandler.postRunnable(new Runnable() {
 						@Override
 						public void run() {
-							AnimatedSprite face = (AnimatedSprite) pTouchArea;
-							BirdExplosion bird = new BirdExplosion(face.getX(), face.getY(), mExplosionPlayerTexture, scene);
-							scene.getLastChild().attachChild(bird);
-							scene.unregisterTouchArea(face);
-							scene.getLastChild().detachChild(face);
-							badPigeons.remove(face);
+							Ave face = (Ave) pTouchArea;
+							birdDied(face);							
 						}
 					});
 					return true;
@@ -237,9 +233,9 @@ public abstract class Stage extends BaseGameActivity {
 						startActivity(i);
 
 						nextStage();
-						nextStage = true; // Feito para n√£o criar mais de uma
-						// inst√¢ncia de Stage j√° que
-						// onUpdate √© chaamdo v√°rias vezes
+						nextStage = true; // Feito para não criar mais de uma
+						// instância de Stage já que
+						// onUpdate é chamado várias vezes
 					}
 				}
 
@@ -247,15 +243,9 @@ public abstract class Stage extends BaseGameActivity {
 					if (pigeon.isAlive()) {
 						if (pigeon.sufferDamage()) {
 							// the bird died
-							scene.getLastChild().detachChild(pigeon);
-							final BirdExplosion explosion1 = new BirdExplosion(
-									Pigeon.posX, Pigeon.posY,
-									Stage.mExplosionPlayerTexture, scene);
-							scene.getLastChild().attachChild(explosion1);
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
-							pigeon.setAlive(false);
-							Stage.mExplosionSound.play();
+							birdDied(pigeon);
 						}
 						lifeText.setText("♥: " + pigeon.getLife());
 					}
@@ -273,18 +263,31 @@ public abstract class Stage extends BaseGameActivity {
 
 		return scene;
 	}
+	
+	/**
+	 * Called when a bird die
+	 * @param bird Bird that went to hell
+	 */
+	private void birdDied(Ave bird) {
+		BirdExplosion explosion = new BirdExplosion(bird.getX(), bird.getY(), mExplosionPlayerTexture, scene);
+		scene.getLastChild().attachChild(explosion);
+		scene.unregisterTouchArea(bird);
+		scene.getLastChild().detachChild(bird);
+		badPigeons.remove(bird);
+		bird.setAlive(false);
+		Stage.mExplosionSound.play();
+	}
 
+	/**
+	 * Tests the collision between the badpigeon and the piegon
+	 * @return <code> true </code> if there was collision
+	 */
 	protected boolean colissionWithPigeon() {
 		for (BadPigeon bp : badPigeons) {
 			if ((bp.isAlive()) && (bp.collidesWith(this.pigeon))) {
 				if (bp.sufferDamage()) {
 					// the bird died
-					bp.setAlive(false);
-					Stage.mExplosionSound.play();
-					scene.getLastChild().detachChild(bp);
-					final BirdExplosion explosion1 = new BirdExplosion(
-							bp.getX(), bp.getY(), Stage.mExplosionPlayerTexture, scene);
-					scene.getLastChild().attachChild(explosion1);
+					birdDied(bp);
 				}
 				return true;
 			}
