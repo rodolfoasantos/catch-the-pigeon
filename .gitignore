@@ -1,5 +1,5 @@
 *\bin
 .DS_Store
 server/build/*
-R.java
 android/CatchThePigeonAndroid/default.properties
+android/CatchThePigeonAndroid/gen/br/eng/mosaic/pigeon/client/R.java
