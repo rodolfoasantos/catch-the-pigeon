@@ -5,21 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
+import br.eng.mosaic.pigeon.client.R;
 
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.Facebook;
+import com.facebook.android.FbDialog;
 import com.facebook.android.Util;
 
 public class LoginFacebook extends Activity {
@@ -42,41 +34,19 @@ public class LoginFacebook extends Activity {
                     "specified before running this example: see Example.java");
         }
 
-        View view = null;
-		try {
-			view = getBrowser();
+        try {
+			showDialog();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        setContentView( view );
+        setContentView( R.layout.main );
     }
     
-    public View getBrowser() throws ClientProtocolException, IOException {
-    	LinearLayout layout = new LinearLayout(this);
-    	layout.setOrientation(LinearLayout.VERTICAL);
-    	
-    	HttpClient client = new DefaultHttpClient();
-		String url = "http://m.facebook.com/dialog/oauth/?scope=email,user_about_me,publish_stream&client_id=150586265008036&redirect_uri=http://mosaic.eng.br:8080/server/oauth/facebook/callback.do";
-		
-		HttpUriRequest request = new HttpGet( url );
-		HttpResponse response = client.execute( request );
-		BufferedReader reader = getReader( response.getEntity().getContent() );
-		String content = extract(reader);
-		
-    	WebView mWebView = new WebView(this);
-        mWebView.setVerticalScrollBarEnabled(false);
-        mWebView.setHorizontalScrollBarEnabled(false);
-        mWebView.setWebViewClient( null ); // TODO pendente
-        mWebView.getSettings().setJavaScriptEnabled(true);
-//        mWebView.loadUrl( "http://m.facebook.com/dialog/oauth/?scope=email,user_about_me,publish_stream&client_id=150586265008036&redirect_uri=http://mosaic.eng.br:8080/server/oauth/facebook/callback.do" );
-//        String xx = "https://graph.facebook.com/oauth/authorize?client_id=150586265008036&redirect_uri=http://locahost:8080/pigeon/oauth/facebook/callback.do?&scope=email,user_about_me,publish_stream";
-//        mWebView.loadUrl( xx );
-        
-        mWebView.loadData(content, "text/html", "UTF-8");
-        
-        layout.addView(mWebView);
-        
-        return layout;
+    
+    public void showDialog() throws Exception {
+    	String url = "http://m.facebook.com/dialog/oauth/?scope=email,user_about_me,publish_stream&client_id=150586265008036&redirect_uri=http://mosaic.eng.br:8080/server/oauth/facebook/callback.do";
+//    	String url = "http://m.facebook.com"; // TODO refatorar para n‹o abrir novo browser : bug
+    	new FbDialog(this, url, null).show();
     }
     
     private static BufferedReader getReader( InputStream is ) throws IOException {
@@ -94,3 +64,12 @@ public class LoginFacebook extends Activity {
 	}
 
 }
+
+//LinearLayout layout = new LinearLayout(this);
+//layout.setOrientation(LinearLayout.VERTICAL);
+//
+//HttpClient client = new DefaultHttpClient();
+//HttpUriRequest request = new HttpGet( url );
+//HttpResponse response = client.execute( request );
+//BufferedReader reader = getReader( response.getEntity().getContent() );
+//String content = extract(reader);
