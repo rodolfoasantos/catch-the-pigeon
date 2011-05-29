@@ -3,7 +3,6 @@ package br.eng.mosaic.pigeon.client.gameplay.cast.anim;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
-import android.util.Log;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 
 public class BirdExplosion extends Ave {
@@ -24,7 +23,6 @@ public class BirdExplosion extends Ave {
 		this.mPhysicsHandler.setVelocityX(this.velocity);		
 		if(++smokeFrame > 10) {
 			this.setVisible(false);
-			this.setPosition(-50, -50);
 			this.scene.detachChild(this);
 		}
 		super.onManagedUpdate(pSecondsElapsed);
