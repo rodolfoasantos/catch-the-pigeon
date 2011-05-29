@@ -1,11 +1,11 @@
-package br.eng.mosaic.pigeon.common.dto;
+package br.eng.mosaic.pigeon.common.domain;
 
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * DTO to Score of User 
+ * Domain class to Game User 
  * 
  * @author Raoni Kulesza
  * 
@@ -15,7 +15,7 @@ public class Score {
 	public static String[] columns = new String[] { Scores._ID, Scores.USERID, Scores.DATE, Scores.POINTS };
 
 	/**
-	 * Pacote do Content Provider. Precisa ser único.
+	 * Pacote do Content Provider
 	 */
 	public static final String AUTHORITY = "br.eng.mosaic.pigeon.client.infra.provider.score";
 

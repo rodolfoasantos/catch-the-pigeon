@@ -2,6 +2,8 @@ package br.eng.mosaic.pigeon.client.gameplay;
 
 import java.util.Vector;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.sound.Sound;
 import org.anddev.andengine.audio.sound.SoundFactory;
@@ -19,6 +21,11 @@ import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
 import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
+import org.anddev.andengine.entity.scene.menu.MenuScene;
+import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
+import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.TextMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.decorator.ColorMenuItemDecorator;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
@@ -49,18 +56,31 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
+import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
 import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
+import br.eng.mosaic.pigeon.client.infra.Config;
+import br.eng.mosaic.pigeon.client.infra.ConfigIF;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
-public abstract class Stage extends BaseGameActivity {
+public abstract class Stage extends BaseGameActivity implements IOnMenuItemClickListener {
 
+	public ConfigIF profile = Config.getInstance();
+	
+	private ChangeableText scoreText;
+	
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
 	
+	protected static final int MENU_RESET = 0;
+	protected static final int MENU_QUIT = MENU_RESET + 1;
+	
+	protected MenuScene mMenuScene;
 
 	public String backgroundBack;
 	public String backgroundFront;
+	public String backgroundFront2;
+	public String backgroundFront3;
 	public String backgroundMid;
 	
 	private Camera mCamera;
@@ -72,12 +92,15 @@ public abstract class Stage extends BaseGameActivity {
 	public static TiledTextureRegion mEnemyTextureRegion1;
 	public static TiledTextureRegion mExplosionPlayerTexture;
 	public static TiledTextureRegion mInvertedEnemyTextureRegion;
+	public static TiledTextureRegion mFetherTexture;
 
 	private Texture mAutoParallaxBackgroundTexture;
 
 	private TextureRegion mParallaxLayerBack;
-	private TextureRegion mParallaxLayerMid;
+	//private TextureRegion mParallaxLayerMid;
 	private TextureRegion mParallaxLayerFront;
+	private TextureRegion mParallaxLayerFront2;
+	private TextureRegion mParallaxLayerFront3;
 
 	private Texture mFontTexture;
 	private Font mFont;
@@ -106,8 +129,9 @@ public abstract class Stage extends BaseGameActivity {
 	@Override
 	public void onLoadResources() {
 		this.scene = new Scene(1);
-		this.mTexture = new Texture(256, 128,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		
+	
+		this.mTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(
 				this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(
@@ -118,6 +142,8 @@ public abstract class Stage extends BaseGameActivity {
 		Stage.mExplosionPlayerTexture = TextureRegionFactory
 		.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
 				0, 3, 4);
+		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, 
+				"gfx/bird_feather.png", 0, 0, 3, 5);
 
 		// --pause scene
 		// this.mPausedTextureRegion =
@@ -135,7 +161,7 @@ public abstract class Stage extends BaseGameActivity {
 
 		setBackgroundParameter();
 		
-		createBackground(backgroundBack, backgroundMid, backgroundFront);
+		createBackground(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 		
 		createCharacters();
 
@@ -147,22 +173,37 @@ public abstract class Stage extends BaseGameActivity {
 
 	@Override
 	public Scene onLoadScene() {
+		
+		this.mMenuScene = this.createMenuScene();
+		
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 
 		// --------------- Criando a Cena e inserindo o background
 		// ---------------
 		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(
 				0, 0, 0, 5);
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(0.0f,
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f,
 				new Sprite(0, CAMERA_HEIGHT
 						- this.mParallaxLayerBack.getHeight(),
 						this.mParallaxLayerBack)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f,
-				new Sprite(0, 80, this.mParallaxLayerMid)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-10.0f,
+		
+		//autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-10.0f,
+			//	new Sprite(0, 80, this.mParallaxLayerMid)));
+		
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-15.0f,
 				new Sprite(0, CAMERA_HEIGHT
 						- this.mParallaxLayerFront.getHeight(),
 						this.mParallaxLayerFront)));
+		
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-20.0f,
+				new Sprite(0, CAMERA_HEIGHT 
+						- this.mParallaxLayerFront2.getHeight(),
+						this.mParallaxLayerFront2)));
+		
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-25.0f,
+				new Sprite(0, CAMERA_HEIGHT 
+						- this.mParallaxLayerFront3.getHeight(),
+						this.mParallaxLayerFront3)));
 		scene.setBackground(autoParallaxBackground);
 		// ---------------------------------------------------------------------
 
@@ -170,11 +211,14 @@ public abstract class Stage extends BaseGameActivity {
 
 		// ----------------------------------------------------------------------
 
-		// --------------- Criando texto exibido ---------------
+		// --------------- Criando texto de vida ---------------
 		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
 		scene.getLastChild().attachChild(lifeText);
 
-		// -----------------------------------------------------
+		// --------------- Criando texto de score ---------------
+		this.scoreText = new ChangeableText(470, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
+		scene.getLastChild().attachChild(scoreText);
+
 
 		// -------------- Criando Retangulo para colis√£o --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
@@ -200,12 +244,8 @@ public abstract class Stage extends BaseGameActivity {
 					runnableHandler.postRunnable(new Runnable() {
 						@Override
 						public void run() {
-							AnimatedSprite face = (AnimatedSprite) pTouchArea;
-							BirdExplosion bird = new BirdExplosion(face.getX(), face.getY(), mExplosionPlayerTexture, scene);
-							scene.getLastChild().attachChild(bird);
-							scene.unregisterTouchArea(face);
-							scene.getLastChild().detachChild(face);
-							badPigeons.remove(face);
+							Ave face = (Ave) pTouchArea;
+							birdDied(face);							
 						}
 					});
 					return true;
@@ -233,13 +273,17 @@ public abstract class Stage extends BaseGameActivity {
 						 * Chama a tela de login do facebook quando o pombo alcanca
 						 * o final da tela
 						 */
+						/*
+						 * trecho comentado por causar problemas
+						 * quando executa.
 						Intent i = new Intent(getBaseContext(), LoginFacebook.class);
 						startActivity(i);
-
+						*/
+						nextStage = true;
 						nextStage();
-						nextStage = true; // Feito para n√£o criar mais de uma
-						// inst√¢ncia de Stage j√° que
-						// onUpdate √© chaamdo v√°rias vezes
+						 // Feito para não criar mais de uma
+						// instância de Stage já que
+						// onUpdate é chamado várias vezes
 					}
 				}
 
@@ -247,16 +291,12 @@ public abstract class Stage extends BaseGameActivity {
 					if (pigeon.isAlive()) {
 						if (pigeon.sufferDamage()) {
 							// the bird died
-							scene.getLastChild().detachChild(pigeon);
-							final BirdExplosion explosion1 = new BirdExplosion(
-									Pigeon.posX, Pigeon.posY,
-									Stage.mExplosionPlayerTexture, scene);
-							scene.getLastChild().attachChild(explosion1);
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
-							pigeon.setAlive(false);
-							Stage.mExplosionSound.play();
+							birdDied(pigeon);
 						}
+						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene);
+						scene.getLastChild().attachChild(feather);
 						lifeText.setText("♥: " + pigeon.getLife());
 					}
 				}
@@ -273,18 +313,33 @@ public abstract class Stage extends BaseGameActivity {
 
 		return scene;
 	}
+	
+	/**
+	 * Called when a bird die
+	 * @param bird Bird that went to hell
+	 */
+	private void birdDied(Ave bird) {	
+		this.profile.setScore(1);
+		scoreText.setText("Highscore: " + profile.getScore());
+		BirdExplosion explosion = new BirdExplosion(bird.getX(), bird.getY(), mExplosionPlayerTexture, scene);
+		scene.getLastChild().attachChild(explosion);
+		scene.unregisterTouchArea(bird);
+		scene.getLastChild().detachChild(bird);
+		badPigeons.remove(bird);
+		bird.setAlive(false);
+		Stage.mExplosionSound.play();
+	}
 
+	/**
+	 * Tests the collision between the badpigeon and the piegon
+	 * @return <code> true </code> if there was collision
+	 */
 	protected boolean colissionWithPigeon() {
 		for (BadPigeon bp : badPigeons) {
 			if ((bp.isAlive()) && (bp.collidesWith(this.pigeon))) {
 				if (bp.sufferDamage()) {
 					// the bird died
-					bp.setAlive(false);
-					Stage.mExplosionSound.play();
-					scene.getLastChild().detachChild(bp);
-					final BirdExplosion explosion1 = new BirdExplosion(
-							bp.getX(), bp.getY(), Stage.mExplosionPlayerTexture, scene);
-					scene.getLastChild().attachChild(explosion1);
+					birdDied(bp);
 				}
 				return true;
 			}
@@ -292,6 +347,89 @@ public abstract class Stage extends BaseGameActivity {
 		return false;
 	}
 
+	@Override
+	public void onLoadComplete() {		
+	}
+	
+	@Override
+	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
+			if(this.scene.hasChildScene()) {
+				/* Remove the menu and reset it. */
+				this.mMenuScene.back();
+			} else {
+				/* Attach the menu. */
+				this.scene.setChildScene(this.mMenuScene, false, true, true);
+			}
+			return true;
+		} else {
+			return super.onKeyDown(pKeyCode, pEvent);
+		}
+	}
+
+	@Override
+	public boolean onMenuItemClicked(final MenuScene pMenuScene, final IMenuItem pMenuItem, final float pMenuItemLocalX, final float pMenuItemLocalY) {
+		switch(pMenuItem.getID()) {
+			case MENU_RESET:
+				/* Restart the animation. */
+				this.scene.reset();
+
+				/* Remove the menu and reset it. */
+				this.scene.clearChildScene();
+				this.mMenuScene.reset();
+				return true;
+			case MENU_QUIT:
+				/* End Activity. */
+				this.finish();
+				return true;
+			default:
+				return false;
+		}
+	}
+	
+	
+	public void setBackgroundBack(String backgroundBack) {
+		this.backgroundBack = backgroundBack;
+	}
+
+	public void setBackgroundFront(String backgroundFront) {
+		this.backgroundFront = backgroundFront;
+	}
+	
+	public void setBackgroundFront2(String backgroundFront2)
+	{
+		this.backgroundFront2 = backgroundFront2;
+	}
+	public void setBackgroundFront3(String backgroundFront3)
+	{
+		this.backgroundFront3 = backgroundFront3;
+	}
+	//public void setBackgroundMid(String backgroundMid) {
+		//this.backgroundMid = backgroundMid;
+	//}
+	
+	public void createBackground(String back, String mid, String front, String front2, String front3){
+		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
+				TextureOptions.DEFAULT);			
+		
+		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
+		
+		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
+		
+		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
+		
+		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
+	//	this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
+		//		this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
+
+		this.mEngine.getTextureManager().loadTextures(this.mTexture,
+				this.mAutoParallaxBackgroundTexture);
+	}
+	
 	protected Dialog onCreateDialog(final int pID) {
 		switch (pID) {
 		case DIALOG_CHOOSE_MESSAGE:
@@ -317,35 +455,24 @@ public abstract class Stage extends BaseGameActivity {
 			return super.onCreateDialog(pID);
 		}
 	}
-
-	@Override
-	public void onLoadComplete() {		
-	}
 	
-	public void setBackgroundBack(String backgroundBack) {
-		this.backgroundBack = backgroundBack;
-	}
+	protected MenuScene createMenuScene() {
+		final MenuScene menuScene = new MenuScene(this.mCamera);
 
-	public void setBackgroundFront(String backgroundFront) {
-		this.backgroundFront = backgroundFront;
-	}
+		final IMenuItem resetMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_RESET, this.mFont, "RESET"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
+		resetMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		menuScene.addMenuItem(resetMenuItem);
 
-	public void setBackgroundMid(String backgroundMid) {
-		this.backgroundMid = backgroundMid;
-	}
-	
-	public void createBackground(String back, String mid, String front){
-		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
-				TextureOptions.DEFAULT);
-		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
-		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
-		this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
+		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, this.mFont, "QUIT"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
+		quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		menuScene.addMenuItem(quitMenuItem);
 
-		this.mEngine.getTextureManager().loadTextures(this.mTexture,
-				this.mAutoParallaxBackgroundTexture);
+		menuScene.buildAnimations();
+
+		menuScene.setBackgroundEnabled(false);
+
+		menuScene.setOnMenuItemClickListener(this);
+		return menuScene;
 	}
 		
 	protected abstract void setBackgroundParameter();
@@ -355,4 +482,5 @@ public abstract class Stage extends BaseGameActivity {
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
+
 }

@@ -5,16 +5,16 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
 
-public class BirdExplosion extends Ave {
-	
+public class FeatherEvent extends Ave{
+
 	/** Velocidade da Ave */	
 	private float velocity = 0.0f;
 	private Scene scene;
 	private int smokeFrame = 0;
 	
-	public BirdExplosion(final float pX, final float pY, final TiledTextureRegion pTextureRegion, Scene scene) {
+	public FeatherEvent(final float pX, final float pY, final TiledTextureRegion pTextureRegion, Scene scene) {
 		super(pX, pY, pTextureRegion, 50);
-		this.animate(new long[]{200, 200, 200}, 6, 8, 1);
+		this.animate(new long[]{200, 200, 200}, 12, 14, 1);
 		this.scene = scene;
 	}
 

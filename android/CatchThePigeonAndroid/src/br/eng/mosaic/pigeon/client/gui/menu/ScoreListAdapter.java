@@ -3,7 +3,7 @@ package br.eng.mosaic.pigeon.client.gui.menu;
 import java.util.List;
 
 import br.eng.mosaic.pigeon.client.R;
-import br.eng.mosaic.pigeon.common.dto.Score;
+import br.eng.mosaic.pigeon.common.domain.Score;
 
 import android.content.Context;
 import android.view.LayoutInflater;
