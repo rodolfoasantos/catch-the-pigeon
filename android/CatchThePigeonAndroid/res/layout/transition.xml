@@ -42,7 +42,6 @@
 					<ImageView android:layout_width="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_picture_of_ponits" android:layout_height="wrap_content" android:id="@+id/points_background"></ImageView>
 				</LinearLayout>
 				<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
-					<ImageView android:layout_width="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_figeon_noselection" android:layout_height="wrap_content" android:id="@+id/figeon"></ImageView>
 				</LinearLayout>
 				<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout10">
 					<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout11">
@@ -80,8 +79,10 @@
 				<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout15" android:layout_gravity="bottom|right">
 					<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mosaic_pigeon_img_layer_help" android:layout_marginBottom="10dip" android:id="@+id/button_help"></Button>
 				</LinearLayout>				
-			</LinearLayout>			
+			</LinearLayout>
+			<ImageView android:layout_width="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_picture_of_ponits" android:id="@+id/points_background" android:layout_height="wrap_content"></ImageView>			
 </TableRow>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_figeon_noselection" android:id="@+id/figeon"></ImageView>
 		
 	
 	</TableLayout>

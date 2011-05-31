@@ -9,14 +9,15 @@ public class Stage2 extends Stage {
 	@Override
 	protected void createCharacters() {
 		/* Calculate the coordinates for the face, so its centered on the camera. */
-		final int playerX = (CAMERA_WIDTH - Stage1.mPlayerTextureRegion.getTileWidth()) / 4;
-		final int playerY = (CAMERA_HEIGHT - Stage1.mPlayerTextureRegion.getTileHeight()) / 2;
+		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
+		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 
-		this.pigeon = new Pigeon(playerX/2, playerY, Stage1.mPlayerTextureRegion, 3);
+		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mPlayerTextureRegion, 3);
 
-		badPigeons.add(new BadPigeon(0, playerY, Stage1.mInvertedEnemyTextureRegion, 1));	
-		badPigeons.add(new BadPigeon(0, playerY - 100, Stage1.mInvertedEnemyTextureRegion, 1));
-		badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage1.mInvertedEnemyTextureRegion, 1));	
+		badPigeons.add(new BadPigeon(0, playerY, Stage.mEnemyTextureRegion, 1));	
+		badPigeons.add(new BadPigeon(0, playerY - 100, Stage.mEnemyTextureRegion, 1));
+		//badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage1.mInvertedEnemyTextureRegion, 9, 11, 1));	
+		badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage.mInvertedEnemyTextureRegion, 1));	
 		scene.getLastChild().attachChild(pigeon);
 
 		scene.getLastChild().attachChild(pigeon);
@@ -28,10 +29,17 @@ public class Stage2 extends Stage {
 	}
 
 	@Override
-	protected void nextStage() {	
-		super.profile.setScore(1);
+	protected void nextStage() {
+		
+		/*super.profile.setScore(1);
 		Intent i = new Intent(getBaseContext(), Stage3.class);
-		startActivity(i);		
+		startActivity(i);*/
+		
+		/*Intent i = new Intent(this,Transition.class);
+		startActivity(i);*/
+		Intent i = new Intent(this,Transition.class);
+		i.putExtra("level", "3");
+		startActivity(i);
 	}
 
 	@Override

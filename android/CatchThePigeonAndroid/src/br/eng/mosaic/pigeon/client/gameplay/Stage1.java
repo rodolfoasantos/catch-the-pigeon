@@ -34,11 +34,18 @@ public class Stage1 extends Stage {
 
 	@Override
 	protected void nextStage() {
-		super.profile.setScore(1);
-		Intent i = new Intent(getBaseContext(), Stage2.class);
+		//super.profile.setScore(1);
+		//Intent i = new Intent(getBaseContext(), Stage2.class);
+		//Intent i = new Intent(getBaseContext(), Transition.class);
+		
+		/*Intent i = new Intent(this,Transition.class);
+		startActivity(i);
+		*/
+		Intent i = new Intent(this,Transition.class);
+		i.putExtra("level", "2");
 		startActivity(i);
 
-		BadPigeon.velocity *= 1.3;
+		//BadPigeon.velocity *= 1.3;
 	}
 
 	@Override
