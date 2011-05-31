@@ -16,7 +16,7 @@ public class Stage3 extends Stage {
 
 		badPigeons.add(new BadPigeon(0, playerY, Stage2.mEnemyTextureRegion1, 1));	
 		badPigeons.add(new BadPigeon(0, playerY - 100, Stage2.mEnemyTextureRegion1, 1));
-		badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage2.mInvertedEnemyTextureRegion, 9, 11, 1));	
+		badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage2.mInvertedEnemyTextureRegion, 1));	
 		scene.getLastChild().attachChild(pigeon);
 
 		scene.getLastChild().attachChild(pigeon);

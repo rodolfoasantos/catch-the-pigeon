@@ -10,14 +10,15 @@ public class BadPigeon extends Ave {
 	public static float velocity = 70.0f;
 
 	
-	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnimation, int endAnimation, int life) {
+	private BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnimation, int endAnimation, int life) {
 		super(pX, pY, pTextureRegion, life);
 		this.setPosition(pX, pY);
 		this.animate(new long[]{200, 200, 200}, startAnimation, endAnimation, true);
 	}
 	
 	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
-		this(pX, pY, pTextureRegion, 0, 2, 1);
+		//Test if the bird come from left to right or from right to left then setup the correct image
+		this(pX, pY, pTextureRegion, (pX < Pigeon.posX ? 0 : 9), (pX < Pigeon.posX ? 2 : 11), 1);
 	}
 
 	@Override

@@ -13,10 +13,14 @@ public class Pigeon extends Ave {
 	public static float posY = 0;
 	
 	
-	public Pigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
+	private Pigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnim, int endAnim, int life) {
 		super(pX, pY, pTextureRegion, life);
 		this.setPosition(pX, pY);		
-		this.animate(new long[]{200, 200, 200}, 3, 5, true);
+		this.animate(new long[]{200, 200, 200}, startAnim, endAnim, true);
+	}
+	
+	public Pigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
+		this(pX, pY, pTextureRegion, 3, 5, life);
 	}
 
 	@Override

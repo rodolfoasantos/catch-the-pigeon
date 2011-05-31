@@ -11,14 +11,14 @@
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         
         
-        <activity android:label="@string/app_name" android:name=".gui.menu.SplashScreen">
+        <activity android:label="@string/app_name" android:name=".gui.menu.SplashScreen" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
-        <activity android:label="@string/app_name" android:name=".gui.menu.MainActivity">
+        <activity android:label="@string/app_name" android:name=".gui.menu.MainActivity" android:screenOrientation="landscape">
         </activity>
 
         <activity android:name=".gui.menu.TopFiveActivity" android:label="@string/top_five"></activity>

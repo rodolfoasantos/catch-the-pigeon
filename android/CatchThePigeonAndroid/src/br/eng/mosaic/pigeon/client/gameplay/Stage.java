@@ -109,7 +109,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public static Music mMainMusic;
 	public static Music mPigeonDieSound;
 
-	protected Vector<BadPigeon> badPigeons = new Vector();
+	protected Vector<BadPigeon> badPigeons = new Vector<BadPigeon>();
 	protected Scene scene;
 	protected Pigeon pigeon;
 
