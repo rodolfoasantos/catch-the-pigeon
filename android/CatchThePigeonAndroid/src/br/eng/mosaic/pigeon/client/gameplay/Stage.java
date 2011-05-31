@@ -89,9 +89,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	private Texture mTexture;
 	public static TiledTextureRegion mPlayerTextureRegion;
-	public static TiledTextureRegion mEnemyTextureRegion1;
-	public static TiledTextureRegion mExplosionPlayerTexture;
+	public static TiledTextureRegion mEnemyTextureRegion;
 	public static TiledTextureRegion mInvertedEnemyTextureRegion;
+	public static TiledTextureRegion mExplosionPlayerTexture;	
 	public static TiledTextureRegion mFetherTexture;
 
 	private Texture mAutoParallaxBackgroundTexture;
@@ -135,7 +135,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.mTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(
 				this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		Stage.mEnemyTextureRegion1 = TextureRegionFactory.createTiledFromAsset(
+		Stage.mEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(
 				this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory
 		.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0,
@@ -165,7 +165,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		createBackground(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 		
 		createCharacters();
-
 		
 		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
 		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
@@ -306,8 +305,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 					}
 				}
 
-				if(badPigeons.size() == 1){
-					for (BadPigeon bad : GameUtil.genEnemies(3, CAMERA_WIDTH, CAMERA_HEIGHT, Stage1.mEnemyTextureRegion1)) {
+				if(badPigeons.size() < 1){
+					for (BadPigeon bad : GameUtil.genEnemies(2, CAMERA_WIDTH, CAMERA_HEIGHT, Stage.mEnemyTextureRegion, Stage.mInvertedEnemyTextureRegion)) {
 						badPigeons.add(bad);
 						scene.getLastChild().attachChild(bad);
 						scene.registerTouchArea(bad);
