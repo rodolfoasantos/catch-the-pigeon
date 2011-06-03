@@ -34,21 +34,27 @@ public final class R {
         public static final int mosaic_logo=0x7f020010;
         public static final int mosaic_pigeon_img_layer_back=0x7f020011;
         public static final int mosaic_pigeon_img_layer_back_1=0x7f020012;
-        public static final int mosaic_pigeon_img_layer_facebook=0x7f020013;
-        public static final int mosaic_pigeon_img_layer_facebook_320=0x7f020014;
-        public static final int mosaic_pigeon_img_layer_figeon_noselection=0x7f020015;
-        public static final int mosaic_pigeon_img_layer_go=0x7f020016;
-        public static final int mosaic_pigeon_img_layer_help=0x7f020017;
-        public static final int mosaic_pigeon_img_layer_pause=0x7f020018;
-        public static final int mosaic_pigeon_img_layer_picture_of_ponits=0x7f020019;
-        public static final int mosaic_pigeon_img_layer_play_320=0x7f02001a;
-        public static final int mosaic_pigeon_img_layer_separator=0x7f02001b;
-        public static final int mosaic_pigeon_img_layer_twitter=0x7f02001c;
-        public static final int opening_screen_background=0x7f02001d;
-        public static final int paulo=0x7f02001e;
-        public static final int picture_of_avatar=0x7f02001f;
-        public static final int sigeon_noselection=0x7f020020;
-        public static final int twitter=0x7f020021;
+        public static final int mosaic_pigeon_img_layer_background_large=0x7f020013;
+        public static final int mosaic_pigeon_img_layer_background_xlarge=0x7f020014;
+        public static final int mosaic_pigeon_img_layer_bnt_start_large=0x7f020015;
+        public static final int mosaic_pigeon_img_layer_facebook=0x7f020016;
+        public static final int mosaic_pigeon_img_layer_facebook_320=0x7f020017;
+        public static final int mosaic_pigeon_img_layer_figeon_noselection=0x7f020018;
+        public static final int mosaic_pigeon_img_layer_go=0x7f020019;
+        public static final int mosaic_pigeon_img_layer_help=0x7f02001a;
+        public static final int mosaic_pigeon_img_layer_opening_scrreen_background_large=0x7f02001b;
+        public static final int mosaic_pigeon_img_layer_opening_scrreen_background_xlarge=0x7f02001c;
+        public static final int mosaic_pigeon_img_layer_pause=0x7f02001d;
+        public static final int mosaic_pigeon_img_layer_picture_of_avatar_large=0x7f02001e;
+        public static final int mosaic_pigeon_img_layer_picture_of_ponits=0x7f02001f;
+        public static final int mosaic_pigeon_img_layer_play_320=0x7f020020;
+        public static final int mosaic_pigeon_img_layer_separator=0x7f020021;
+        public static final int mosaic_pigeon_img_layer_twitter=0x7f020022;
+        public static final int opening_screen_background=0x7f020023;
+        public static final int paulo=0x7f020024;
+        public static final int picture_of_avatar=0x7f020025;
+        public static final int sigeon_noselection=0x7f020026;
+        public static final int twitter=0x7f020027;
     }
     public static final class id {
         public static final int ImageViewPos2=0x7f06001b;
@@ -117,7 +123,8 @@ public final class R {
         public static final int main=0x7f030002;
         public static final int score_table=0x7f030003;
         public static final int splash=0x7f030004;
-        public static final int transition=0x7f030005;
+        public static final int teste=0x7f030005;
+        public static final int transition=0x7f030006;
     }
     public static final class string {
         public static final int app_name=0x7f050005;

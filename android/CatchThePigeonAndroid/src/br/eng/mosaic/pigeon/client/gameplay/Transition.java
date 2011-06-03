@@ -14,8 +14,8 @@ import android.widget.Button;
 public class Transition extends Activity{
 	Button start;
 	public static String  level;
-	/*public static Intent i;
-	public static Context c;*/
+	//public static Intent i;
+	/*public static Context c;*/
 	//public static Integer cont;
 	
 	public void onCreate(Bundle savedInstanceState){
@@ -27,14 +27,16 @@ public class Transition extends Activity{
 			//String ss = (cont++).toString();
 			
 			//Log.i("jamilson", "SSS"+ss);
+			
 			Intent intent = getIntent();
 			level = (String) intent.getSerializableExtra("level");
 			Log.i("jamilson", level);
+			
 			start  = (Button) findViewById(R.id.start_game);
+			
 			//start  = (Button) findViewById(R.id.button_go);
 			Stage.mMainMusic.stop();
 			start.setOnClickListener(new OnClickListener() {
-				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -42,15 +44,15 @@ public class Transition extends Activity{
 					//Stage.profile.setScore(1);
 					//c = getBaseContext();
 					
-					Intent i = new Intent(getBaseContext(), Stage2.class);
-					startActivity(i);
+					//Intent i = new Intent(getBaseContext(), Stage2.class);
+					//startActivity(i);
 					
 					if (level=="2")
 					{
-						Log.i("jamilson", "Level 2 "+level);
+						Log.i("jamilson", "Dentro de Level 2 "+level);
 						
-						/*i = new Intent(c, Stage2.class);
-						startActivity(i);*/
+						Intent i = new Intent(getBaseContext(), Stage2.class);
+						startActivity(i);
 						
 					}
 					if (level=="3")

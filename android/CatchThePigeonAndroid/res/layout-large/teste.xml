@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		* Copyright (C) 2010 The Android Open Source Project * * Licensed
+		under the Apache License, Version 2.0 (the "License"); * you may not
+		use this file except in compliance with the License. * You may obtain
+		a copy of the License at * *
+		http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by
+		applicable law or agreed to in writing, software * distributed under
+		the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES
+		OR CONDITIONS OF ANY KIND, either express or implied. * See the
+		License for the specific language governing permissions and *
+		limitations under the License.
+	-->
+<AbsoluteLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:background="@drawable/mosaic_pigeon_img_layer_background_large">
+	<TableLayout
+		android:id="@+id/TableLayout02"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TableRow
+			android:layout_width="fill_parent">
+
+			<LinearLayout
+				android:id="@+id/LinearLayoutPos6"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/picture_of_avatar"
+				android:orientation="vertical"
+				android:layout_marginLeft="250px"
+				android:layout_marginTop="4px"
+				android:layout_marginRight="4px">
+				<ImageView
+					android:id="@+id/ImageViewPos6"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/paulo"
+					android:layout_margin="6px"></ImageView>
+				<TextView
+					android:text="@string/pos1"
+					android:id="@+id/TextView01"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/LinearLayoutPos2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/picture_of_avatar"
+				android:orientation="vertical"
+				android:layout_margin="4px">
+				<ImageView
+					android:id="@+id/ImageViewPos2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/dhiego"
+					android:layout_margin="6px"></ImageView>
+				<TextView
+					android:text="@string/pos2"
+					android:id="@+id/TextView01"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/LinearLayoutPos3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/picture_of_avatar"
+				android:orientation="vertical"
+				android:layout_margin="4px">
+				<ImageView
+					android:id="@+id/ImageViewPos3"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/fernanda"
+					android:layout_margin="6px"></ImageView>
+				<TextView
+					android:text="@string/pos3"
+					android:id="@+id/TextView01"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/LinearLayoutPos4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/picture_of_avatar"
+				android:orientation="vertical"
+				android:layout_margin="4px">
+				<ImageView
+					android:id="@+id/ImageViewPos4"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/lenin"
+					android:layout_margin="6px"></ImageView>
+				<TextView
+					android:text="@string/pos4"
+					android:id="@+id/TextView01"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"></TextView>
+			</LinearLayout>
+			<LinearLayout
+				android:layout_margin="4px"
+				android:background="@drawable/picture_of_avatar"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:id="@+id/LinearLayoutPos5"
+				android:layout_width="wrap_content">
+				<ImageView
+					android:layout_margin="6px"
+					android:id="@+id/ImageViewPos5"
+					android:background="@drawable/joao"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"></ImageView>
+				<TextView
+					android:text="@string/pos5"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:id="@+id/TextView01"></TextView>
+			</LinearLayout>
+		</TableRow>
+	</TableLayout>
+</AbsoluteLayout>
