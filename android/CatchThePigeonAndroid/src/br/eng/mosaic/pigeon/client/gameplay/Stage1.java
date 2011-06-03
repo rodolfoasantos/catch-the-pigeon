@@ -18,7 +18,7 @@ public class Stage1 extends Stage {
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 
-		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mPlayerTextureRegion, 3);
+		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, Pigeon.FIGEON);
 
 		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
 		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));

@@ -13,7 +13,7 @@ public class BadPigeon extends Ave {
 	private BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int startAnimation, int endAnimation, int life) {
 		super(pX, pY, pTextureRegion, life);
 		this.setPosition(pX, pY);
-		this.animate(new long[]{200, 200, 200}, startAnimation, endAnimation, true);
+		this.animate(new long[]{millisecondsByFrame, millisecondsByFrame, millisecondsByFrame}, startAnimation, endAnimation, true);
 	}
 	
 	public BadPigeon(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {

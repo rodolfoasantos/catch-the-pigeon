@@ -17,15 +17,17 @@ public abstract class Ave extends AnimatedSprite {
 	protected boolean alive = true;
 	
 	private int life;
+	
+	/** Milliseconds by frame of the texture of the Ave*/
+	protected int millisecondsByFrame = 150;
 
 	public Ave(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
 		super(pX, pY, pTextureRegion);
 		this.life = life;
 		this.pTextureRegion = pTextureRegion;
 		
-		//this.setScaleCenterY(Stage1.mPlayerTextureRegion.getTileHeight());
 		this.setScale(2);
-		this.animate(new long[]{200, 200, 200}, 3, 5, true);
+		this.animate(new long[]{millisecondsByFrame, millisecondsByFrame, millisecondsByFrame}, 3, 5, true);
 
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
