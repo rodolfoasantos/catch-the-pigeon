@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import br.eng.mosaic.pigeon.client.R;
+import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.gameplay.Stage1;
 import br.eng.mosaic.pigeon.client.gameplay.Transition;
@@ -55,8 +56,8 @@ public class MainActivity extends Activity {
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
-
-		Intent i = new Intent(this, Stage1.class);
+		Intent i = new Intent(this, SelectPerson.class);
+		//Intent i = new Intent(this, Stage1.class);
 		//Intent i = new Intent(this, Stage2.class);
 		//Intent i = new Intent(this, Stage3.class);
 		startActivity(i);

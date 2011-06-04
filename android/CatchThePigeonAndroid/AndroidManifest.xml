@@ -66,15 +66,16 @@
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar">
-			<intent-filter>
-				<action
-					android:name="android.intent.action.MAIN" />
-			</intent-filter>
 		</activity>
 		<activity
 			android:name="infra.facebook.LoginFacebook"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity
+			android:name=".gameplay.SelectPerson"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar"/>	
 	</application>
 </manifest>

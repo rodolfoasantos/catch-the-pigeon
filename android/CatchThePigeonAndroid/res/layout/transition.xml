@@ -1,89 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- * Copyright (C) 2010 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
--->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/background" android:orientation="horizontal">
-	<TableLayout  
-		android:id="@+id/TableLayout02" 
-		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent" android:background="@drawable/background_screen_transition">
-		
-		<TableRow>
-			<LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout4" android:orientation="vertical" android:layout_width="fill_parent">
-				<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout5">
-					<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mosaic_pigeon_img_layer_facebook" android:id="@+id/button_facebook"></Button>
-				</LinearLayout>
-				<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout6">
-					<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/button_twitter" android:background="@drawable/mosaic_pigeon_img_layer_twitter"></Button>
-				</LinearLayout>
-				<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout7" android:orientation="horizontal">
-					<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout8">
-						<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mosaic_pigeon_img_layer_back" android:id="@+id/button_back"></Button>
-					</LinearLayout>
-					<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout9">
-						<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/button_go" android:background="@drawable/mosaic_pigeon_img_layer_pause"></Button>
-					</LinearLayout>
-				</LinearLayout>
-			</LinearLayout>
-			<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout1" android:orientation="vertical">
-				<LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content">
-					<ImageView android:layout_width="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_picture_of_ponits" android:layout_height="wrap_content" android:id="@+id/points_background"></ImageView>
-				</LinearLayout>
-				<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
-				</LinearLayout>
-				<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout10">
-					<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout11">
-						<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mosaic_pigeon_img_layer_back_1" android:id="@+id/button_back"></Button>
-					</LinearLayout>
-					<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout13">
-						<Button android:layout_width="wrap_content" android:id="@+id/button_go" android:background="@drawable/mosaic_pigeon_img_layer_go" android:layout_height="wrap_content"></Button>
-					</LinearLayout>
-					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout12" android:background="@drawable/mosaic_pigeon_img_layer_separator"></LinearLayout>
-				</LinearLayout>
-			</LinearLayout>
-			<LinearLayout android:id="@+id/LinearLayoutPos1" android:orientation="vertical">
-				<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout14">
-					<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4px" android:id="@+id/LinearLayoutPos5" android:background="@drawable/picture_of_avatar">
-						<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos5" android:layout_margin="6px" android:background="@drawable/joao"></ImageView>
-						<TextView android:layout_width="wrap_content" android:text="@string/pos5" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:id="@+id/TextView01"></TextView>
-					</LinearLayout>
-					<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4px" android:id="@+id/LinearLayoutPos4" android:background="@drawable/picture_of_avatar">
-						<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos4" android:layout_margin="6px" android:background="@drawable/lenin"></ImageView>
-						<TextView android:layout_width="wrap_content" android:text="@string/pos4" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:id="@+id/TextView01"></TextView>
-					</LinearLayout>
-					<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4px" android:id="@+id/LinearLayoutPos3" android:background="@drawable/picture_of_avatar">
-						<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos3" android:layout_margin="6px" android:background="@drawable/fernanda"></ImageView>
-						<TextView android:layout_width="wrap_content" android:text="@string/pos3" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:id="@+id/TextView01"></TextView>
-					</LinearLayout>
-					<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4px" android:id="@+id/LinearLayoutPos2" android:background="@drawable/picture_of_avatar">
-						<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos2" android:layout_margin="6px" android:background="@drawable/dhiego"></ImageView>
-						<TextView android:layout_width="wrap_content" android:text="@string/pos2" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:id="@+id/TextView01"></TextView>
-					</LinearLayout>
-					<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4px" android:id="@+id/LinearLayoutPos6" android:background="@drawable/picture_of_avatar">
-						<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:layout_margin="6px" android:background="@drawable/paulo"></ImageView>
-						<TextView android:layout_width="wrap_content" android:text="@string/pos1" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:id="@+id/TextView01"></TextView>
-					</LinearLayout>
-				</LinearLayout>
-				<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout15" android:layout_gravity="bottom|right">
-					<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mosaic_pigeon_img_layer_help" android:layout_marginBottom="10dip" android:id="@+id/button_help"></Button>
-				</LinearLayout>				
-			</LinearLayout>
-			<ImageView android:layout_width="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_picture_of_ponits" android:id="@+id/points_background" android:layout_height="wrap_content"></ImageView>			
-</TableRow>
-		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/mosaic_pigeon_img_layer_figeon_noselection" android:id="@+id/figeon"></ImageView>
-		
-	
-	</TableLayout>
-</LinearLayout>
+<AbsoluteLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/mosaic_pigeon_tela_transicao_layer01">
+
+	<AbsoluteLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@drawable/mosaic_pigeon_tela_transicao_layer02"
+		android:id="@+id/absoluteLayout1"
+		android:layout_x="-1dip"
+		android:layout_y="1dip">
+
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:layout_x="28dip"
+			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
+			android:layout_y="269dip"></ImageButton>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_img_layer_help"
+			android:layout_x="672dip"
+			android:layout_y="254dip"></ImageButton>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
+			android:layout_x="28dip"
+			android:layout_y="194dip"></ImageButton>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_img_layer_back"
+			android:layout_x="31dip"
+			android:layout_y="371dip"></ImageButton>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
+			android:layout_x="90dip"
+			android:layout_y="368dip"></ImageButton>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_tela_transicao_separador_botoes"
+			android:layout_x="275dip"
+			android:layout_y="243dip"></ImageView>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/next_level"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_tela_transicao_go"
+			android:layout_x="332dip"
+			android:layout_y="243dip"></ImageButton>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
+			android:layout_x="550dip"
+			android:layout_y="14dip"></ImageView>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
+			android:layout_x="450dip"
+			android:layout_y="126dip"></ImageView>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
+			android:layout_x="350dip"
+			android:layout_y="127dip"></ImageView>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
+			android:layout_x="450dip"
+			android:layout_y="15dip"></ImageView>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
+			android:layout_x="350dip"
+			android:layout_y="16dip"></ImageView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:text="@string/pos5"
+			android:id="@+id/TextView01"
+			android:layout_height="wrap_content"
+			android:layout_x="470dip"
+			android:layout_y="209dip"></TextView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:text="@string/pos4"
+			android:id="@+id/TextView01"
+			android:layout_height="wrap_content"
+			android:layout_x="370dip"
+			android:layout_y="211dip"></TextView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:text="@string/pos3"
+			android:id="@+id/TextView01"
+			android:layout_height="wrap_content"
+			android:layout_x="565dip"
+			android:layout_y="97dip"></TextView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:text="@string/pos2"
+			android:id="@+id/TextView01"
+			android:layout_height="wrap_content"
+			android:layout_x="470dip"
+			android:layout_y="99dip"></TextView>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_tela_transicao_quadro_level_sigeon"
+			android:layout_x="210dip"
+			android:layout_y="69dip"></ImageButton>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ImageViewPos6"
+			android:background="@drawable/mosaic_pigeon_tela_transicao_quadro_pontos"
+			android:layout_x="210dip"
+			android:layout_y="12dip"></ImageView>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_tela_transicao_back"
+			android:layout_x="210dip"
+			android:layout_y="242dip"></ImageButton>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="560dip" android:layout_y="30dip"></ImageView>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="460dip" android:layout_y="30dip"></ImageView>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="360dip" android:layout_y="30dip"></ImageView>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="360dip" android:layout_y="141dip"></ImageView>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="460dip" android:layout_y="141dip"></ImageView>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextView01" android:text="@string/pos1" android:layout_x="370dip" android:layout_y="97dip"></TextView>
+	</AbsoluteLayout>
+
+
+</AbsoluteLayout>

@@ -10,9 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class Transition extends Activity{
-	Button start;
+	ImageButton next;
 	public static String  level;
 	public static int lev;
 	//public static Intent i;
@@ -21,8 +22,8 @@ public class Transition extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.char_select);
-		//setContentView(R.layout.transition);
+		//setContentView(R.layout.char_select);
+		setContentView(R.layout.transition);
 			
 			
 			//String ss = (cont++).toString();
@@ -34,11 +35,11 @@ public class Transition extends Activity{
 			lev = Integer.parseInt(level);
 			Log.i("jamilson", level);
 			
-			start  = (Button) findViewById(R.id.start_game);
+			next  = (ImageButton) findViewById(R.id.next_level);
 			
 			//start  = (Button) findViewById(R.id.button_go);
 			Stage.mMainMusic.stop();
-			start.setOnClickListener(new OnClickListener() {
+			next.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub

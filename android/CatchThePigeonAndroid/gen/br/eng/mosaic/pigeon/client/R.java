@@ -95,39 +95,21 @@ public final class R {
         public static final int TextView01=0x7f06001d;
         public static final int absoluteLayout1=0x7f060017;
         public static final int back=0x7f060013;
-        public static final int button_back=0x7f060033;
-        public static final int button_facebook=0x7f06002e;
-        public static final int button_go=0x7f060035;
-        public static final int button_help=0x7f06003d;
-        public static final int button_twitter=0x7f060030;
         public static final int date=0x7f060028;
         public static final int facebook_config=0x7f06000f;
-        public static final int figeon=0x7f06003e;
         public static final int figeon_button=0x7f060006;
         public static final int help_button=0x7f060016;
         public static final int high_score=0x7f060026;
-        public static final int imageButton1=0x7f060019;
-        public static final int imageButton2=0x7f060018;
-        public static final int imageButton3=0x7f06001a;
         public static final int imageView1=0x7f06002a;
         public static final int linearLayout1=0x7f060015;
-        public static final int linearLayout10=0x7f060037;
-        public static final int linearLayout11=0x7f060038;
-        public static final int linearLayout12=0x7f06003a;
-        public static final int linearLayout13=0x7f060039;
-        public static final int linearLayout14=0x7f06003b;
-        public static final int linearLayout15=0x7f06003c;
         public static final int linearLayout2=0x7f060012;
         public static final int linearLayout3=0x7f060008;
-        public static final int linearLayout4=0x7f06002c;
-        public static final int linearLayout5=0x7f06002d;
-        public static final int linearLayout6=0x7f06002f;
-        public static final int linearLayout7=0x7f060031;
-        public static final int linearLayout8=0x7f060032;
-        public static final int linearLayout9=0x7f060034;
+        public static final int next_level=0x7f06002c;
         public static final int points=0x7f060029;
-        public static final int points_background=0x7f060036;
         public static final int progressBar1=0x7f06002b;
+        public static final int selectFigean=0x7f06001a;
+        public static final int selectFigeon=0x7f060018;
+        public static final int selectSigeon=0x7f060019;
         public static final int sigean_button=0x7f060004;
         public static final int sigeon_button=0x7f060002;
         public static final int social_confg=0x7f060024;
@@ -144,15 +126,13 @@ public final class R {
     }
     public static final class layout {
         public static final int char_select=0x7f030000;
-        public static final int char_select_v=0x7f030001;
-        public static final int help=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int main_not=0x7f030004;
-        public static final int score_table=0x7f030005;
-        public static final int splash=0x7f030006;
-        public static final int teste=0x7f030007;
-        public static final int transition=0x7f030008;
-        public static final int transition_v=0x7f030009;
+        public static final int help=0x7f030001;
+        public static final int main=0x7f030002;
+        public static final int main_not=0x7f030003;
+        public static final int score_table=0x7f030004;
+        public static final int splash=0x7f030005;
+        public static final int teste=0x7f030006;
+        public static final int transition=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f050005;
