@@ -86,5 +86,5 @@ public class Stage1 extends Stage {
 		setBackgroundFront3("gfx/mosaic_pigeon_ima_stage01_layer04.png");
 				
 		//setBackgroundMid("gfx/parallax_background_layer_mid.png");		
-	}	
+	}
 }

@@ -278,6 +278,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 						Intent i = new Intent(getBaseContext(), LoginFacebook.class);
 						startActivity(i);
 						*/
+					
 						nextStage = true;
 						nextStage();
 						 // Feito para não criar mais de uma
@@ -363,6 +364,10 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		super.onStop();
 		Stage.mMainMusic.stop();
 	}
+	protected void onDestroy(){
+		super.onDestroy();
+		this.finish();
+	}
 	@Override
 	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
 		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
@@ -384,11 +389,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		switch(pMenuItem.getID()) {
 			case MENU_RESET:
 				/* Restart the animation. */
-				this.scene.reset();
-
+				//this.scene.reset();
+				this.scene.back();
 				/* Remove the menu and reset it. */
-				this.scene.clearChildScene();
-				this.mMenuScene.reset();
+				//this.scene.clearChildScene();
+				//this.mMenuScene.reset();
 				return true;
 			case MENU_QUIT:
 				/* End Activity. */
