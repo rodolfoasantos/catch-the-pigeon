@@ -27,22 +27,23 @@ public class MainActivity extends Activity {
                     }
                 });
 
-        findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
+       /* findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 showTopFive();
             }
         });
-        
-        findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
+        */
+        /*findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 showHighScore();
             }
         });
+        
 		findViewById(R.id.social_confg).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				loginFacebook();
 			}
-		});
+		});*/
 	}
 		
 

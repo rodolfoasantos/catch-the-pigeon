@@ -14,6 +14,7 @@ import android.widget.Button;
 public class Transition extends Activity{
 	Button start;
 	public static String  level;
+	public static int lev;
 	//public static Intent i;
 	/*public static Context c;*/
 	//public static Integer cont;
@@ -30,6 +31,7 @@ public class Transition extends Activity{
 			
 			Intent intent = getIntent();
 			level = (String) intent.getSerializableExtra("level");
+			lev = Integer.parseInt(level);
 			Log.i("jamilson", level);
 			
 			start  = (Button) findViewById(R.id.start_game);
@@ -47,20 +49,21 @@ public class Transition extends Activity{
 					//Intent i = new Intent(getBaseContext(), Stage2.class);
 					//startActivity(i);
 					
-					if (level=="2")
+					if (lev==2)
 					{
+						//valor2();
 						Log.i("jamilson", "Dentro de Level 2 "+level);
-						
 						Intent i = new Intent(getBaseContext(), Stage2.class);
 						startActivity(i);
 						
+						
 					}
-					if (level=="3")
+					if (lev==3)
 					{
 						Log.i("jamilson", "Level 3 "+level);
 						//Stage.profile.setScore(1);
-					//	Intent i = new Intent(getBaseContext(), Stage3.class);
-						//startActivity(i);
+						Intent i = new Intent(getBaseContext(), Stage3.class);
+						startActivity(i);
 					}
 					
 
@@ -68,5 +71,6 @@ public class Transition extends Activity{
 				}
 			});
 	}
+	
 
 }
