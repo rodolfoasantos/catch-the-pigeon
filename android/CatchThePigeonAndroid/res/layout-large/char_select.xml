@@ -15,9 +15,16 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/help_button"
 			android:layout_width="wrap_content"
-			android:background="@drawable/audio_icon"
+			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
+			android:layout_x="80dip"
+			android:layout_y="310dip"></ImageButton>
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:id="@+id/help_button"
+			android:layout_height="wrap_content"
+			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:layout_x="15dip"
-			android:layout_y="290dip"></ImageButton>
+			android:layout_y="310dip"></ImageButton>
 		<ImageButton
 			android:layout_height="wrap_content"
 			android:id="@+id/help_button"
@@ -30,21 +37,22 @@
 			android:id="@+id/selectFigeon"
 			android:layout_width="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_selected_figeon"
-			android:layout_x="250dip"
-			android:layout_y="2dip"></ImageButton>
-		<ImageButton
-			android:layout_height="wrap_content"
-			android:id="@+id/selectSigeon"
-			android:layout_width="wrap_content"
-			android:background="@drawable/mosaic_pigeon_ima_selected_sigeon"
-			android:layout_x="75dip"
-			android:layout_y="40dip"></ImageButton>
+			android:layout_x="85dip"
+			android:layout_y="45dip"></ImageButton>
 		<ImageButton
 			android:layout_height="wrap_content"
 			android:id="@+id/selectFigean"
 			android:layout_width="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_selected_figean"
-			android:layout_x="425dip"
+			android:layout_x="275dip"
+			android:layout_y="15dip"></ImageButton>
+		<ImageButton
+			android:layout_height="wrap_content"
+			android:id="@+id/selectSigeon"
+			android:layout_width="wrap_content"
+			android:background="@drawable/mosaic_pigeon_ima_selected_sigeon"
+			android:layout_x="460dip"
 			android:layout_y="45dip"></ImageButton>
+		
 	</AbsoluteLayout>
 </AbsoluteLayout>
