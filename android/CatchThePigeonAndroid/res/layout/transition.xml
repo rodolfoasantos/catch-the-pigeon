@@ -34,20 +34,6 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
 			android:layout_x="28dip"
 			android:layout_y="194dip"></ImageButton>
-		<ImageButton
-			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_height="wrap_content"
-			android:background="@drawable/mosaic_pigeon_img_layer_back"
-			android:layout_x="31dip"
-			android:layout_y="371dip"></ImageButton>
-		<ImageButton
-			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_height="wrap_content"
-			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
-			android:layout_x="90dip"
-			android:layout_y="368dip"></ImageButton>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -152,6 +138,7 @@
 		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="360dip" android:layout_y="141dip"></ImageView>
 		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_ima_quadro_foto" android:layout_x="460dip" android:layout_y="141dip"></ImageView>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextView01" android:text="@string/pos1" android:layout_x="370dip" android:layout_y="97dip"></TextView>
+		<ImageButton android:id="@+id/help_button" android:layout_width="wrap_content" android:background="@drawable/mosaic_pigeon_icon_audio_icon" android:layout_height="wrap_content" android:layout_x="126dip" android:layout_y="243dip"></ImageButton>
 	</AbsoluteLayout>
 
 
