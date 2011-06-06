@@ -138,7 +138,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		/*96 means that the texture will be positioned beside of first that have 96px of width*/
-		Stage.mCharacters = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 3);
+		Stage.mCharacters = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
 		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, "gfx/bird_feather.png", 0, 0, 3, 5);
@@ -364,10 +364,10 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		super.onStop();
 		Stage.mMainMusic.stop();
 	}
-	protected void onDestroy(){
+	/*protected void onDestroy(){
 		super.onDestroy();
 		this.finish();
-	}
+	}*/
 	@Override
 	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
 		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
@@ -389,11 +389,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		switch(pMenuItem.getID()) {
 			case MENU_RESET:
 				/* Restart the animation. */
-				//this.scene.reset();
-				this.scene.back();
+				this.scene.reset();
+				//this.scene.back();
 				/* Remove the menu and reset it. */
-				//this.scene.clearChildScene();
-				//this.mMenuScene.reset();
+				this.scene.clearChildScene();
+				this.mMenuScene.reset();
 				return true;
 			case MENU_QUIT:
 				/* End Activity. */

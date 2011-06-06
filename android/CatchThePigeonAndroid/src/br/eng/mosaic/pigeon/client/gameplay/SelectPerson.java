@@ -47,16 +47,29 @@ public class SelectPerson extends Activity{
 		
 	}
 	public void selectFigeon(){
-		Intent i = new Intent(this, Stage1.class);
+		
+		Intent i = new Intent(this,Stage1.class);
+		i.putExtra("select", "figeon");
 		startActivity(i);
+		
+		//Intent i = new Intent(this, Stage1.class);
+		//startActivity(i);
 	}
 	public void selectSigeon(){
-		Intent i = new Intent(this, Stage1.class);
+		Intent i = new Intent(this,Stage1.class);
+		i.putExtra("select", "sigeon");
 		startActivity(i);
+		
+		/*Intent i = new Intent(this, Stage1.class);
+		startActivity(i);*/
 	}
 	public void selectFigean(){
-		Intent i = new Intent(this, Stage1.class);
+		Intent i = new Intent(this,Stage1.class);
+		i.putExtra("select", "figean");
 		startActivity(i);
+		
+		/*Intent i = new Intent(this, Stage1.class);
+		startActivity(i);*/
 	}
 
 }

@@ -11,14 +11,18 @@ import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 
 public class Stage1 extends Stage {
 
-	
+	public String select; 
 	@Override
 	protected void createCharacters() {
+		Intent intent = getIntent();
+		select = (String) intent.getSerializableExtra("select");
+		
+		Log.i("jamilson", "Pombo selecionado:" + select);
 		/* Calculate the coordinates for the face, so its centered on the camera. */
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 
-		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, Pigeon.FIGEON);
+		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, (select.equalsIgnoreCase("figeon") ? Pigeon.FIGEON : (select.equalsIgnoreCase("sigeon") ? Pigeon.SIGEON : Pigeon.FIGEAN)));
 
 		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
 		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
