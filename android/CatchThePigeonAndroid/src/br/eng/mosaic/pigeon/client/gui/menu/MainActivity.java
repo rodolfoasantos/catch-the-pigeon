@@ -8,8 +8,6 @@ import android.view.View.OnClickListener;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
-import br.eng.mosaic.pigeon.client.gameplay.Stage1;
-import br.eng.mosaic.pigeon.client.gameplay.Transition;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
@@ -39,12 +37,12 @@ public class MainActivity extends Activity {
                 showHighScore();
             }
         });
-        
-		findViewById(R.id.social_confg).setOnClickListener(new OnClickListener() {
+        */
+		findViewById(R.id.facebook).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				loginFacebook();
 			}
-		});*/
+		});
 	}
 		
 

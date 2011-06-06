@@ -13,9 +13,9 @@
 			android:layout_y="220dip"></ImageButton>
 
 		<ImageButton android:layout_width="wrap_content"
-			android:id="@+id/help_button" android:layout_height="wrap_content"
+			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
-			android:layout_x="28dip" android:layout_y="150dip">
+			android:layout_x="28dip" android:layout_y="150dip" android:id="@+id/facebook">
 		</ImageButton>
 		<ImageButton android:layout_width="wrap_content"
 			android:id="@+id/start_game" android:layout_height="wrap_content"

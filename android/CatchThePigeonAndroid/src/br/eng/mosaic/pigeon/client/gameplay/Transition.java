@@ -25,6 +25,7 @@ public class Transition extends Activity{
 		//setContentView(R.layout.char_select);
 		setContentView(R.layout.transition);
 			
+			// postar aqui envio mensagem, refatorar para thread
 			
 			//String ss = (cont++).toString();
 			
