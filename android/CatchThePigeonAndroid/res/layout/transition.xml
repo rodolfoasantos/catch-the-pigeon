@@ -12,35 +12,6 @@
 		android:id="@+id/absoluteLayout1"
 		android:layout_x="-1dip"
 		android:layout_y="1dip">
-
-		<ImageButton
-			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_height="wrap_content"
-			android:layout_x="28dip"
-			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
-			android:layout_y="269dip"></ImageButton>
-		<ImageButton
-			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_height="wrap_content"
-			android:background="@drawable/mosaic_pigeon_img_layer_help"
-			android:layout_x="565dip"
-			android:layout_y="215dip"></ImageButton>
-		<ImageButton
-			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_height="wrap_content"
-			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
-			android:layout_x="28dip"
-			android:layout_y="194dip"></ImageButton>
-		<ImageButton
-			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_height="wrap_content"
-			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
-			android:layout_x="100dip"
-			android:layout_y="280dip"></ImageButton>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -119,7 +90,7 @@
 			android:content="@+id/contentLayout"
 			android:padding="10dip"
 			android:layout_x="200dip"
-			android:layout_y="283dip">
+			android:layout_y="310dip">
 
 			<Button
 				android:layout_width="wrap_content"
@@ -219,5 +190,18 @@
 			android:id="@+id/TextView01"
 			android:layout_x="470dip"
 			android:layout_y="193dip"></TextView>
+		<ImageButton
+	android:background="@drawable/mosaic_pigeon_img_layer_help"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:id="@+id/help_button"
+	android:layout_x="568dip"
+	android:layout_y="240dip"></ImageButton>
+		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_facebook" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/help_button" android:layout_x="26dip" android:layout_y="162dip"></ImageButton>
+		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_twitter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/help_button" android:layout_x="26dip" android:layout_y="241dip"></ImageButton>
+		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_back" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/back_button" android:layout_x="8dip" android:layout_y="343dip"></ImageButton>
+		<ImageButton android:background="@drawable/mosaic_pigeon_icon_audio_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/help_button" android:layout_x="71dip" android:layout_y="341dip"></ImageButton>
 	</AbsoluteLayout>
+
+
 </AbsoluteLayout>
