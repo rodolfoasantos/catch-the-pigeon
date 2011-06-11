@@ -2,6 +2,7 @@ package br.eng.mosaic.pigeon.client.gameplay;
 
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
+import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +14,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class Transition extends Activity{
-	ImageButton next;
+	ImageButton next,  back, audio;
+	int cont;
+	
 	public static String  level;
 	public static int lev;
 	//public static Intent i;
@@ -34,9 +37,12 @@ public class Transition extends Activity{
 			Intent intent = getIntent();
 			level = (String) intent.getSerializableExtra("level");
 			lev = Integer.parseInt(level);
-			Log.i("jamilson", level);
 			
+			
+			cont=0;
 			next  = (ImageButton) findViewById(R.id.next_level);
+			back = (ImageButton) findViewById(R.id.back_button_transition);
+			audio = (ImageButton) findViewById(R.id.audio_button_transition);
 			
 			//start  = (Button) findViewById(R.id.button_go);
 			Stage.mMainMusic.stop();
@@ -72,7 +78,39 @@ public class Transition extends Activity{
 					BadPigeon.velocity *= 1.5;
 				}
 			});
+			
+			back.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					startActivity(new Intent(getBaseContext(), SelectPerson.class));
+					//Stage.mMainMusic.play();
+				}
+			});
+			
+			audio.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if (cont==0)
+					{
+						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
+						cont++;
+					}else
+					{
+						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);
+						cont=0;
+					}
+				//v.setBackgroundDrawable(R.drawable.mosaic_pigeon_icon_mute_icon);
+				//mosaic_pigeon_icon_mute_icon
+					
+				}
+			});
 	}
+	
+	
 	
 	@Override
 	protected void onPause() {

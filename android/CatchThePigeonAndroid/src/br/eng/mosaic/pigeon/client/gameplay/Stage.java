@@ -367,6 +367,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		super.onPause();
 		Stage.mMainMusic.stop();
+		setResult(RESULT_CANCELED);
+		// Fecha a tela
+		finish();
 	}
 	public void onStop(){
 		super.onStop();

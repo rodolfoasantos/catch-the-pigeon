@@ -100,7 +100,9 @@ public final class R {
         public static final int TextView01=0x7f060008;
         public static final int absoluteLayout1=0x7f060000;
         public static final int audio_button=0x7f060006;
+        public static final int audio_button_transition=0x7f060020;
         public static final int back_button=0x7f060005;
+        public static final int back_button_transition=0x7f06001f;
         public static final int contentLayout=0x7f06000b;
         public static final int date=0x7f060010;
         public static final int facebook=0x7f06000d;
