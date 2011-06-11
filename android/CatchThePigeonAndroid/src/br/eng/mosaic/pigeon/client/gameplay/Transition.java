@@ -74,5 +74,13 @@ public class Transition extends Activity{
 			});
 	}
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		setResult(RESULT_CANCELED);
+		// Fecha a tela
+		finish();
+	}
+	
 
 }
