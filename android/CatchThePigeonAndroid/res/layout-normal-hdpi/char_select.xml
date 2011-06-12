@@ -33,8 +33,8 @@
 			android:layout_x="352dip"
 			android:layout_y="76dip"></ImageButton>
 		<ImageButton android:layout_height="50dip" android:background="@drawable/mosaic_pigeon_img_layer_help" android:id="@+id/help_button" android:layout_width="50dip" android:layout_x="477dip" android:layout_y="175dip"></ImageButton>
-		<ImageButton android:layout_height="35dip" android:background="@drawable/mosaic_pigeon_img_layer_back" android:id="@+id/help_button" android:layout_width="35dip" android:layout_x="13dip" android:layout_y="232dip"></ImageButton>
-		<ImageButton android:layout_height="35dip" android:background="@drawable/mosaic_pigeon_icon_audio_icon" android:id="@+id/help_button" android:layout_width="35dip" android:layout_x="49dip" android:layout_y="232dip"></ImageButton>
+		<ImageButton android:layout_height="35dip" android:background="@drawable/mosaic_pigeon_img_layer_back" android:id="@+id/back_butto" android:layout_width="35dip" android:layout_x="13dip" android:layout_y="232dip"></ImageButton>
+		<ImageButton android:layout_height="35dip" android:background="@drawable/mosaic_pigeon_icon_audio_icon" android:id="@+id/audio_button" android:layout_width="35dip" android:layout_x="49dip" android:layout_y="232dip"></ImageButton>
 
 	</AbsoluteLayout>
 </AbsoluteLayout>

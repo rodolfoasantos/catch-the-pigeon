@@ -16,8 +16,7 @@ public class Stage1 extends Stage {
 	protected void createCharacters() {
 		Intent intent = getIntent();
 		select = (String) intent.getSerializableExtra("select");
-		
-		Log.i("jamilson", "Pombo selecionado:" + select);
+				
 		/* Calculate the coordinates for the face, so its centered on the camera. */
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;

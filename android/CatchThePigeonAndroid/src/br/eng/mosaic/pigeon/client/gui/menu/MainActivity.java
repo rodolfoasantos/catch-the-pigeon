@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
+import br.eng.mosaic.pigeon.client.gameplay.Stage1;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
@@ -53,11 +54,11 @@ public class MainActivity extends Activity {
 			this.showDialog(Stage.DIALOG_CHOOSE_MESSAGE);
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-		}
-		Intent i = new Intent(this, SelectPerson.class);
+		}		
 		//Intent i = new Intent(this, Stage1.class);
 		//Intent i = new Intent(this, Stage2.class);
 		//Intent i = new Intent(this, Stage3.class);
+		Intent i = new Intent(this, SelectPerson.class);
 		startActivity(i);
 	}
 

@@ -13,14 +13,14 @@
 		android:layout_y="-1dip">
 		<ImageButton
 			android:layout_height="30dip"
-			android:id="@+id/help_button"
+			android:id="@+id/audio_button"
 			android:layout_width="30dip"
 			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
 			android:layout_x="60dip"
 			android:layout_y="280dip"></ImageButton>
 		<ImageButton
 			android:layout_width="30dip"
-			android:id="@+id/help_button"
+			android:id="@+id/back_button"
 			android:layout_height="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:layout_x="15dip"
