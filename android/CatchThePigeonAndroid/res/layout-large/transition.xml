@@ -225,6 +225,7 @@
 			android:id="@+id/audio_button_transition"
 			android:layout_x="71dip"
 			android:layout_y="341dip"></ImageButton>
+		
 	</AbsoluteLayout>
 
 

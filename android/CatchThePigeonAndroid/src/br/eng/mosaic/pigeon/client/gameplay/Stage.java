@@ -88,7 +88,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	private boolean nextStage = false;
 
-	private Texture mTexture;
+	public Texture mTexture;
 	
 	public static TiledTextureRegion mPlayerTextureRegion;
 	public static TiledTextureRegion mEnemyTextureRegion;
@@ -97,13 +97,13 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public static TiledTextureRegion mExplosionPlayerTexture;	
 	public static TiledTextureRegion mFetherTexture;
 
-	private Texture mAutoParallaxBackgroundTexture;
+	protected Texture mAutoParallaxBackgroundTexture;
 
-	private TextureRegion mParallaxLayerBack;
+	public TextureRegion mParallaxLayerBack;
 	//private TextureRegion mParallaxLayerMid;
-	private TextureRegion mParallaxLayerFront;
-	private TextureRegion mParallaxLayerFront2;
-	private TextureRegion mParallaxLayerFront3;
+	public TextureRegion mParallaxLayerFront;
+	public TextureRegion mParallaxLayerFront2;
+	public TextureRegion mParallaxLayerFront3;
 
 	private Texture mFontTexture;
 	private Font mFont;
@@ -156,7 +156,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 		setBackgroundParameter();
 		
-		createBackground(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
+		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
+		
+		//createBackground(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 		
 		createCharacters();
 		
@@ -501,5 +503,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
+	
+	protected abstract void createBackgroundTest(String back, String mid, String front, String front2, String front3);
 
 }

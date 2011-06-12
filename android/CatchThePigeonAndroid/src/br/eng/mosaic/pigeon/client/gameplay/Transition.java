@@ -1,12 +1,15 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
 
+import java.io.IOException;
+
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -46,9 +49,8 @@ public class Transition extends Activity{
 			person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_sigeon_noselection);
 		else if (level[0].equals("figeon"))
 			person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_figeon_noselection);
-			
 		
-		
+		sound();
 		
 		//Stage.mMainMusic.stop();
 		next.setOnClickListener(new OnClickListener() {
@@ -106,7 +108,12 @@ public class Transition extends Activity{
 		});
 	}
 	
+	public void sound()
+	{
 
+	    
+	}
+	
 	/**
 	 * @author jamilson
 	 * @Description Implementation for button  back of Activity
