@@ -11,12 +11,9 @@
 		android:id="@+id/absoluteLayout1"
 		android:layout_x="-1dip"
 		android:layout_y="1dip">
-		<!--
-			<ImageView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/ImageViewPos6"
-			android:background="@drawable/mosaic_pigeon_img_layer_messege_box"
-			android:layout_x="200dip" android:layout_y="283dip"> </ImageView>
-		-->
+		<!-- <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+			android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_img_layer_messege_box" 
+			android:layout_x="200dip" android:layout_y="283dip"> </ImageView> -->
 
 
 		<ImageView
@@ -157,7 +154,8 @@
 					android:layout_marginRight="4px"
 					android:layout_marginTop="15px"
 					android:layout_width="260dip"
-					android:layout_height="60dip">
+					android:layout_height="60dip"
+					android:maxLength="136">
 				</EditText>
 
 			</LinearLayout>
@@ -174,7 +172,7 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/help_button"
+			android:id="@+id/twitter_button"
 			android:layout_x="30dip"
 			android:layout_y="254dip"></ImageButton>
 		<ImageButton

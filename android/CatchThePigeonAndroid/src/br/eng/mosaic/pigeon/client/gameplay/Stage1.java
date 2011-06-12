@@ -27,7 +27,11 @@ public class Stage1 extends Stage {
 		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
 		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
 
-
+	
+		//scoreText.setText("Level: 1");
+		this.setLevel("1");
+		//setLevel
+		
 		scene.getLastChild().attachChild(pigeon);
 
 		for (BadPigeon bp: badPigeons) {
@@ -38,16 +42,10 @@ public class Stage1 extends Stage {
 
 	@Override
 	protected void nextStage() {
-		//super.profile.setScore(1);
-		//Intent i = new Intent(getBaseContext(), Stage2.class);
-		//Intent i = new Intent(getBaseContext(), Transition.class);
 		
-		/*Intent i = new Intent(this,Transition.class);
-		startActivity(i);
-		*/
+		super.profile.setScore(1);
 		String[] person_level = {select,"2"};
 		Intent i = new Intent(this,Transition.class);
-		//i.putExtra("level", "2");
 		i.putExtra("level", person_level);
 		startActivity(i);
 		

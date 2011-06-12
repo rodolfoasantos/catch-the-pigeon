@@ -50,7 +50,7 @@ public class Transition extends Activity{
 		
 		
 		
-		Stage.mMainMusic.stop();
+		//Stage.mMainMusic.stop();
 		next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -94,10 +94,12 @@ public class Transition extends Activity{
 				if (cont==0)
 				{
 					v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
+					
 					cont++;
 				}else
 				{
 					v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);
+					
 					cont=0;
 				}
 			}

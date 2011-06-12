@@ -68,6 +68,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public ConfigIF profile = Config.getInstance();
 	
 	private ChangeableText scoreText;
+	private ChangeableText levelText;
 	
 	public static final int CAMERA_WIDTH = 720;
 	public static final int CAMERA_HEIGHT = 480;
@@ -135,7 +136,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			
 		this.mTexture = new Texture(1024, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);		
 		
-		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		//Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
+		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
 		/*96 means that the texture will be positioned beside of first that have 96px of width*/
 		Stage.mCharacters = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
@@ -210,10 +212,15 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		scene.getLastChild().attachChild(lifeText);
 
 		// --------------- Criando texto de score ---------------
-		this.scoreText = new ChangeableText(470, 10, this.mFont, "Highscore: " + profile.getScore(), "Highcore: XXXXX".length());
+		this.scoreText = new ChangeableText(490, 10, this.mFont, "Score: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(scoreText);
-
-
+		
+		
+		
+		
+		//this.levelText = new ChangeableText(490, 40, this.mFont, "Level: " + profile.getScore(), "Highcore: XXXXX".length());
+		//scene.getLastChild().attachChild(levelText);
+		
 		// -------------- Criando Retangulo para colis√£o --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
 		final int rectangleY = (CAMERA_HEIGHT);
@@ -297,12 +304,24 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	}
 	
 	/**
+	 * 
+	 * @param level
+	 * @Description Teste
+	 */
+	public void setLevel(String varlevel)
+	{
+		this.levelText = new ChangeableText(490, 40, this.mFont, "Level: " + profile.getScore(), "Highcore: XXXXX".length());
+		scene.getLastChild().attachChild(levelText);
+		Log.i("jamilson", "Valor do Level"+Integer.parseInt(varlevel));
+		levelText.setText("Level: "+varlevel);
+	}
+	/**
 	 * Called when a bird die
 	 * @param bird Bird that went to hell
 	 */
 	private void birdDied(Ave bird) {	
 		this.profile.setScore(1);
-		scoreText.setText("Highscore: " + profile.getScore());
+		scoreText.setText("Score: " + profile.getScore());
 		BirdExplosion explosion = new BirdExplosion(bird.getX(), bird.getY(), mExplosionPlayerTexture, scene);
 		scene.getLastChild().attachChild(explosion);
 		scene.unregisterTouchArea(bird);
