@@ -11,7 +11,8 @@ import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 
 public class Stage1 extends Stage {
 
-	public String select; 
+	public String select;
+	
 	@Override
 	protected void createCharacters() {
 		Intent intent = getIntent();
