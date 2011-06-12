@@ -122,7 +122,7 @@
 			android:layout_y="44dip"></ImageView>
 		<ImageButton
 			android:id="@+id/help_button"
-			android:background="@drawable/mosaic_pigeon_tela_transicao_quadro_level_sigeon"
+			android:background="@drawable/mosaic_pigeon_ima_layer_sigeon_noselection"
 			android:layout_width="59dip"
 			android:layout_height="90dip"
 			android:layout_x="187dip"
