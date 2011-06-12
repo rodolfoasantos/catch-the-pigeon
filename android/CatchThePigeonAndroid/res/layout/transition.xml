@@ -65,7 +65,7 @@
 			android:layout_width="wrap_content"
 			android:id="@+id/help_button"
 			android:layout_height="wrap_content"
-			android:background="@drawable/mosaic_pigeon_tela_transicao_quadro_level_sigeon"
+			android:background="@drawable/mosaic_pigeon_ima_layer_sigeon_noselection"
 			android:layout_x="210dip"
 			android:layout_y="69dip"></ImageButton>
 		<ImageView

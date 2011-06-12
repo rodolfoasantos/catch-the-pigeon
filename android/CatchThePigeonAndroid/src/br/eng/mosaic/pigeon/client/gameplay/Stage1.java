@@ -45,10 +45,12 @@ public class Stage1 extends Stage {
 		/*Intent i = new Intent(this,Transition.class);
 		startActivity(i);
 		*/
+		String[] person_level = {select,"2"};
 		Intent i = new Intent(this,Transition.class);
-		i.putExtra("level", "2");
+		//i.putExtra("level", "2");
+		i.putExtra("level", person_level);
 		startActivity(i);
-
+		
 		//BadPigeon.velocity *= 1.3;
 	}
 

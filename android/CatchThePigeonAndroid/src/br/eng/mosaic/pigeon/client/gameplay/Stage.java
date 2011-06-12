@@ -275,23 +275,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 				if (colisionLine.collidesWith(pigeon)) {
 
 					if (!nextStage) {
-
-						/*
-						 * Chama a tela de login do facebook quando o pombo alcanca
-						 * o final da tela
-						 */
-						/*
-						 * trecho comentado por causar problemas
-						 * quando executa.
-						Intent i = new Intent(getBaseContext(), LoginFacebook.class);
-						startActivity(i);
-						*/
-					
 						nextStage = true;
 						nextStage();
-						 // Feito para não criar mais de uma
-						// instância de Stage já que
-						// onUpdate é chamado várias vezes
 					}
 				}
 
