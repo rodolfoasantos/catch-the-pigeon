@@ -5,9 +5,15 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 
 public class Stage2 extends Stage {
-
+	
+	public String select;
+	
 	@Override
 	protected void createCharacters() {
+		
+		Intent intent = getIntent();
+		select = (String) intent.getSerializableExtra("select");
+		
 		/* Calculate the coordinates for the face, so its centered on the camera. */
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
@@ -22,8 +28,8 @@ public class Stage2 extends Stage {
 
 		scene.getLastChild().attachChild(pigeon);
 		*/
-		
-		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, Pigeon.FIGEON);
+		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, (select.equalsIgnoreCase("figeon") ? Pigeon.FIGEON : (select.equalsIgnoreCase("sigeon") ? Pigeon.SIGEON : Pigeon.FIGEAN)));
+		//this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, Pigeon.FIGEON);
 
 		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
 		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
@@ -46,9 +52,17 @@ public class Stage2 extends Stage {
 		
 		/*Intent i = new Intent(this,Transition.class);
 		startActivity(i);*/
+		
+		String[] person_level = {select,"3"};
 		Intent i = new Intent(this,Transition.class);
-		i.putExtra("level", "3");
+		//i.putExtra("level", "2");
+		i.putExtra("level", person_level);
 		startActivity(i);
+		
+		
+		/*Intent i = new Intent(this,Transition.class);
+		i.putExtra("level", "3");
+		startActivity(i);*/
 	}
 
 	@Override

@@ -56,13 +56,21 @@ public class Transition extends Activity{
 			public void onClick(View v) {
 				if (lev==2)
 				{
-					Intent i = new Intent(getBaseContext(), Stage2.class);
+					Intent i = new Intent(getBaseContext(),Stage2.class);
+					i.putExtra("select", level[0]);
 					startActivity(i);
+					
+					//Intent i = new Intent(getBaseContext(), Stage2.class);
+					//startActivity(i);
 				}
 				if (lev==3)
 				{
-					Intent i = new Intent(getBaseContext(), Stage3.class);
+					Intent i = new Intent(getBaseContext(),Stage3.class);
+					i.putExtra("select", level[0]);
 					startActivity(i);
+					
+					//Intent i = new Intent(getBaseContext(), Stage3.class);
+					//startActivity(i);
 				}
 				BadPigeon.velocity *= 1.5;
 			}
