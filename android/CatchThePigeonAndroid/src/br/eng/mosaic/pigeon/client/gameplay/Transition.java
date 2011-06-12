@@ -1,5 +1,6 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
+
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,11 +30,7 @@ public class Transition extends Activity{
 		//setContentView(R.layout.char_select);
 		setContentView(R.layout.transition);
 			
-			// postar aqui envio mensagem, refatorar para thread
 			
-			//String ss = (cont++).toString();
-			
-			//Log.i("jamilson", "SSS"+ss);
 			
 			Intent intent = getIntent();
 			level = (String) intent.getSerializableExtra("level");
@@ -49,32 +47,17 @@ public class Transition extends Activity{
 			next.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Log.i("jamilson", "Dentro do onClick "+level);
-					//Stage.profile.setScore(1);
-					//c = getBaseContext();
-					
-					//Intent i = new Intent(getBaseContext(), Stage2.class);
-					//startActivity(i);
-					
 					if (lev==2)
 					{
-						//valor2();
 						Log.i("jamilson", "Dentro de Level 2 "+level);
 						Intent i = new Intent(getBaseContext(), Stage2.class);
 						startActivity(i);
-						
-						
 					}
 					if (lev==3)
 					{
-						Log.i("jamilson", "Level 3 "+level);
-						//Stage.profile.setScore(1);
 						Intent i = new Intent(getBaseContext(), Stage3.class);
 						startActivity(i);
 					}
-					
-
 					BadPigeon.velocity *= 1.5;
 				}
 			});
@@ -110,7 +93,21 @@ public class Transition extends Activity{
 			});
 	}
 	
-	
+
+	/**
+	 * @author jamilson
+	 * @Description Implementation for button  back of Activity
+	 * @param Indentification of onclick for mouse
+	 * @return value boolean
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	startActivity(new Intent(getBaseContext(), SelectPerson.class));
+	        return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 	
 	@Override
 	protected void onPause() {
