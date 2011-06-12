@@ -5,6 +5,7 @@ import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,25 +53,34 @@ public class SelectPerson extends Activity {
 			}
 		});
 		
-		back.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getBaseContext(), MainActivity.class));
-			}
-		});
+		try {
+			back.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(getBaseContext(), MainActivity.class));
+				}
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "back_button is null");
+		}
 		
-		audio.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) { 
-				if (cont==0) {
-					v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
-					cont++;
-				}else {
-					v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);
-					cont=0;
-				} 				
-			}
-		});		
+		try {
+			audio.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) { 
+					if (cont==0) {
+						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
+						cont++;
+					}else {
+						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);
+						cont=0;
+					} 				
+				}
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "audio_button is null");
+		}
+			
 	}
 	
 	/**

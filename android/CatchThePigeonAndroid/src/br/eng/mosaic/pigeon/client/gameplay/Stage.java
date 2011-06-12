@@ -134,29 +134,16 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.scene = new Scene(1);
 			
 		this.mTexture = new Texture(1024, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);		
-				
-		/*Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		Stage.mEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		/*96 means that the texture will be positioned beside of first that have 96px of width
-		Stage.mCharacters = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
-		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		Stage.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, "gfx/bird_feather.png", 0, 0, 3, 5);
-		*/
 		
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
 		/*96 means that the texture will be positioned beside of first that have 96px of width*/
 		Stage.mCharacters = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
 		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
-		Stage.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
-		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, "gfx/bird_feather.png", 0, 0, 3, 5);
-		// --pause scene
-		// this.mPausedTextureRegion =
-		// TextureRegionFactory.createFromAsset(this.mTexture, this,
-		// "gfx/paused.png", 0, 0);
-
-		// -------- Texto -------
+		Stage.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/explosion.png", 352, 0, 4, 1);
+		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, "gfx/mosaic_pigeon_ima_spite_feather.png", 0, 0, 3, 3);
+		
+		// -------- Text -------
 		this.mFontTexture = new Texture(256, 256,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mFont = new Font(this.mFontTexture, Typeface.create(
@@ -290,7 +277,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							Stage.mPigeonDieSound.play();
 							Stage.mPigeonDieSound.setLooping(false);
 						}
-						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene);
+						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene, pigeon);
 						scene.getLastChild().attachChild(feather);
 						lifeText.setText("♥: " + pigeon.getLife());
 					}

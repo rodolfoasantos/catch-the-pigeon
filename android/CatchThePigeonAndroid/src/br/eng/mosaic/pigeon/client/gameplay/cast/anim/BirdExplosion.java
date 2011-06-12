@@ -14,7 +14,7 @@ public class BirdExplosion extends Ave {
 	
 	public BirdExplosion(final float pX, final float pY, final TiledTextureRegion pTextureRegion, Scene scene) {
 		super(pX, pY, pTextureRegion, 50);
-		this.animate(new long[]{200, 200, 200}, 6, 8, 1);
+		this.animate(new long[]{200, 200, 200, 200}, 0, 3, 1);
 		this.scene = scene;
 	}
 

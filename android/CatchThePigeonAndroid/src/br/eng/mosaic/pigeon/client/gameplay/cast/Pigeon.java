@@ -34,6 +34,8 @@ public class Pigeon extends Ave {
 		int startAnim;
 		int endAnim; 
 		
+		this.kindOfPigeon = kindOfPigeon; 
+		
 		switch(kindOfPigeon) {
 			case FIGEAN:
 				startAnim = 0;
@@ -67,4 +69,7 @@ public class Pigeon extends Ave {
 		return velocity;
 	}
 	
+	public int getKindOfPigeon() {
+		return kindOfPigeon;
+	}
 }
