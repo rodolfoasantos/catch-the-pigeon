@@ -1,5 +1,9 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
+import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.TextureOptions;
+import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+
 import android.content.Intent;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
@@ -81,5 +85,27 @@ public class Stage2 extends Stage {
 		setBackgroundFront2("gfx/mosaic_pigeon_ima_stage02_layer03.png");
 		setBackgroundFront3("gfx/mosaic_pigeon_ima_stage02_layer04.png");	
 	}	
+
+	public void createBackgroundTest(String back, String mid, String front, String front2, String front3){
+		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
+				TextureOptions.DEFAULT);			
+		
+		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
+		
+		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
+		
+		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
+		
+		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(
+				this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
+	//	this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
+		//		this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
+
+		this.mEngine.getTextureManager().loadTextures(this.mTexture,
+				this.mAutoParallaxBackgroundTexture);
+	}
 
 }
