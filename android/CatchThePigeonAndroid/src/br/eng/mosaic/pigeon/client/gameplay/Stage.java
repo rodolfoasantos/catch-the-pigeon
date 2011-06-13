@@ -8,6 +8,7 @@ import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.sound.Sound;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
+import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.handler.IUpdateHandler;
 import org.anddev.andengine.engine.handler.runnable.RunnableHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -79,14 +80,15 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public static TiledTextureRegion mInvertedEnemyTextureRegion;
 	public static TiledTextureRegion mCharacters;
 	public static TiledTextureRegion mExplosionPlayerTexture;	
-	public static TiledTextureRegion mFetherTexture;
-
+	public static TiledTextureRegion mFetherTexture;	
+	
 	protected Texture mAutoParallaxBackgroundTexture;
 
 	public TextureRegion mParallaxLayerBack;
 	public TextureRegion mParallaxLayerFront;
 	public TextureRegion mParallaxLayerFront2;
 	public TextureRegion mParallaxLayerFront3;
+	public TextureRegion mCharacterLife;
 
 	private Texture mFontTexture;
 	private Font mFont;
@@ -116,7 +118,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	@Override
 	public void onLoadResources() {
 		this.scene = new Scene(1);
-			
+					
 		this.mTexture = new Texture(1024, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);		
 		
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 0, 0, 3, 4);
@@ -126,22 +128,21 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		Stage.mInvertedEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
 		Stage.mExplosionPlayerTexture = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/explosion.png", 352, 0, 4, 1);
 		Stage.mFetherTexture = TextureRegionFactory.createTiledFromAsset(mTexture, this, "gfx/mosaic_pigeon_ima_spite_feather.png", 0, 0, 3, 3);
-		
+				
 		// -------- Text -------
-		this.mFontTexture = new Texture(256, 256,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mFont = new Font(this.mFontTexture, Typeface.create(
-				Typeface.DEFAULT, Typeface.BOLD), 36, true, Color.WHITE);
+		this.mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 36, true, Color.WHITE);
 		this.mEngine.getTextureManager().loadTexture(this.mFontTexture);
 		this.mEngine.getFontManager().loadFont(this.mFont);
 		// ---------------------
 
 		setBackgroundParameter();
+
+		createCharacters();
+		mCharacterLife = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/" + (pigeon.getKindOfPigeon() == Pigeon.FIGEON ? "mosaic_pigeon_ima_figeon.png" : (pigeon.getKindOfPigeon() == Pigeon.SIGEON ? "mosaic_pigeon_ima_sigeon.png" : "mosaic_pigeon_ima_figean.png")), 352, 32);
 		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
-		
-		createCharacters();
-		
+				
 		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
 		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
 		mPigeonDieSound = AudioFactory.createMusic(mEngine, this, "mfx/mosaic_pigeon_snd_sigeon.ogg");	
@@ -164,16 +165,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 		message = "";
 
-		// --------------- Criando texto de vida ---------------
-		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
-		scene.getLastChild().attachChild(lifeText);
-
 		// --------------- Criando texto de score ---------------
 		this.scoreText = new ChangeableText(490, 10, this.mFont, "Score: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(scoreText);
-		
-		//this.levelText = new ChangeableText(490, 40, this.mFont, "Level: " + profile.getScore(), "Highcore: XXXXX".length());
-		//scene.getLastChild().attachChild(levelText);
 		
 		// -------------- Criando Retangulo para colis√£o --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
@@ -231,7 +225,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 						}
 						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene, pigeon);
 						scene.getLastChild().attachChild(feather);
-						lifeText.setText("♥: " + pigeon.getLife());
+						//lifeText.setText("♥: " + pigeon.getLife());
 					}
 				}
 
@@ -245,6 +239,13 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			}
 		});
 
+		//--------- Add HUD in the Screen --------------
+		HUD hud = new HUD();
+		Sprite health = new Sprite(0, 5, mCharacterLife.getWidth(), mCharacterLife.getHeight(), mCharacterLife);		
+		hud.getLastChild().attachChild(health);
+		mCamera.setHUD(hud);
+		//----------------------------------------------
+		
 		return scene;
 	}
 	
@@ -252,8 +253,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	 * @param level
 	 * @Description Teste
 	 */
-	public void setLevel(String varlevel)
-	{
+	public void setLevel(String varlevel) {
 		this.levelText = new ChangeableText(490, 40, this.mFont, "Level: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(levelText);
 		Log.i("jamilson", "Valor do Level"+Integer.parseInt(varlevel));

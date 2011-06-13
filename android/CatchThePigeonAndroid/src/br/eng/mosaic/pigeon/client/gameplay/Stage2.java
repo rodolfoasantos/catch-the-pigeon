@@ -22,19 +22,6 @@ public class Stage2 extends Stage {
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 
-		/*this.pigeon = new Pigeon(playerX/2, playerY, Stage.mPlayerTextureRegion, 3, Pigeon.FIGEON);
-
-		badPigeons.add(new BadPigeon(0, playerY, Stage.mEnemyTextureRegion, 1));	
-		badPigeons.add(new BadPigeon(0, playerY - 100, Stage.mEnemyTextureRegion, 1));
-		//badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage1.mInvertedEnemyTextureRegion, 9, 11, 1));	
-		badPigeons.add(new BadPigeon(playerX + 600, playerY + 100, Stage.mInvertedEnemyTextureRegion, 1));	
-		scene.getLastChild().attachChild(pigeon);
-
-		scene.getLastChild().attachChild(pigeon);
-		*/
-		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, (select.equalsIgnoreCase("figeon") ? Pigeon.FIGEON : (select.equalsIgnoreCase("sigeon") ? Pigeon.SIGEON : Pigeon.FIGEAN)));
-		//this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, Pigeon.FIGEON);
-
 		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
 		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
 
@@ -53,30 +40,15 @@ public class Stage2 extends Stage {
 		
 		super.profile.setScore(1);
 		
-		/*super.profile.setScore(1);
-		Intent i = new Intent(getBaseContext(), Stage3.class);
-		startActivity(i);*/
-		
-		/*Intent i = new Intent(this,Transition.class);
-		startActivity(i);*/
-		
 		String[] person_level = {select,"3"};
-		Intent i = new Intent(this,Transition.class);
-		//i.putExtra("level", "2");
+		Intent i = new Intent(this,Transition.class);		
 		i.putExtra("level", person_level);
 		startActivity(i);
 		
-		
-		/*Intent i = new Intent(this,Transition.class);
-		i.putExtra("level", "3");
-		startActivity(i);*/
 	}
 
 	@Override
-	protected void gameOver() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected void gameOver() {}
 
 	@Override
 	protected void setBackgroundParameter() {
@@ -87,25 +59,12 @@ public class Stage2 extends Stage {
 	}	
 
 	public void createBackgroundTest(String back, String mid, String front, String front2, String front3){
-		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
-				TextureOptions.DEFAULT);			
-		
-		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
-		
-		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
-		
-		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
-		
-		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
-	//	this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
-		//		this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
-
-		this.mEngine.getTextureManager().loadTextures(this.mTexture,
-				this.mAutoParallaxBackgroundTexture);
+		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024, TextureOptions.DEFAULT);
+		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
+		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
+		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
+		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
+		this.mEngine.getTextureManager().loadTextures(this.mTexture,this.mAutoParallaxBackgroundTexture);
 	}
 
 }
