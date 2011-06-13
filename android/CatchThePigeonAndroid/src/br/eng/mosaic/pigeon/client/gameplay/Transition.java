@@ -45,8 +45,8 @@ public class Transition extends Activity{
 		} catch (NullPointerException np) {
 			Log.e("Null", "person button is null. See the names of the IDs in transition.xml");
 		}	
-			
-		sound();		//Stage.mMainMusic.stop();
+						
+		//Stage.mMainMusic.stop();
 		try {
 			next.setOnClickListener(new OnClickListener() {
 				@Override
