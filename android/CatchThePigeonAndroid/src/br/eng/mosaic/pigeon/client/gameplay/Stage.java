@@ -6,7 +6,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.sound.Sound;
-import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.handler.IUpdateHandler;
@@ -17,51 +16,36 @@ import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolic
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.CameraScene;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
-import org.anddev.andengine.entity.scene.Scene.ITouchArea;
+import org.anddev.andengine.entity.scene.Scene.*;
 import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
 import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
 import org.anddev.andengine.entity.scene.menu.MenuScene;
 import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
-import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
-import org.anddev.andengine.entity.scene.menu.item.TextMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.*;
 import org.anddev.andengine.entity.scene.menu.item.decorator.ColorMenuItemDecorator;
-import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.font.Font;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
-import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
+import org.anddev.andengine.opengl.texture.*;
+import org.anddev.andengine.opengl.texture.region.*;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
-
-import sun.font.CreatedFontTracker;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import br.eng.mosaic.pigeon.client.R;
-import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
-import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
-import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
-import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
-import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
-import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
-import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
+import br.eng.mosaic.pigeon.client.gameplay.cast.*;
+import br.eng.mosaic.pigeon.client.gameplay.cast.anim.*;
+import br.eng.mosaic.pigeon.client.gameplay.util.*;
 import br.eng.mosaic.pigeon.client.infra.Config;
 import br.eng.mosaic.pigeon.client.infra.ConfigIF;
-import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public abstract class Stage extends BaseGameActivity implements IOnMenuItemClickListener {
 
@@ -100,7 +84,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected Texture mAutoParallaxBackgroundTexture;
 
 	public TextureRegion mParallaxLayerBack;
-	//private TextureRegion mParallaxLayerMid;
 	public TextureRegion mParallaxLayerFront;
 	public TextureRegion mParallaxLayerFront2;
 	public TextureRegion mParallaxLayerFront3;
@@ -136,7 +119,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			
 		this.mTexture = new Texture(1024, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);		
 		
-		//Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/bird.png", 0, 0, 3, 4);
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 0, 0, 3, 4);
 		Stage.mEnemyTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 96, 0, 8, 4);
 		/*96 means that the texture will be positioned beside of first that have 96px of width*/
@@ -158,56 +140,29 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 		
-		//createBackground(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
-		
 		createCharacters();
 		
 		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
 		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
-		mPigeonDieSound = AudioFactory.createMusic(mEngine, this, "mfx/mosaic_pigeon_snd_sigeon.ogg");
-
-	
+		mPigeonDieSound = AudioFactory.createMusic(mEngine, this, "mfx/mosaic_pigeon_snd_sigeon.ogg");	
 	}
 
 	@Override
 	public Scene onLoadScene() {
 		
-		this.mMenuScene = this.createMenuScene();
-		
+		this.mMenuScene = this.createMenuScene();		
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 
 		// --------------- Criando a Cena e inserindo o background
-		// ---------------
-		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(
-				0, 0, 0, 5);
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f,
-				new Sprite(0, CAMERA_HEIGHT
-						- this.mParallaxLayerBack.getHeight(),
-						this.mParallaxLayerBack)));
-		
-		//autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-10.0f,
-			//	new Sprite(0, 80, this.mParallaxLayerMid)));
-		
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-15.0f,
-				new Sprite(0, CAMERA_HEIGHT
-						- this.mParallaxLayerFront.getHeight(),
-						this.mParallaxLayerFront)));
-		
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-20.0f,
-				new Sprite(0, CAMERA_HEIGHT 
-						- this.mParallaxLayerFront2.getHeight(),
-						this.mParallaxLayerFront2)));
-		
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-25.0f,
-				new Sprite(0, CAMERA_HEIGHT 
-						- this.mParallaxLayerFront3.getHeight(),
-						this.mParallaxLayerFront3)));
+		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0, 0, 0, 5);
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5.0f, new Sprite(0, CAMERA_HEIGHT - this.mParallaxLayerBack.getHeight(), this.mParallaxLayerBack)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-15.0f, new Sprite(0, CAMERA_HEIGHT - this.mParallaxLayerFront.getHeight(), this.mParallaxLayerFront)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-20.0f, new Sprite(0, CAMERA_HEIGHT - this.mParallaxLayerFront2.getHeight(), this.mParallaxLayerFront2)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-25.0f, new Sprite(0, CAMERA_HEIGHT - this.mParallaxLayerFront3.getHeight(), this.mParallaxLayerFront3)));
 		scene.setBackground(autoParallaxBackground);
 		// ---------------------------------------------------------------------
 
 		message = "";
-
-		// ----------------------------------------------------------------------
 
 		// --------------- Criando texto de vida ---------------
 		final ChangeableText lifeText = new ChangeableText(10, 10, this.mFont, "♥: " + pigeon.getLife(), "S2: X".length());
@@ -217,21 +172,13 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.scoreText = new ChangeableText(490, 10, this.mFont, "Score: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(scoreText);
 		
-		
-		
-		
 		//this.levelText = new ChangeableText(490, 40, this.mFont, "Level: " + profile.getScore(), "Highcore: XXXXX".length());
 		//scene.getLastChild().attachChild(levelText);
 		
 		// -------------- Criando Retangulo para colis√£o --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
 		final int rectangleY = (CAMERA_HEIGHT);
-		final Rectangle colisionLine = new Rectangle(rectangleX, 0,
-				rectangleX + 1, rectangleY);
-		// colisionRectangle.registerEntityModifier(new LoopEntityModifier(new
-		// ParallelEntityModifier(new RotationModifier(6, 0, 360), new
-		// SequenceEntityModifier(new ScaleModifier(3, 1, 1.5f), new
-		// ScaleModifier(3, 1.5f, 1)))));
+		final Rectangle colisionLine = new Rectangle(rectangleX, 0, rectangleX + 1, rectangleY);
 		scene.getLastChild().attachChild(colisionLine);
 		// -------------------------------------------------------------------
 
@@ -253,9 +200,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 					});
 					return true;
 				}
-
 				return false;
-
 			}
 		});
 		scene.setTouchAreaBindingEnabled(true);
@@ -263,13 +208,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		/* The actual collision-checking. */
 		scene.registerUpdateHandler(new IUpdateHandler() {
 			@Override
-			public void reset() {
-			}
+			public void reset() {}
 
 			@Override
 			public void onUpdate(final float pSecondsElapsed) {
 				if (colisionLine.collidesWith(pigeon)) {
-
 					if (!nextStage) {
 						nextStage = true;
 						nextStage();
@@ -305,8 +248,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		return scene;
 	}
 	
-	/**
-	 * 
+	/** 
 	 * @param level
 	 * @Description Teste
 	 */
@@ -317,6 +259,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		Log.i("jamilson", "Valor do Level"+Integer.parseInt(varlevel));
 		levelText.setText("Level: "+varlevel);
 	}
+	
 	/**
 	 * Called when a bird die
 	 * @param bird Bird that went to hell
@@ -352,26 +295,20 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	@Override
 	public void onLoadComplete() {		
-		
-		Stage.mMainMusic.play();
-		
+		Stage.mMainMusic.play();		
 	}
-	public void onPause(){
-		
+	public void onPause() {		
 		super.onPause();
 		Stage.mMainMusic.stop();
 		setResult(RESULT_CANCELED);
-		// Fecha a tela
-		finish();
+		finish(); //Close the screen
 	}
-	public void onStop(){
+	
+	public void onStop() {
 		super.onStop();
 		Stage.mMainMusic.stop();
-	}
-	/*protected void onDestroy(){
-		super.onDestroy();
-		this.finish();
-	}*/
+	} 
+	
 	@Override
 	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
 		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
@@ -417,38 +354,20 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.backgroundFront = backgroundFront;
 	}
 	
-	public void setBackgroundFront2(String backgroundFront2)
-	{
+	public void setBackgroundFront2(String backgroundFront2) {
 		this.backgroundFront2 = backgroundFront2;
 	}
-	public void setBackgroundFront3(String backgroundFront3)
-	{
+	public void setBackgroundFront3(String backgroundFront3) {
 		this.backgroundFront3 = backgroundFront3;
 	}
-	//public void setBackgroundMid(String backgroundMid) {
-		//this.backgroundMid = backgroundMid;
-	//}
 	
 	public void createBackground(String back, String mid, String front, String front2, String front3){
-		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024,
-				TextureOptions.DEFAULT);			
-		
-		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
-		
-		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
-		
-		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
-		
-		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(
-				this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
-	//	this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(
-		//		this.mAutoParallaxBackgroundTexture, this,mid, 0, 669);
-
-		this.mEngine.getTextureManager().loadTextures(this.mTexture,
-				this.mAutoParallaxBackgroundTexture);
+		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024, TextureOptions.DEFAULT);		
+		this.mParallaxLayerFront = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front, 0, 0);
+		this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,back, 0, 188);
+		this.mParallaxLayerFront2 = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front2, 0, 690);
+		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front3, 0, 750);
+		this.mEngine.getTextureManager().loadTextures(this.mTexture, this.mAutoParallaxBackgroundTexture);
 	}
 	
 	protected Dialog onCreateDialog(final int pID) {
@@ -457,21 +376,21 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			final EditText ipEditText = new EditText(this);
 			ipEditText.setText(message);
 			return new AlertDialog.Builder(this)
-			.setIcon(R.drawable.facebook_icon)
-			.setTitle("Your Message").setCancelable(false)
-			.setView(ipEditText)
-			.setPositiveButton("Send", new OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface pDialog,
-						final int pWhich) {
-					message = ipEditText.getText().toString();
-				}
-			}).setNegativeButton("Cancel", new OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface pDialog, final int pWhich) {
-					Stage.this.onResume();
-				}
-			}).create();
+				.setIcon(R.drawable.facebook_icon)
+				.setTitle("Your Message").setCancelable(false)
+				.setView(ipEditText)
+				.setPositiveButton("Send", new OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface pDialog,
+							final int pWhich) {
+						message = ipEditText.getText().toString();
+					}
+				}).setNegativeButton("Cancel", new OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface pDialog, final int pWhich) {
+						Stage.this.onResume();
+					}
+				}).create();
 		default:
 			return super.onCreateDialog(pID);
 		}
@@ -486,13 +405,12 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, this.mFont, "QUIT"), 1.0f,0.0f,0.0f, 0.0f,0.0f,0.0f);
 		quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		
 		menuScene.addMenuItem(quitMenuItem);
-
 		menuScene.buildAnimations();
-
 		menuScene.setBackgroundEnabled(false);
-
 		menuScene.setOnMenuItemClickListener(this);
+		
 		return menuScene;
 	}
 		
