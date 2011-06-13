@@ -77,7 +77,7 @@
 			android:layout_y="12dip"></ImageView>
 		<ImageButton
 			android:layout_width="wrap_content"
-			android:id="@+id/help_button"
+			android:id="@+id/back_button_transition"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_tela_transicao_back"
 			android:layout_x="180dip"

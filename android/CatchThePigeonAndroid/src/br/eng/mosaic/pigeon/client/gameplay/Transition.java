@@ -21,9 +21,6 @@ public class Transition extends Activity{
 	
 	public static String[]  level;
 	public static int lev;
-	//public static Intent i;
-	/*public static Context c;*/
-	//public static Integer cont;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -33,77 +30,72 @@ public class Transition extends Activity{
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
 		
-		
-		cont=0;
 		next  = (ImageButton) findViewById(R.id.next_level);
 		back = (ImageButton) findViewById(R.id.back_button_transition);
 		audio = (ImageButton) findViewById(R.id.audio_button_transition);
 		person = (ImageButton) findViewById(R.id.level_person);
 		
-		if (level[0].equals("figean"))
-			person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_figean_noselection);
-		else if (level[0].equals("sigeon"))
-			person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_sigeon_noselection);
-		else if (level[0].equals("figeon"))
-			person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_figeon_noselection);
+		try {
+			if (level[0].equals("figean"))
+				person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_figean_noselection);
+			else if (level[0].equals("sigeon"))
+				person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_sigeon_noselection);
+			else if (level[0].equals("figeon"))
+				person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_figeon_noselection);
+		} catch (NullPointerException np) {
+			Log.e("Null", "person button is null. See the names of the IDs in transition.xml");
+		}	
 			
-		
-		
-		
 		//Stage.mMainMusic.stop();
-		next.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (lev==2)
-				{
-					Intent i = new Intent(getBaseContext(),Stage2.class);
-					i.putExtra("select", level[0]);
-					startActivity(i);
-					
-					//Intent i = new Intent(getBaseContext(), Stage2.class);
-					//startActivity(i);
+		try {
+			next.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (lev == 2) {
+						Intent i = new Intent(getBaseContext(),Stage2.class);
+						i.putExtra("select", level[0]);
+						startActivity(i);
+					}
+					if (lev == 3) {
+						Intent i = new Intent(getBaseContext(),Stage3.class);
+						i.putExtra("select", level[0]);
+						startActivity(i);					
+					}
+					BadPigeon.velocity *= 1.5;
 				}
-				if (lev==3)
-				{
-					Intent i = new Intent(getBaseContext(),Stage3.class);
-					i.putExtra("select", level[0]);
-					startActivity(i);
-					
-					//Intent i = new Intent(getBaseContext(), Stage3.class);
-					//startActivity(i);
-				}
-				BadPigeon.velocity *= 1.5;
-			}
-		});
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "next button is null. See the names of the IDs in transition.xml");
+		}
 		
-		back.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				startActivity(new Intent(getBaseContext(), SelectPerson.class));
-				//Stage.mMainMusic.play();
-			}
-		});
-		
-		audio.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (cont==0)
-				{
-					v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
-					
-					cont++;
-				}else
-				{
-					v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);
-					
-					cont=0;
+		try {
+			back.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(getBaseContext(), SelectPerson.class));
+					//Stage.mMainMusic.play();
 				}
-			}
-		});
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "back button is null. See the names of the IDs in transition.xml");
+		}
+		
+		try {
+			audio.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) {
+					if (cont==0) {
+						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);					
+						cont++;
+					} else {
+						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);					
+						cont=0;
+					}
+				}
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "audio button is null. See the names of the IDs in transition.xml");
+		}
 	}
 	
 
@@ -126,8 +118,7 @@ public class Transition extends Activity{
 	protected void onPause() {
 		super.onPause();
 		setResult(RESULT_CANCELED);
-		// Fecha a tela
-		finish();
+		finish(); //Close the screen
 	}
 	
 

@@ -203,7 +203,7 @@
 		<ImageButton
 			android:layout_height="45dip"
 			android:background="@drawable/mosaic_pigeon_tela_transicao_back"
-			android:id="@+id/transition_back_button"
+			android:id="@+id/back_button_transition"
 			android:layout_width="45dip"
 			android:layout_x="187dip"
 			android:layout_y="180dip"></ImageButton>

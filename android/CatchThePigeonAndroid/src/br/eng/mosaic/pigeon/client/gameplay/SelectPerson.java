@@ -26,32 +26,44 @@ public class SelectPerson extends Activity {
 		back = (ImageButton) findViewById(R.id.back_button);
 		audio = (ImageButton) findViewById(R.id.audio_button);
 		
-		figeon.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(SelectPerson.this, Stage1.class);
-				i.putExtra("select", "figeon");
-				startActivity(i);				
-			}
-		});
+		try {
+			figeon.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(SelectPerson.this, Stage1.class);
+					i.putExtra("select", "figeon");
+					startActivity(i);				
+				}
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "figeon button is null. See the names of the IDs in char_select.xml");
+		}
 		
-		sigeon.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {			
-				Intent i = new Intent(SelectPerson.this, Stage1.class);
-				i.putExtra("select", "sigeon");
-				startActivity(i);
-			}
-		});
+		try {
+			sigeon.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) {			
+					Intent i = new Intent(SelectPerson.this, Stage1.class);
+					i.putExtra("select", "sigeon");
+					startActivity(i);
+				}
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "sigeon button is null. See the names of the IDs in char_select.xml");
+		}
 		
-		figean.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(SelectPerson.this, Stage1.class);
-				i.putExtra("select", "figean");
-				startActivity(i);
-			}
-		});
+		try {
+			figean.setOnClickListener(new OnClickListener() {			
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(SelectPerson.this, Stage1.class);
+					i.putExtra("select", "figean");
+					startActivity(i);
+				}
+			});
+		} catch (NullPointerException np) {
+			Log.e("Null", "figean button is null. See the names of the IDs in char_select.xml");
+		}
 		
 		try {
 			back.setOnClickListener(new OnClickListener() {			
@@ -61,7 +73,7 @@ public class SelectPerson extends Activity {
 				}
 			});
 		} catch (NullPointerException np) {
-			Log.e("Null", "back_button is null");
+			Log.e("Null", "back button is null. See the names of the IDs in char_select.xml");
 		}
 		
 		try {
@@ -78,7 +90,7 @@ public class SelectPerson extends Activity {
 				}
 			});
 		} catch (NullPointerException np) {
-			Log.e("Null", "audio_button is null");
+			Log.e("Null", "audio button is null. See the names of the IDs in char_select.xml");
 		}
 			
 	}
