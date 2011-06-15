@@ -70,6 +70,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public String backgroundMid;
 	
 	private Camera mCamera;
+	
+	private HUD hud;
+	private Vector<Sprite> hearts;
 
 	private boolean nextStage = false;
 
@@ -89,6 +92,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public TextureRegion mParallaxLayerFront2;
 	public TextureRegion mParallaxLayerFront3;
 	public TextureRegion mCharacterLife;
+	public TextureRegion mHeart;
 
 	private Texture mFontTexture;
 	private Font mFont;
@@ -99,7 +103,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	protected Vector<BadPigeon> badPigeons = new Vector<BadPigeon>();
 	protected Scene scene;
-	protected Pigeon pigeon;
+	protected static Pigeon pigeon;
 
 	private CameraScene mPauseScene;
 
@@ -140,6 +144,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 		createCharacters();
 		mCharacterLife = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/" + (pigeon.getKindOfPigeon() == Pigeon.FIGEON ? "mosaic_pigeon_ima_figeon.png" : (pigeon.getKindOfPigeon() == Pigeon.SIGEON ? "mosaic_pigeon_ima_sigeon.png" : "mosaic_pigeon_ima_figean.png")), 352, 32);
+		mHeart = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_ima_life.png", 352, 84);
 		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 				
@@ -240,9 +245,25 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		});
 
 		//--------- Add HUD in the Screen --------------
-		HUD hud = new HUD();
-		Sprite health = new Sprite(0, 5, mCharacterLife.getWidth(), mCharacterLife.getHeight(), mCharacterLife);		
+		int posXLife = 0;
+		int posYLife = 5;
+		
+		hud = new HUD();
+		
+		Sprite health = new Sprite(posXLife, posYLife, mCharacterLife.getWidth(), mCharacterLife.getHeight(), mCharacterLife);		
 		hud.getLastChild().attachChild(health);
+				
+		posXLife += 50;
+		posYLife += (mCharacterLife.getHeight()>>1) - (mHeart.getHeight()>>1);
+		
+		hearts = new Vector<Sprite>(pigeon.getLife());
+		
+		for(int i = 0; i < pigeon.getLife(); i++) {
+			hearts.add(new Sprite(posXLife, posYLife, mHeart.getWidth(), mHeart.getHeight(), mHeart));		
+			hud.getLastChild().attachChild(hearts.elementAt(i));		
+			posXLife += mHeart.getWidth() - 3;
+		}
+				
 		mCamera.setHUD(hud);
 		//----------------------------------------------
 		
@@ -282,7 +303,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	 */
 	protected boolean colissionWithPigeon() {
 		for (BadPigeon bp : badPigeons) {
-			if ((bp.isAlive()) && (bp.collidesWith(this.pigeon))) {
+			if ((bp.isAlive()) && (bp.collidesWith(Stage.pigeon))) {
+				
+				//Destroying hearts :)
+				hud.getLastChild().detachChild(hearts.elementAt(pigeon.getLife() - 1));
+				
 				if (bp.sufferDamage()) {
 					// the bird died
 					birdDied(bp);
