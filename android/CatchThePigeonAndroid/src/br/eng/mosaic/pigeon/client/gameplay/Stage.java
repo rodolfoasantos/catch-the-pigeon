@@ -244,6 +244,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							Stage.mPigeonDieSound.setLooping(false);
 							
 							gameOver();
+							
 						}
 						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene, pigeon);
 						scene.getLastChild().attachChild(feather);
@@ -486,6 +487,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 					showDialog(GAME_OVER);
 				}
 			});
+			
+			profile.setScore(-profile.getScore());
+			scoreText.setText("Score: " + profile.getScore());
 	}
 	
 	protected abstract void createCharacters();
