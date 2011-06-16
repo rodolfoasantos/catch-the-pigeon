@@ -21,7 +21,7 @@ public class Stage1 extends Stage {
 	protected void createCharacters() {
 		Intent intent = getIntent();
 		select = (String) intent.getSerializableExtra("select");
-				
+		
 		/* Calculate the coordinates for the face, so its centered on the camera. */
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
 		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
@@ -32,7 +32,7 @@ public class Stage1 extends Stage {
 		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
 
 		this.setLevel("1");
-
+		
 		scene.getLastChild().attachChild(pigeon);
 
 		for (BadPigeon bp: badPigeons) {
@@ -51,36 +51,6 @@ public class Stage1 extends Stage {
 		startActivity(i);
 		
 		//BadPigeon.velocity *= 1.3;
-	}
-
-	@Override
-	protected void gameOver() {
-		
-		Log.d("aa", "entrei");
-		
-		AlertDialog alert = new AlertDialog.Builder(this).create();
-		alert.setTitle("Game Over");
-		alert.setMessage("You Died!");
-		
-		alert.setButton("Try Again", new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent i = new Intent(getBaseContext(), Stage1.class);
-				startActivity(i);
-			}
-		});
-		
-		
-		alert.setButton2("Menu", new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent i = new Intent(getBaseContext(), MainActivity.class);
-				startActivity(i);
-			}
-		});
-		
 	}
 
 	@Override
