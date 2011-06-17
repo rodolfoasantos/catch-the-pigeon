@@ -2,11 +2,10 @@
 <AbsoluteLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="@drawable/mosaic_pigeon_tela_abertura_layer01_large">
+	android:layout_height="fill_parent">
 	<AbsoluteLayout
 		android:id="@+id/absoluteLayout1"
-		android:background="@drawable/mosaic_pigeon_tela_abertura_layer02_large"
+		android:background="@drawable/mosaic_pigeon_tela_abertura_layer_large"
 		android:layout_height="fill_parent"
 		android:layout_width="fill_parent"
 		android:layout_x="0dip"

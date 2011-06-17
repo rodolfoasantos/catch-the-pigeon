@@ -2,13 +2,12 @@
 <AbsoluteLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="@drawable/mosaic_pigeon_ima_selected_layer01_large">
+	android:layout_height="fill_parent">
 	<AbsoluteLayout
 		android:layout_height="fill_parent"
 		android:id="@+id/absoluteLayout1"
 		android:layout_width="fill_parent"
-		android:background="@drawable/mosaic_pigeon_ima_selected_layer02_large"
+		android:background="@drawable/mosaic_pigeon_ima_selected_large"
 		android:layout_x="1dip"
 		android:layout_y="-1dip">
 		<ImageButton
