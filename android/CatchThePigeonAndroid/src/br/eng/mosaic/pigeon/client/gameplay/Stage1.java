@@ -4,14 +4,10 @@ import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.util.Log;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
-import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
+import br.eng.mosaic.pigeon.client.infra.SendMessage;
 
 public class Stage1 extends Stage {
 
@@ -21,6 +17,12 @@ public class Stage1 extends Stage {
 	protected void createCharacters() {
 		Intent intent = getIntent();
 		select = (String) intent.getSerializableExtra("select");
+		
+		//Send message to server
+		Intent in = new Intent(this,SendMessage.class);
+		in.putExtra("select", (String)getIntent().getSerializableExtra("select"));
+		startActivity(in);
+		////////////////////////
 		
 		/* Calculate the coordinates for the face, so its centered on the camera. */
 		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
@@ -46,6 +48,7 @@ public class Stage1 extends Stage {
 		
 		super.profile.setScore(1);
 		String[] person_level = {select,"2"};
+		
 		Intent i = new Intent(this,Transition.class);
 		i.putExtra("level", person_level);
 		startActivity(i);

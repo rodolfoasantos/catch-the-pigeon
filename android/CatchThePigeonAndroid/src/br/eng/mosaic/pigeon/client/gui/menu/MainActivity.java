@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
-import br.eng.mosaic.pigeon.client.gameplay.Stage1;
+import br.eng.mosaic.pigeon.client.infra.SendMessage;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
@@ -44,6 +44,12 @@ public class MainActivity extends Activity {
 				loginFacebook();
 			}
 		});
+		
+		findViewById(R.id.twitter_button).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				enviaMensagem();
+			}
+		});
 	}
 		
 
@@ -77,6 +83,10 @@ public class MainActivity extends Activity {
 	private void loginFacebook() {
 		Intent i = new Intent(this, LoginFacebook.class);
 		startActivity(i);
+	}
+	
+	public void enviaMensagem() {
+		startActivity(new Intent(this, SendMessage.class));
 	}
 
 }
