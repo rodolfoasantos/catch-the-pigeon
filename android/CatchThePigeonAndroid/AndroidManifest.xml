@@ -1,70 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="br.eng.mosaic.pigeon.client" android:versionCode="1"
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="br.eng.mosaic.pigeon.client"
+	android:versionCode="1"
 	android:versionName="1.0">
 
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
-	<uses-sdk android:minSdkVersion="4" />
+	<uses-permission
+		android:name="android.permission.INTERNET" />
+	<uses-permission
+		android:name="android.permission.WAKE_LOCK" />
+	<uses-permission
+		android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission
+		android:name="android.permission.RECORD_AUDIO" />
+	<uses-sdk
+		android:minSdkVersion="4" />
 
-	<application android:icon="@drawable/mosaic_pigeon_ima_icone"
+	<application
+		android:icon="@drawable/mosaic_pigeon_ima_icone"
 		android:label="@string/app_name">
-		<activity android:label="@string/app_name" android:name=".gui.menu.SplashScreen"
+		<activity
+			android:label="@string/app_name"
+			android:name=".gui.menu.SplashScreen"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
+				<action
+					android:name="android.intent.action.MAIN" />
+				<category
+					android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:label="@string/app_name" android:name=".gui.menu.MainActivity"
+		<activity
+			android:label="@string/app_name"
+			android:name=".gui.menu.MainActivity"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity android:name=".gui.menu.TopFiveActivity"
-			android:label="@string/top_five" android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar" />
-		<activity android:name=".gui.menu.HighScoreActivity"
-			android:label="@string/high_score" android:configChanges="keyboardHidden|orientation"
+		<activity
+			android:name=".gui.menu.TopFiveActivity"
+			android:label="@string/top_five"
+			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity android:name=".gameplay.Stage1"
+			android:theme="@android:style/Theme.NoTitleBar" />
+		<activity
+			android:name=".gui.menu.HighScoreActivity"
+			android:label="@string/high_score"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity android:name=".gameplay.Stage2"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar" />
-		<activity android:name=".gameplay.Stage3"
+		<activity
+			android:name=".gameplay.Stage1"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity android:name=".gameplay.Transition"
+		<activity
+			android:name=".gameplay.Stage2"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar" />
+		<activity
+			android:name=".gameplay.Stage3"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+		<activity
+			android:name=".gameplay.Transition"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 		</activity>
-		<activity android:configChanges="keyboardHidden|orientation"
+		<activity
+			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			android:name=".infra.facebook.LoginFacebook" />
-		<activity android:name=".gameplay.SelectPerson"
+		<activity
+			android:name=".gameplay.SelectPerson"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-		<activity android:name=".gameplay.SoundTeste"
+		<activity
+			android:name=".gameplay.SoundTeste"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
+				<action
+					android:name="android.intent.action.MAIN" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".infra.SendMessage"></activity>
-		<activity android:name=".infra.SendMessage"></activity>
+		<activity
+			android:name=".infra.SendMessage"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+		<activity
+			android:name=".infra.SendMessage"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 	</application>
 </manifest>

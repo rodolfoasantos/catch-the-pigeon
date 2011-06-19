@@ -30,6 +30,7 @@ public class Transition extends Activity{
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
 		
+		cont=0;
 		next  = (ImageButton) findViewById(R.id.next_level);
 		back = (ImageButton) findViewById(R.id.back_button_transition);
 		audio = (ImageButton) findViewById(R.id.audio_button_transition);
