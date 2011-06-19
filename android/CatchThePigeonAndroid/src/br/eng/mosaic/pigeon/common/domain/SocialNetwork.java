@@ -2,8 +2,8 @@ package br.eng.mosaic.pigeon.common.domain;
 
 public class SocialNetwork {
 
-	private String id;
-	private String name;
+	public String id;
+	public String name;
 
 	public SocialNetwork(){
 		this.id = "";

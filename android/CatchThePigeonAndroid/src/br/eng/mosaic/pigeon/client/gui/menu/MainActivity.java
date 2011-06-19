@@ -2,17 +2,27 @@ package br.eng.mosaic.pigeon.client.gui.menu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
-import br.eng.mosaic.pigeon.client.gameplay.Stage1;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
-
+	
+	public void updateSocialLogged() {
+		ImageButton btn = (ImageButton) findViewById(R.id.facebook);
+		Drawable image = getDrawable( R.drawable.mosaic_pigeon_img_layer_facebook);
+		btn.setBackgroundDrawable(image);
+	}
+	
+	protected Drawable getDrawable(int id) {
+    	return this.getResources().getDrawable( id );
+    }
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -45,8 +55,7 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-		
-
+	
 	private void startGame() {
 		// call the dialog to set a message
 		try {

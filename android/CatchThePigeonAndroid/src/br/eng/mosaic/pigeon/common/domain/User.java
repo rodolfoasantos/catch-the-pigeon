@@ -5,10 +5,11 @@ import java.util.List;
 
 public class User {
 
-	private String name;
-	private String email;
-	private List<Credential> socialNetworks;
-	private int score;
+	public long id;
+	public String name;
+	public String email;
+	public List<Credential> socialNetworks;
+	public int score;
 
 	public User(){
 		this.name = "";

@@ -29,14 +29,18 @@ import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import br.eng.mosaic.pigeon.client.R;
+import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
+import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
+import br.eng.mosaic.pigeon.common.domain.Credential;
+import br.eng.mosaic.pigeon.common.domain.SocialNetwork;
+import br.eng.mosaic.pigeon.common.domain.User;
 
 import com.facebook.android.Facebook.DialogListener;
 
@@ -123,20 +127,33 @@ public class FbDialog extends Dialog {
 
 	private class FbWebViewClient extends WebViewClient {
 
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		@Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			if (url.contains("welcome.do")) {
-				Log.d("rafa", url);
 				
-				EditText edtTxt = (EditText) findViewById( R.id.msg ); 
-				String msg = edtTxt.getText().toString();
+				User user = new User();
+				user.id = 9824L;
 				
+				SocialNetwork sn = new SocialNetwork();
+				sn.name = "facebook";
+				
+				Credential cred = new Credential();
+				cred.setSocialNetwork(sn);
+				cred.setUserId( ""+user.id );
+				cred.setAllowPublishing( true );
+				user.getSocialNetworks().add(cred);
+				
+				Log.d("rafa", ""+user.id);
+				PigeonSharedUser.save(user, view.getContext());
 				FbDialog.this.dismiss();
 			}
-
+			
 			view.loadUrl(url);
 			return true;
 		}
+		
+		protected Drawable getDrawable(Context ctx, int id) {
+	    	return ctx.getResources().getDrawable( id );
+	    }
 
 		@Override
 		public void onReceivedError(WebView view, int errorCode,

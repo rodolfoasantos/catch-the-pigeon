@@ -1,19 +1,23 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
 
-import br.eng.mosaic.pigeon.client.R;
-import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
-import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
+import java.io.InputStream;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
+import br.eng.mosaic.pigeon.client.R;
+import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 
 public class Transition extends Activity{
 	ImageButton next,  back, audio, person;
@@ -21,6 +25,17 @@ public class Transition extends Activity{
 	
 	public static String[]  level;
 	public static int lev;
+	
+	private void sendScoreAndPublish() {
+		try {
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost("http://10.0.2.2:8888/oauth/facebook/publish.do");
+			HttpResponse response = httpClient.execute(httpPost);
+			InputStream is = response.getEntity().getContent();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);

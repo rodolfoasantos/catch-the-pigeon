@@ -162,7 +162,7 @@
 
 		</SlidingDrawer>
 		<ImageButton
-			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
+			android:background="@drawable/mosaic_pigeon_img_layer_facebook_logout"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/facebook"

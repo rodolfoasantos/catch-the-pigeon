@@ -22,7 +22,10 @@ public class LoginFacebook extends Activity {
     }
     
     public void showDialog() throws Exception {
-    	String url = "http://m.facebook.com/dialog/oauth/?scope=email,user_about_me,publish_stream&client_id=114292618654468&redirect_uri=http://pigeon-dev-local.dyndns.biz:8080/pigeon/oauth/facebook/callback.do";
+    	String url = "http://m.facebook.com/dialog/oauth/" +
+    			"?scope=email,user_about_me,publish_stream" +
+    			"&client_id=114292618654468" +
+    			"&redirect_uri=http://10.0.0.3:8080/pigeon/oauth/facebook/callback.do";
     	new FbDialog(this, url, null).show();
     }
 
