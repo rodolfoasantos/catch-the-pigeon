@@ -5,7 +5,7 @@ import java.util.List;
 
 public class User {
 
-	public long id;
+	public String id;
 	public String name;
 	public String email;
 	public List<Credential> socialNetworks;

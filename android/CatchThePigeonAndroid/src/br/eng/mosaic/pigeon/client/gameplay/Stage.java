@@ -17,34 +17,47 @@ import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolic
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.CameraScene;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.*;
+import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
+import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
 import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
 import org.anddev.andengine.entity.scene.menu.MenuScene;
 import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
-import org.anddev.andengine.entity.scene.menu.item.*;
+import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.TextMenuItem;
 import org.anddev.andengine.entity.scene.menu.item.decorator.ColorMenuItemDecorator;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.font.Font;
-import org.anddev.andengine.opengl.texture.*;
-import org.anddev.andengine.opengl.texture.region.*;
+import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.TextureOptions;
+import org.anddev.andengine.opengl.texture.region.TextureRegion;
+import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import br.eng.mosaic.pigeon.client.R;
-import br.eng.mosaic.pigeon.client.gameplay.cast.*;
-import br.eng.mosaic.pigeon.client.gameplay.cast.anim.*;
-import br.eng.mosaic.pigeon.client.gameplay.util.*;
+import br.eng.mosaic.pigeon.client.gameplay.cast.Ave;
+import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
+import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
+import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
+import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
+import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
+import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
+import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import br.eng.mosaic.pigeon.client.infra.Config;
 import br.eng.mosaic.pigeon.client.infra.ConfigIF;
 import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
@@ -110,6 +123,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	private CameraScene mPauseScene;
 
 	public static final int DIALOG_CHOOSE_MESSAGE = 0;
+	public static final int GAME_OVER = 1;
 
 	public static String message;
 
@@ -149,7 +163,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		mHeart = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_ima_life.png", 352, 84);
 		
 		String statusFb = "gfx/mosaic_pigeon_icon_facebook_off.png";
-		if ( PigeonSharedUser.get( this.getBaseContext()) != 0 ) {
+		if ( PigeonSharedUser.get( this.getBaseContext()) != null ) {
 			statusFb = "gfx/mosaic_pigeon_icon_facebook_on.png";
 		}
 		mFacebook = TextureRegionFactory.createFromAsset(this.mTexture, this, statusFb, 352, 110);
@@ -230,11 +244,15 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 					if (pigeon.isAlive()) {
 						if (pigeon.sufferDamage()) {
 							// the bird died
+							pigeon.setAlive(false);
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
 							birdDied(pigeon);
 							Stage.mPigeonDieSound.play();
 							Stage.mPigeonDieSound.setLooping(false);
+							
+							gameOver();
+							
 						}
 						FeatherEvent feather = new FeatherEvent(pigeon.getX(), pigeon.getY(), mFetherTexture, scene, pigeon);
 						scene.getLastChild().attachChild(feather);
@@ -424,6 +442,26 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 						Stage.this.onResume();
 					}
 				}).create();
+		case GAME_OVER:
+			return new AlertDialog.Builder(this)
+			.setIcon(R.drawable.facebook_icon)
+			.setTitle("Game Over").setCancelable(false)
+			.setMessage("You Died!")
+			.setPositiveButton("Try Again", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent i = new Intent(getBaseContext(), Stage1.class);
+					i.putExtra("select", (String)getIntent().getSerializableExtra("select"));
+					startActivity(i);
+				}
+			}).setNegativeButton("Menu", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent i = new Intent(getBaseContext(), MainActivity.class);
+					startActivity(i);
+				}
+				
+			}).create();
 		default:
 			return super.onCreateDialog(pID);
 		}
@@ -449,12 +487,23 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 	protected abstract void setBackgroundParameter();
 	
-	protected abstract void gameOver();
+	protected void gameOver() {
+			Log.d("aa", "entrei");
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					showDialog(GAME_OVER);
+				}
+			});
+			
+			profile.setScore(-profile.getScore());
+			scoreText.setText("Score: " + profile.getScore());
+	}
 	
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
 	
 	protected abstract void createBackgroundTest(String back, String mid, String front, String front2, String front3);
-
+	
 }

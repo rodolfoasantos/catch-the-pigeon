@@ -6,19 +6,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
+import br.eng.mosaic.pigeon.client.infra.SendMessage;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
 
 public class MainActivity extends Activity {
-	
-	public void updateSocialLogged() {
-		ImageButton btn = (ImageButton) findViewById(R.id.facebook);
-		Drawable image = getDrawable( R.drawable.mosaic_pigeon_img_layer_facebook);
-		btn.setBackgroundDrawable(image);
-	}
 	
 	protected Drawable getDrawable(int id) {
     	return this.getResources().getDrawable( id );
@@ -37,12 +31,10 @@ public class MainActivity extends Activity {
                     }
                 });
 
-       /* findViewById(R.id.top_five).setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                showTopFive();
-            }
-        });
-        */
+       
+		//showTopFive();
+		
+        
         /*findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 showHighScore();
@@ -52,6 +44,12 @@ public class MainActivity extends Activity {
 		findViewById(R.id.facebook).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				loginFacebook();
+			}
+		});
+		
+		findViewById(R.id.twitter_button).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				enviaMensagem();
 			}
 		});
 	}
@@ -86,6 +84,10 @@ public class MainActivity extends Activity {
 	private void loginFacebook() {
 		Intent i = new Intent(this, LoginFacebook.class);
 		startActivity(i);
+	}
+	
+	public void enviaMensagem() {
+		startActivity(new Intent(this, SendMessage.class));
 	}
 
 }

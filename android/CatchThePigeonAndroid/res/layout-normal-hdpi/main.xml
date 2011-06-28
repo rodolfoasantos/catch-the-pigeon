@@ -2,17 +2,16 @@
 <AbsoluteLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="@drawable/mosaic_pigeon_tela_abertura_layer01_large">
+	android:layout_height="fill_parent">
 	<AbsoluteLayout
 		android:id="@+id/absoluteLayout1"
-		android:background="@drawable/mosaic_pigeon_tela_abertura_layer02_large"
+		android:background="@drawable/mosaic_pigeon_tela_abertura_layer_large"
 		android:layout_height="fill_parent"
 		android:layout_width="fill_parent"
 		android:layout_x="0dip"
 		android:layout_y="1dip">
 		<SlidingDrawer
-			android:layout_y="213dip"
+			android:layout_y="265dip"
 			android:handle="@+id/slideHandleButton"
 			android:layout_x="140dip"
 			android:id="@+id/SlidingDrawer"
@@ -163,20 +162,8 @@
 			android:id="@+id/TextView01"
 			android:layout_x="400dip"
 			android:layout_y="56dip"></TextView>
-		<ImageButton
-			android:layout_height="50dip"
-			android:background="@drawable/mosaic_pigeon_img_layer_help"
-			android:id="@+id/help_button"
-			android:layout_width="50dip"
-			android:layout_x="476dip"
-			android:layout_y="185dip"></ImageButton>
-		<ImageButton
-			android:background="@drawable/mosaic_pigeon_img_layer_start"
-			android:id="@+id/start_game"
-			android:layout_height="38dip"
-			android:layout_width="38dip"
-			android:layout_x="270dip"
-			android:layout_y="171dip"></ImageButton>
+		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_start" android:layout_width="38dip" android:layout_height="38dip" android:id="@+id/start_game" android:layout_x="266dip" android:layout_y="182dip"></ImageButton>
+		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_help" android:layout_width="50dip" android:layout_height="50dip" android:id="@+id/help_button" android:layout_x="475dip" android:layout_y="188dip"></ImageButton>
 	</AbsoluteLayout>
 
 </AbsoluteLayout>

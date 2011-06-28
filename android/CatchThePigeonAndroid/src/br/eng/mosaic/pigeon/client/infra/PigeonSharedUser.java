@@ -9,16 +9,14 @@ public class PigeonSharedUser {
 	public static void save(User user, Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences("user", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit(); 
-		editor.putLong("user.id", user.id);
-		
-		user.socialNetworks.get(0);
-		editor.putLong("user..from.facebook", user.id); 
+		editor.putString("user.id", user.id);
 		editor.commit();	
 	}
 	
-	public static long get(Context ctx) {
+	public static String get(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences("user", Context.MODE_PRIVATE);
-		return prefs.getLong("user", 0);
+		String param = prefs.getString("user.id", null); 
+		return param;
 	}
 	
 }

@@ -1,12 +1,6 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
-
-import java.io.InputStream;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,9 +9,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
+import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
+import br.eng.mosaic.pigeon.communication.AsynCallback;
+import br.eng.mosaic.pigeon.communication.ProxyClient;
+import br.eng.mosaic.pigeon.communication.Source;
 
 public class Transition extends Activity{
 	ImageButton next,  back, audio, person;
@@ -26,15 +25,48 @@ public class Transition extends Activity{
 	public static String[]  level;
 	public static int lev;
 	
-	private void sendScoreAndPublish() {
-		try {
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost("http://10.0.2.2:8888/oauth/facebook/publish.do");
-			HttpResponse response = httpClient.execute(httpPost);
-			InputStream is = response.getEntity().getContent();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private void startThreadFromServer() {
+		new Thread() {
+			@Override public synchronized void start() {
+				sendScore();
+			}
+			
+		}.start();
+	}
+	
+	private String[] getParams() {
+		String user = "" + PigeonSharedUser.get( this.getBaseContext() );
+		Log.d("rafa", "urlala.sss:" + user);
+		EditText edt = (EditText) findViewById(R.id.msg);
+		String message = edt.getText().toString();
+		message = "mensagem fixa rafa.rocha codando madruga prévia.sao.joao";
+		
+		String score = "233";// level[1];
+		return new String[] { user, ""+score, message };	
+	}
+	
+	private String concatRealAddress(String uri) {
+		return "http://10.0.0.4:8080/pigeon/" + uri;
+	}
+	
+	private  void sendScore() {
+		
+		String[] params = getParams();
+		String url = Source.score.apply( params );
+		url = concatRealAddress(url);
+		
+		Log.d("rafa", "real.url:" + url);
+		
+		ProxyClient client = new ProxyClient();
+		client.execute(url, new AsynCallback() {
+			@Override public void onSucess(JSONObject json)  { 
+				Log.d("rafa", "sucess:" + json.toString());
+			}
+			@Override public void onFailure(JSONObject json) {
+				Log.d("rafa", "fail:" + json.toString());
+				//new QueueServer().exchange();
+			}
+		});
 	}
 	
 	public void onCreate(Bundle savedInstanceState){
@@ -45,6 +77,7 @@ public class Transition extends Activity{
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
 		
+		cont=0;
 		next  = (ImageButton) findViewById(R.id.next_level);
 		back = (ImageButton) findViewById(R.id.back_button_transition);
 		audio = (ImageButton) findViewById(R.id.audio_button_transition);
@@ -111,6 +144,8 @@ public class Transition extends Activity{
 		} catch (NullPointerException np) {
 			Log.e("Null", "audio button is null. See the names of the IDs in transition.xml");
 		}
+		
+		startThreadFromServer();
 	}
 	
 

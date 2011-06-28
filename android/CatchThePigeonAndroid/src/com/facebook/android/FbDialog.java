@@ -118,31 +118,23 @@ public class FbDialog extends Dialog {
 		mWebView.setLayoutParams(FILL);
 		mContent.addView(mWebView);
 	}
-
-	private class JSFeedbackServer {
-		@SuppressWarnings("unused") public void processHTML(String html) {
-			Log.d("rafa", "html:" + html);
-		}
+	
+	private String getUserFromUrl(String url) {
+		String init = "pigeon/";
+		int idx = url.indexOf(init);
+		
+		int start = idx + init.length();
+		String retail = url.substring(start);
+		return retail.replace("/welcome.do", "");
 	}
-
+	
 	private class FbWebViewClient extends WebViewClient {
 
 		@Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			if (url.contains("welcome.do")) {
-				
 				User user = new User();
-				user.id = 9824L;
-				
-				SocialNetwork sn = new SocialNetwork();
-				sn.name = "facebook";
-				
-				Credential cred = new Credential();
-				cred.setSocialNetwork(sn);
-				cred.setUserId( ""+user.id );
-				cred.setAllowPublishing( true );
-				user.getSocialNetworks().add(cred);
-				
-				Log.d("rafa", ""+user.id);
+				user.id = getUserFromUrl(url);
+				Log.d("rafa", "logado.pelo.id.fb:" + user.id);
 				PigeonSharedUser.save(user, view.getContext());
 				FbDialog.this.dismiss();
 			}
@@ -151,14 +143,13 @@ public class FbDialog extends Dialog {
 			return true;
 		}
 		
-		protected Drawable getDrawable(Context ctx, int id) {
-	    	return ctx.getResources().getDrawable( id );
-	    }
-
 		@Override
 		public void onReceivedError(WebView view, int errorCode,
 				String description, String failingUrl) {
 			super.onReceivedError(view, errorCode, description, failingUrl);
+			
+			Log.d("rafa", "fudeu:" + description + " : " + errorCode + " : " + failingUrl);
+			
 			mListener.onError(new DialogError(description, errorCode,
 					failingUrl));
 			FbDialog.this.dismiss();
@@ -179,9 +170,6 @@ public class FbDialog extends Dialog {
 			if (title != null && title.length() > 0) {
 				mTitle.setText(title);
 			}
-
-//			String js = "javascript:window.HTMLOUT.showHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');";
-//			mWebView.loadUrl(js);
 
 			mSpinner.dismiss();
 		}
