@@ -195,7 +195,6 @@
 			android:textSize="5px"
 			android:layout_width="25dip"
 			android:text="@string/pos1"
-			android:id="@+id/TextView01"
 			android:layout_x="294dip"
 			android:layout_y="72dip"></TextView>
 		<TextView
@@ -230,6 +229,45 @@
 			android:id="@+id/TextView01"
 			android:layout_x="373dip"
 			android:layout_y="121dip"></TextView>
+		<TextView android:text="50000" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/transition_score" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="216dip" 
+			android:layout_y="46dip" android:typeface="sans" android:textSize="3pt"></TextView>
+		<TextView android:layout_height="wrap_content" 
+			android:id="@+id/textView1" 
+			android:layout_width="wrap_content" 
+			android:layout_x="251dip" 
+			android:layout_y="47dip" 
+			android:typeface="sans" 
+			android:textSize="3pt" 
+			android:textStyle="bold" 
+			android:text="pt" 
+			android:textColor="#A0522D"></TextView>
+		<TextView android:textSize="2.5pt" 
+			android:text="Level" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/textView2" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="219dip" 
+			android:layout_y="148dip"></TextView>
+		<TextView android:textSize="7pt" 
+			android:text="2" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/transition_level" 
+			android:typeface="normal" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="249dip" 
+			android:layout_y="130dip"></TextView>
+		
 	</AbsoluteLayout>
 
 

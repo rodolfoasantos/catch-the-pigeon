@@ -224,6 +224,46 @@
 			android:id="@+id/audio_button_transition"
 			android:layout_x="71dip"
 			android:layout_y="341dip"></ImageButton>
+		<TextView android:textSize="20pt" 
+			android:text="2" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/transition_level" 
+			android:typeface="normal" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="282dip" 
+			android:layout_y="177dip"></TextView>
+		<TextView android:textSize="9.5pt" 
+			android:text="Level" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/textView2" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="218dip" 
+			android:layout_y="201dip"></TextView>
+		<TextView android:textSize="10pt" 
+			android:text="pt" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/textView1" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="287dip" 
+			android:layout_y="25dip"></TextView>
+		<TextView android:textSize="10pt" 
+			android:text="50000" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/transition_score" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D"
+			android:layout_x="218dip" 
+			android:layout_y="25dip"></TextView>
 		
 	</AbsoluteLayout>
 
