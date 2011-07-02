@@ -58,7 +58,7 @@
 			android:text="@string/pos2"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:id="@+id/TextView01"></TextView>
+			android:id="@+id/transition_score_tf2"></TextView>
 		<ImageView
 			android:id="@+id/ImageViewPos6"
 			android:layout_y="8dip"
@@ -72,9 +72,9 @@
 			android:text="@string/pos3"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:id="@+id/TextView01"></TextView>
+			android:id="@+id/transition_score_tf3"></TextView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf3"
 			android:layout_y="12dip"
 			android:layout_x="512dip"
 			android:layout_height="48dip"
@@ -93,7 +93,7 @@
 			android:text="@string/pos1"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:id="@+id/TextView01"></TextView>
+			android:id="@+id/transition_score_tf1"></TextView>
 		<ImageView
 			android:id="@+id/ImageViewPos6"
 			android:layout_y="80dip"
@@ -107,7 +107,7 @@
 			android:text="@string/pos4"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:id="@+id/TextView01"></TextView>
+			android:id="@+id/transition_score_tf4"></TextView>
 		<ImageView
 			android:id="@+id/ImageViewPos6"
 			android:layout_y="80dip"
@@ -121,30 +121,30 @@
 			android:text="@string/pos5"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:id="@+id/TextView01"></TextView>
+			android:id="@+id/transition_score_tf5"></TextView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf4"
 			android:layout_y="82dip"
 			android:layout_x="414dip"
 			android:layout_height="48dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_width="44dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf1"
 			android:layout_y="12dip"
 			android:layout_x="382dip"
 			android:layout_height="48dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_width="44dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf2"
 			android:layout_y="12dip"
 			android:layout_x="448dip"
 			android:layout_height="48dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_width="44dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf5"
 			android:layout_y="82dip"
 			android:layout_x="482dip"
 			android:layout_height="48dip"

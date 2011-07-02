@@ -120,21 +120,21 @@
 		</SlidingDrawer>
 
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="555dip"
 			android:layout_y="20dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="355dip"
 			android:layout_y="20dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
@@ -144,32 +144,32 @@
 			android:text="@string/pos1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/transition_score_tf1"
 			android:layout_x="371dip"
 			android:layout_y="82dip"></TextView>
 		<TextView
 			android:text="@string/pos2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			aandroid:id="@+id/transition_score_tf2"
 			android:layout_x="466dip"
 			android:layout_y="81dip"></TextView>
 		<TextView
 			android:text="@string/pos3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/transition_score_tf3"
 			android:layout_x="569dip"
 			android:layout_y="81dip"></TextView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="355dip"
 			android:layout_y="132dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
@@ -179,14 +179,14 @@
 			android:text="@string/pos4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/transition_score_tf4"
 			android:layout_x="370dip"
 			android:layout_y="194dip"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/transition_score_tf5"
 			android:layout_x="470dip"
 			android:layout_y="193dip"></TextView>
 		<ImageButton
