@@ -29,28 +29,28 @@
 			android:id="@+id/help_button"
 			android:layout_width="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
-			android:layout_x="360dip"
+			android:layout_x="407dip"
 			android:layout_y="210dip"></ImageButton>
 		<ImageButton
 			android:id="@+id/selectFigeon"
 			android:background="@drawable/mosaic_pigeon_ima_selected_figeon"
 			android:layout_width="90dip"
 			android:layout_height="93dip"
-			android:layout_x="58dip"
+			android:layout_x="83dip"
 			android:layout_y="58dip"></ImageButton>
 		<ImageButton
 			android:id="@+id/selectFigean"
 			android:background="@drawable/mosaic_pigeon_ima_selected_figean"
 			android:layout_width="90dip"
 			android:layout_height="93dip"
-			android:layout_x="165dip"
+			android:layout_x="190dip"
 			android:layout_y="33dip"></ImageButton>
 		<ImageButton
 			android:id="@+id/selectSigeon"
 			android:background="@drawable/mosaic_pigeon_ima_selected_sigeon"
 			android:layout_width="90dip"
 			android:layout_height="93dip"
-			android:layout_x="277dip"
+			android:layout_x="301dip"
 			android:layout_y="58dip"></ImageButton>
 
 	</AbsoluteLayout>
