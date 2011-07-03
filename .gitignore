@@ -1,0 +1,4 @@
+*\bin
+.DS_Store
+server/build/*
+android/CatchThePigeonAndroid/gen/br/eng/mosaic/pigeon/client/R.java

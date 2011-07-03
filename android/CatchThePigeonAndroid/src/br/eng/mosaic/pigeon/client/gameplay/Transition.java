@@ -16,6 +16,7 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
 import br.eng.mosaic.pigeon.communication.AsynCallback;
 import br.eng.mosaic.pigeon.communication.ProxyClient;
+import br.eng.mosaic.pigeon.communication.ServerConstants;
 import br.eng.mosaic.pigeon.communication.Source;
 
 public class Transition extends Activity{
@@ -30,40 +31,35 @@ public class Transition extends Activity{
 			@Override public synchronized void start() {
 				sendScore();
 			}
-			
 		}.start();
 	}
 	
 	private String[] getParams() {
 		String user = "" + PigeonSharedUser.get( this.getBaseContext() );
-		Log.d("rafa", "urlala.sss:" + user);
 		EditText edt = (EditText) findViewById(R.id.msg);
 		String message = edt.getText().toString();
-		message = "mensagem fixa rafa.rocha codando madruga prévia.sao.joao";
-		
-		String score = "233";// level[1];
+		message = (message == null || message.isEmpty()) 
+			? "mensagem não especificada ... " + System.currentTimeMillis() : message;
+		String score = level[lev];
 		return new String[] { user, ""+score, message };	
 	}
 	
 	private String concatRealAddress(String uri) {
-		return "http://10.0.0.4:8080/pigeon/" + uri;
+		return ServerConstants.getContextFromAndroid() + "/" + uri;
 	}
 	
 	private  void sendScore() {
-		
 		String[] params = getParams();
 		String url = Source.score.apply( params );
 		url = concatRealAddress(url);
 		
-		Log.d("rafa", "real.url:" + url);
-		
 		ProxyClient client = new ProxyClient();
 		client.execute(url, new AsynCallback() {
 			@Override public void onSucess(JSONObject json)  { 
-				Log.d("rafa", "sucess:" + json.toString());
+				Log.d("pigeon", "sucess:" + json.toString());
 			}
 			@Override public void onFailure(JSONObject json) {
-				Log.d("rafa", "fail:" + json.toString());
+				Log.d("pigeon", "fail:" + json.toString());
 				//new QueueServer().exchange();
 			}
 		});
