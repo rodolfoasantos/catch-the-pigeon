@@ -8,8 +8,8 @@
 		android:id="@+id/absoluteLayout1"
 		android:layout_width="fill_parent"
 		android:background="@drawable/mosaic_pigeon_ima_selected_large"
-		android:layout_x="1dip"
-		android:layout_y="-1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<ImageButton
 			android:layout_height="wrap_content"
 			android:id="@+id/selectFigean"
@@ -23,7 +23,7 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/help_button"
 			android:layout_x="567dip"
-			android:layout_y="248dip"></ImageButton>
+			android:layout_y="240dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_ima_selected_figeon"
 			android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/audio_button"
 			android:layout_x="74dip"
-			android:layout_y="342dip"></ImageButton>
+			android:layout_y="344dip"></ImageButton>
 
 	</AbsoluteLayout>
 </AbsoluteLayout>

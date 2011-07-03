@@ -9,77 +9,77 @@
 		android:layout_height="fill_parent"
 		android:background="@drawable/mosaic_pigeon_default_bg"
 		android:id="@+id/absoluteLayout1"
-		android:layout_x="-1dip"
-		android:layout_y="1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_tela_transicao_separador_botoes"
-			android:layout_x="245dip"
+			android:layout_x="305dip"
 			android:layout_y="243dip"></ImageView>
 		<ImageButton
 			android:layout_width="wrap_content"
 			android:id="@+id/next_level"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_tela_transicao_go"
-			android:layout_x="300dip"
+			android:layout_x="360dip"
 			android:layout_y="243dip"></ImageButton>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
-			android:layout_x="550dip"
+			android:layout_x="570dip"
 			android:layout_y="14dip"></ImageView>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
-			android:layout_x="450dip"
+			android:layout_x="490dip"
 			android:layout_y="126dip"></ImageView>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
-			android:layout_x="350dip"
+			android:layout_x="410dip"
 			android:layout_y="127dip"></ImageView>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
-			android:layout_x="450dip"
+			android:layout_x="490dip"
 			android:layout_y="15dip"></ImageView>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_img_layer_picture_of_avatar_large"
-			android:layout_x="350dip"
+			android:layout_x="410dip"
 			android:layout_y="16dip"></ImageView>
 		<ImageButton
 			android:layout_width="wrap_content"
 			android:id="@+id/level_person"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_layer_sigeon_noselection"
-			android:layout_x="210dip"
+			android:layout_x="250dip"
 			android:layout_y="69dip"></ImageButton>
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ImageViewPos6"
 			android:background="@drawable/mosaic_pigeon_tela_transicao_quadro_pontos"
-			android:layout_x="210dip"
+			android:layout_x="250dip"
 			android:layout_y="12dip"></ImageView>
 		<ImageButton
 			android:layout_width="wrap_content"
 			android:id="@+id/back_button_transition"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_tela_transicao_back"
-			android:layout_x="180dip"
+			android:layout_x="240dip"
 			android:layout_y="242dip"></ImageButton>
 		<SlidingDrawer
 			android:layout_width="280dip"
@@ -120,75 +120,80 @@
 		</SlidingDrawer>
 
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
-			android:layout_x="555dip"
+			android:layout_x="575dip"
 			android:layout_y="20dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
-			android:layout_x="355dip"
+			android:layout_x="415dip"
 			android:layout_y="20dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
-			android:layout_x="454dip"
+			android:layout_x="494dip"
 			android:layout_y="20dip"></ImageView>
 		<TextView
 			android:text="@string/pos1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
-			android:layout_x="371dip"
-			android:layout_y="82dip"></TextView>
+			android:id="@+id/transition_score_tf1"
+			android:layout_x="425dip"
+			android:layout_y="82dip" 
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
-			android:layout_x="466dip"
-			android:layout_y="81dip"></TextView>
+			android:id="@+id/transition_score_tf2"
+			android:layout_x="505dip"
+			android:layout_y="81dip"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
-			android:layout_x="569dip"
-			android:layout_y="81dip"></TextView>
+			android:id="@+id/transition_score_tf3"
+			android:layout_x="585dip"
+			android:layout_y="81dip"
+			android:textStyle="bold"></TextView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
-			android:layout_x="355dip"
+			android:layout_x="415dip"
 			android:layout_y="132dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/transition_img_tf5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
-			android:layout_x="454dip"
+			android:layout_x="494dip"
 			android:layout_y="132dip"></ImageView>
 		<TextView
 			android:text="@string/pos4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
-			android:layout_x="370dip"
-			android:layout_y="194dip"></TextView>
+			android:id="@+id/transition_score_tf4"
+			android:layout_x="425dip"
+			android:layout_y="194dip"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
-			android:layout_x="470dip"
-			android:layout_y="193dip"></TextView>
+			android:id="@+id/transition_score_tf5"
+			android:layout_x="505dip"
+			android:layout_y="193dip"
+			android:textStyle="bold"></TextView>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_width="wrap_content"
@@ -200,15 +205,15 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/help_button"
-			android:layout_x="26dip"
+			android:id="@+id/facebook_button"
+			android:layout_x="10dip"
 			android:layout_y="162dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/twitter_button_transition"
-			android:layout_x="26dip"
+			android:layout_x="10dip"
 			android:layout_y="241dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
@@ -224,6 +229,46 @@
 			android:id="@+id/audio_button_transition"
 			android:layout_x="71dip"
 			android:layout_y="341dip"></ImageButton>
+		<TextView android:textSize="20pt" 
+			android:text="2" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/transition_level" 
+			android:typeface="normal" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="322dip" 
+			android:layout_y="177dip"></TextView>
+		<TextView android:textSize="9.5pt" 
+			android:text="Level" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/textView2" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="258dip" 
+			android:layout_y="201dip"></TextView>
+		<TextView android:textSize="10pt" 
+			android:text="pt" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/textView1" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D" 
+			android:layout_x="327dip" 
+			android:layout_y="25dip"></TextView>
+		<TextView android:textSize="10pt" 
+			android:text="50000" 
+			android:textStyle="bold" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/transition_score" 
+			android:typeface="sans" 
+			android:layout_width="wrap_content" 
+			android:textColor="#A0522D"
+			android:layout_x="258dip" 
+			android:layout_y="25dip"></TextView>
 		
 	</AbsoluteLayout>
 

@@ -3,6 +3,7 @@ package br.eng.mosaic.pigeon.client.infra.facebook;
 import android.app.Activity;
 import android.os.Bundle;
 import br.eng.mosaic.pigeon.client.R;
+import br.eng.mosaic.pigeon.communication.ServerConstants;
 
 import com.facebook.android.FbDialog;
 
@@ -25,8 +26,8 @@ public class LoginFacebook extends Activity {
     	String url = "http://m.facebook.com/dialog/oauth/" +
     			"?scope=email,user_about_me,publish_stream" +
     			"&client_id=114292618654468" +
-    			"&redirect_uri=http://10.0.0.4:8080/pigeon/oauth/facebook/callback.do";
+    			"&redirect_uri=" + ServerConstants.getContextFromFacebook() + "/oauth/facebook/callback.do";
     	new FbDialog(this, url, null).show();
     }
-
+    
 }

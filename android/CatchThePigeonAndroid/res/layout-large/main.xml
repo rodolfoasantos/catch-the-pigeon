@@ -8,8 +8,8 @@
 		android:layout_height="fill_parent"
 		android:background="@drawable/mosaic_pigeon_tela_abertura_layer_large"
 		android:id="@+id/absoluteLayout1"
-		android:layout_x="-1dip"
-		android:layout_y="1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<!--
 			<ImageView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:id="@+id/ImageViewPos6"
@@ -54,35 +54,35 @@
 			android:layout_x="175dip"
 			android:layout_y="5dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/main_img_tf1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="179dip"
 			android:layout_y="11dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/main_img_tf2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="248dip"
 			android:layout_y="11dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/main_img_tf3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="318dip"
 			android:layout_y="11dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/main_img_tf4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:layout_x="387dip"
 			android:layout_y="11dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
+			android:id="@+id/main_img_tf5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
@@ -92,37 +92,40 @@
 			android:text="@string/pos1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/main_score_tf1"
 			android:layout_x="188dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip" android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/main_score_tf2"
 			android:layout_x="256dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip" android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/main_score_tf4"
 			android:layout_x="399dip"
-			android:layout_y="70dip"></TextView>
+			android:layout_y="71dip"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/main_score_tf5"
 			android:layout_x="468dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/TextView01"
+			android:id="@+id/main_score_tf3"
 			android:layout_x="331dip"
-			android:layout_y="70dip"></TextView>
+			android:layout_y="71dip" 
+			android:textStyle="bold"></TextView>
 
 
 		<SlidingDrawer
@@ -175,7 +178,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/twitter_button"
-			android:layout_x="30dip"
+			android:layout_x="27dip"
 			android:layout_y="254dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_img_layer_help"

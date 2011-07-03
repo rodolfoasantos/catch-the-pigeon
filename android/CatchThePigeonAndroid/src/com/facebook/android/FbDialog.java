@@ -19,6 +19,7 @@ package com.facebook.android;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -119,24 +120,27 @@ public class FbDialog extends Dialog {
 		mContent.addView(mWebView);
 	}
 	
-	private String getUserFromUrl(String url) {
+	private User getUserFromUrl(String url) {
 		String init = "pigeon/";
 		int idx = url.indexOf(init);
 		
 		int start = idx + init.length();
 		String retail = url.substring(start);
-		return retail.replace("/welcome.do", "");
+		
+		User user = new User();
+		user.id = retail.replace("/welcome.do", ""); 
+		return user;
 	}
 	
 	private class FbWebViewClient extends WebViewClient {
 
 		@Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			// TODO tratar quando n‹o tem internet, lance do apn quando 3G ou wifi
 			if (url.contains("welcome.do")) {
-				User user = new User();
-				user.id = getUserFromUrl(url);
-				Log.d("rafa", "logado.pelo.id.fb:" + user.id);
+				User user = getUserFromUrl(url);
 				PigeonSharedUser.save(user, view.getContext());
 				FbDialog.this.dismiss();
+				view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
 			}
 			
 			view.loadUrl(url);
