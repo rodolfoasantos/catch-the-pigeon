@@ -43,8 +43,19 @@ public class Stage3 extends Stage {
 		startActivity(i);		
 	}
 
-	@Override
-	protected void gameOver() {}
+	/*@Override
+	protected void gameOver() {
+		
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				showDialog(GAME_OVER);
+			}
+		});
+		
+		profile.setScore(-profile.getScore());
+		scoreText.setText("Score: " + profile.getScore());
+	}*/
 
 	@Override
 	protected void setBackgroundParameter() {
