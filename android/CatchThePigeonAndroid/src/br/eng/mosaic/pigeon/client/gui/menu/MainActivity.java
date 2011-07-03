@@ -15,9 +15,11 @@ import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.infra.SendMessage;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
+import br.eng.mosaic.pigeon.communication.ConnectionVerification;
 
 public class MainActivity extends Activity {
 	static final private int GET_CODE = 0;
+	ConnectionVerification flagConnection;
 	protected Drawable getDrawable(int id) {
     	return this.getResources().getDrawable( id );
     }
@@ -27,7 +29,10 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+		flagConnection = new ConnectionVerification();
+		flagConnection.setFlagConnection(false);
+		
 		findViewById(R.id.start_game).setOnClickListener(
                 new OnClickListener() {
                     public void onClick(View v) {
@@ -45,13 +50,13 @@ public class MainActivity extends Activity {
             }
         });
         */
-		findViewById(R.id.facebook).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.facebook_button_main).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				loginFacebook();
 			}
 		});
 		
-		findViewById(R.id.twitter_button).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.twitter_button_main).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				enviaMensagem();
 			}
@@ -90,10 +95,12 @@ public class MainActivity extends Activity {
 	private void loginFacebook() {
 		if (haveInternet(getBaseContext()))
     	{
+			flagConnection.setFlagConnection(true);
 			Intent i = new Intent(this, LoginFacebook.class);
 			startActivity(i);
     	}else
     	{
+    		flagConnection.setFlagConnection(false);
     		Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
     	}
 	}

@@ -23,8 +23,8 @@ public class SelectPerson extends Activity {
 		figeon = (ImageButton) findViewById(R.id.selectFigeon);
 		sigeon = (ImageButton) findViewById(R.id.selectSigeon);
 		figean = (ImageButton) findViewById(R.id.selectFigean);
-		back = (ImageButton) findViewById(R.id.back_button);
-		audio = (ImageButton) findViewById(R.id.audio_button);
+		back = (ImageButton) findViewById(R.id.back_button_char);
+		audio = (ImageButton) findViewById(R.id.audio_button_char);
 		
 		try {
 			figeon.setOnClickListener(new OnClickListener() {			

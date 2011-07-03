@@ -15,6 +15,7 @@ import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
 import br.eng.mosaic.pigeon.communication.AsynCallback;
+import br.eng.mosaic.pigeon.communication.ConnectionVerification;
 import br.eng.mosaic.pigeon.communication.ProxyClient;
 import br.eng.mosaic.pigeon.communication.ServerConstants;
 import br.eng.mosaic.pigeon.communication.Source;
@@ -26,10 +27,14 @@ public class Transition extends Activity{
 	public static String[]  level;
 	public static int lev;
 	
+	ConnectionVerification flagConnection;
+	
 	private void startThreadFromServer() {
 		new Thread() {
 			@Override public synchronized void start() {
-				sendScore();
+				
+					sendScore();
+				
 			}
 		}.start();
 	}
@@ -73,6 +78,7 @@ public class Transition extends Activity{
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
 		
+		flagConnection = new ConnectionVerification();
 		cont=0;
 		next  = (ImageButton) findViewById(R.id.next_level);
 		back = (ImageButton) findViewById(R.id.back_button_transition);
@@ -141,7 +147,10 @@ public class Transition extends Activity{
 			Log.e("Null", "audio button is null. See the names of the IDs in transition.xml");
 		}
 		
-		startThreadFromServer();
+		if (flagConnection.getFlagConnection())
+		{
+			startThreadFromServer();
+		}
 	}
 	
 
