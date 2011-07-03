@@ -21,7 +21,7 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/help_button"
+			android:id="@+id/help_button_char"
 			android:layout_x="567dip"
 			android:layout_y="240dip"></ImageButton>
 		<ImageButton
@@ -42,14 +42,14 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/back_button"
+			android:id="@+id/back_button_char"
 			android:layout_x="14dip"
 			android:layout_y="346dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/audio_button"
+			android:id="@+id/audio_button_char"
 			android:layout_x="74dip"
 			android:layout_y="344dip"></ImageButton>
 

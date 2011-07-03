@@ -21,14 +21,14 @@
 			android:layout_y="218dip"></ImageButton>
 		<ImageButton
 			android:layout_width="30dip"
-			android:id="@+id/help_button"
+			android:id="@+id/help_button_transition"
 			android:layout_height="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_x="407dip"
 			android:layout_y="210dip"></ImageButton>
 		<ImageButton
 			android:layout_width="30dip"
-			android:id="@+id/facebook_button"
+			android:id="@+id/facebook_button_transition"
 			android:layout_height="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
 			android:layout_x="17dip"
@@ -42,7 +42,7 @@
 			android:layout_y="280dip"></ImageButton>
 		<ImageButton
 			android:layout_width="30dip"
-			android:id="@+id/back_button_transiction"
+			android:id="@+id/back_button"
 			android:layout_height="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:layout_x="15dip"

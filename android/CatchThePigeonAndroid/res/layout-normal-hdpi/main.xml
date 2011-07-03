@@ -48,14 +48,14 @@
 			android:layout_x="20dip"
 			android:layout_height="40dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
-			android:id="@+id/twitter_button"
+			android:id="@+id/twitter_button_main"
 			android:layout_width="40dip"></ImageButton>
 		<ImageButton
 			android:layout_y="152dip"
 			android:layout_x="20dip"
 			android:layout_height="40dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
-			android:id="@+id/facebook_button"
+			android:id="@+id/facebook_button_main"
 			android:layout_width="40dip"></ImageButton>
 		<ImageView
 			android:id="@+id/ImageViewPos6"
@@ -178,7 +178,7 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_help" 
 			android:layout_width="50dip" 
 			android:layout_height="50dip" 
-			android:id="@+id/help_button" 
+			android:id="@+id/help_button_main" 
 			android:layout_x="476dip" 
 			android:layout_y="190dip"></ImageButton>
 	</AbsoluteLayout>

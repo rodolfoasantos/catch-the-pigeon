@@ -178,21 +178,21 @@
 			android:layout_x="215dip"
 			android:layout_y="180dip"></ImageButton>
 		<ImageButton
-			android:id="@+id/facebook"
+			android:id="@+id/facebook_button_main"
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
 			android:layout_width="30dip"
 			android:layout_height="30dip"
 			android:layout_x="17dip"
 			android:layout_y="198dip"></ImageButton>
 		<ImageButton
-			android:id="@+id/twitter_button"
+			android:id="@+id/twitter_button_main"
 			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
 			android:layout_width="30dip"
 			android:layout_height="30dip"
 			android:layout_x="17dip"
 			android:layout_y="234dip"></ImageButton>
 		<ImageButton
-			android:id="@+id/help_button"
+			android:id="@+id/help_button_main"
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_width="30dip"
 			android:layout_height="30dip"
