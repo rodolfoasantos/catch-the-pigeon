@@ -4,10 +4,14 @@ import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.util.Log;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
-import br.eng.mosaic.pigeon.client.infra.SendMessage;
+import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 
 public class Stage1 extends Stage {
 
@@ -18,20 +22,14 @@ public class Stage1 extends Stage {
 		Intent intent = getIntent();
 		select = (String) intent.getSerializableExtra("select");
 		
-		//Send message to server
-		/*Intent in = new Intent(this,SendMessage.class);
-		in.putExtra("select", (String)getIntent().getSerializableExtra("select"));
-		startActivity(in);*/
-		////////////////////////
-		
 		/* Calculate the coordinates for the face, so its centered on the camera. */
-		final int playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
-		final int playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
+		Stage.playerX = (CAMERA_WIDTH - Stage.mPlayerTextureRegion.getTileWidth()) / 4;
+		Stage.playerY = (CAMERA_HEIGHT - Stage.mPlayerTextureRegion.getTileHeight()) / 2;
 
-		this.pigeon = new Pigeon(playerX/2, playerY, Stage.mCharacters, 3, (select.equalsIgnoreCase("figeon") ? Pigeon.FIGEON : (select.equalsIgnoreCase("sigeon") ? Pigeon.SIGEON : Pigeon.FIGEAN)));
+		pigeon = new Pigeon(Stage.playerX/2, Stage.playerY, Stage.mCharacters, 50, (select.equalsIgnoreCase("figeon") ? Pigeon.FIGEON : (select.equalsIgnoreCase("sigeon") ? Pigeon.SIGEON : Pigeon.FIGEAN)));
 
-		badPigeons.add(new BadPigeon(playerX + 600, playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
-		badPigeons.add(new BadPigeon(playerX + 500, playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
+		badPigeons.add(new BadPigeon(Stage.playerX + 600, Stage.playerY - 100, Stage.mInvertedEnemyTextureRegion, 1));
+		badPigeons.add(new BadPigeon(Stage.playerX + 500, Stage.playerY + 450, Stage.mInvertedEnemyTextureRegion, 1));
 
 		this.setLevel("1");
 		
@@ -48,7 +46,6 @@ public class Stage1 extends Stage {
 		
 		super.profile.setScore(1);
 		String[] person_level = {select,"2"};
-		
 		Intent i = new Intent(this,Transition.class);
 		i.putExtra("level", person_level);
 		startActivity(i);
