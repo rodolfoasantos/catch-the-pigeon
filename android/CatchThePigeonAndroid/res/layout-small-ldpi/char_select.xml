@@ -12,21 +12,21 @@
 		android:layout_y="0dip">
 		<ImageButton
 			android:layout_height="30dip"
-			android:id="@+id/audio_button"
+			android:id="@+id/audio_button_char"
 			android:layout_width="30dip"
 			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
 			android:layout_x="60dip"
 			android:layout_y="280dip"></ImageButton>
 		<ImageButton
 			android:layout_width="30dip"
-			android:id="@+id/back_button"
+			android:id="@+id/back_button_char"
 			android:layout_height="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:layout_x="15dip"
 			android:layout_y="280dip"></ImageButton>
 		<ImageButton
 			android:layout_height="30dip"
-			android:id="@+id/help_button"
+			android:id="@+id/help_button_char"
 			android:layout_width="30dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_x="407dip"

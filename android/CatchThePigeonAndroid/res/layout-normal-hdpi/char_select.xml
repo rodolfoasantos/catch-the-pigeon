@@ -44,14 +44,14 @@
 			android:id="@+id/back_button"
 			android:layout_width="35dip"
 			android:layout_x="13dip"
-			android:layout_y="247dip"></ImageButton>
+			android:layout_y="270dip"></ImageButton>
 		<ImageButton
 			android:layout_height="35dip"
 			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
 			android:id="@+id/audio_button"
 			android:layout_width="35dip"
-			android:layout_x="49dip"
-			android:layout_y="247dip"></ImageButton>
+			android:layout_x="60dip"
+			android:layout_y="270dip"></ImageButton>
 
 	</AbsoluteLayout>
 </AbsoluteLayout>

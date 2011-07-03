@@ -198,14 +198,14 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/help_button"
+			android:id="@+id/help_button_transition"
 			android:layout_x="568dip"
 			android:layout_y="240dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/facebook_button"
+			android:id="@+id/facebook_button_transition"
 			android:layout_x="10dip"
 			android:layout_y="162dip"></ImageButton>
 		<ImageButton
@@ -219,7 +219,7 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/back_button_transition"
+			android:id="@+id/back_button"
 			android:layout_x="8dip"
 			android:layout_y="343dip"></ImageButton>
 		<ImageButton
