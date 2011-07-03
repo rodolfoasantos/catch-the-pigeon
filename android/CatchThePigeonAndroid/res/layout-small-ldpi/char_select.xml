@@ -8,8 +8,8 @@
 		android:id="@+id/absoluteLayout1"
 		android:layout_width="fill_parent"
 		android:background="@drawable/mosaic_pigeon_ima_selected_large"
-		android:layout_x="1dip"
-		android:layout_y="-1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<ImageButton
 			android:layout_height="30dip"
 			android:id="@+id/audio_button"

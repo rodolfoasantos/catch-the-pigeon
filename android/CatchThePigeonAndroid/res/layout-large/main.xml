@@ -8,8 +8,8 @@
 		android:layout_height="fill_parent"
 		android:background="@drawable/mosaic_pigeon_tela_abertura_layer_large"
 		android:id="@+id/absoluteLayout1"
-		android:layout_x="-1dip"
-		android:layout_y="1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<!--
 			<ImageView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:id="@+id/ImageViewPos6"
@@ -108,14 +108,16 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/main_score_tf4"
 			android:layout_x="399dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/main_score_tf5"
 			android:layout_x="468dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos3"
 			android:layout_width="wrap_content"

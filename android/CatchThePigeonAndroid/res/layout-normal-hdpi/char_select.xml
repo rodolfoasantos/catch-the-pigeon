@@ -8,50 +8,50 @@
 		android:id="@+id/absoluteLayout1"
 		android:layout_width="fill_parent"
 		android:background="@drawable/mosaic_pigeon_ima_selected_large"
-		android:layout_x="1dip"
-		android:layout_y="-1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<ImageButton
 			android:layout_height="80dip"
 			android:background="@drawable/mosaic_pigeon_ima_selected_figean"
 			android:id="@+id/selectFigean"
 			android:layout_width="80dip"
 			android:layout_x="240dip"
-			android:layout_y="27dip"></ImageButton>
+			android:layout_y="42dip"></ImageButton>
 		<ImageButton
 			android:layout_height="80dip"
 			android:background="@drawable/mosaic_pigeon_ima_selected_figeon"
 			android:id="@+id/selectFigeon"
 			android:layout_width="80dip"
 			android:layout_x="126dip"
-			android:layout_y="73dip"></ImageButton>
+			android:layout_y="88dip"></ImageButton>
 		<ImageButton
 			android:layout_height="80dip"
 			android:background="@drawable/mosaic_pigeon_ima_selected_sigeon"
 			android:id="@+id/selectSigeon"
 			android:layout_width="80dip"
 			android:layout_x="352dip"
-			android:layout_y="76dip"></ImageButton>
+			android:layout_y="91dip"></ImageButton>
 		<ImageButton
 			android:layout_height="50dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:id="@+id/help_button"
 			android:layout_width="50dip"
 			android:layout_x="477dip"
-			android:layout_y="175dip"></ImageButton>
+			android:layout_y="190dip"></ImageButton>
 		<ImageButton
 			android:layout_height="35dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_back"
 			android:id="@+id/back_button"
 			android:layout_width="35dip"
 			android:layout_x="13dip"
-			android:layout_y="232dip"></ImageButton>
+			android:layout_y="247dip"></ImageButton>
 		<ImageButton
 			android:layout_height="35dip"
 			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
 			android:id="@+id/audio_button"
 			android:layout_width="35dip"
 			android:layout_x="49dip"
-			android:layout_y="232dip"></ImageButton>
+			android:layout_y="247dip"></ImageButton>
 
 	</AbsoluteLayout>
 </AbsoluteLayout>

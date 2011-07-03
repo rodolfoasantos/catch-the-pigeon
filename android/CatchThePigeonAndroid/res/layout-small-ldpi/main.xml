@@ -8,8 +8,8 @@
 		android:layout_height="fill_parent"
 		android:background="@drawable/mosaic_pigeon_tela_abertura_layer_large"
 		android:id="@+id/absoluteLayout1"
-		android:layout_x="-1dip"
-		android:layout_y="1dip">
+		android:layout_x="0dip"
+		android:layout_y="0dip">
 		<!-- <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
 			android:id="@+id/ImageViewPos6" android:background="@drawable/mosaic_pigeon_img_layer_messege_box" 
 			android:layout_x="200dip" android:layout_y="283dip"> </ImageView> -->
@@ -92,7 +92,8 @@
 			android:id="@+id/main_score_tf1"
 			android:layout_x="135dip"
 			android:layout_y="61dip"
-			android:textSize="1.5pt"></TextView>
+			android:textSize="1.5pt" 
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos2"
 			android:layout_width="25dip"
@@ -100,7 +101,8 @@
 			android:id="@+id/main_score_tf2"
 			android:layout_x="180dip"
 			android:layout_y="61dip"
-			android:textSize="1.5pt"></TextView>
+			android:textSize="1.5pt"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos4"
 			android:layout_width="25dip"
@@ -108,7 +110,8 @@
 			android:id="@+id/main_score_tf3"
 			android:layout_x="225dip"
 			android:layout_y="61dip"
-			android:textSize="1.5pt"></TextView>
+			android:textSize="1.5pt"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="25dip"
@@ -116,7 +119,8 @@
 			android:id="@+id/main_score_tf4"
 			android:layout_x="265dip"
 			android:layout_y="61dip"
-			android:textSize="1.5pt"></TextView>
+			android:textSize="1.5pt"
+			android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos3"
 			android:layout_width="25dip"
@@ -124,7 +128,8 @@
 			android:id="@+id/main_score_tf5"
 			android:layout_x="310dip"
 			android:layout_y="61dip"
-			android:textSize="1.5pt"></TextView>
+			android:textSize="1.5pt"
+			android:textStyle="bold"></TextView>
 
 
 		<SlidingDrawer
