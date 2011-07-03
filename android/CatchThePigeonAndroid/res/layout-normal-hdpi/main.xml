@@ -55,7 +55,7 @@
 			android:layout_x="20dip"
 			android:layout_height="40dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_facebook"
-			android:id="@+id/facebook"
+			android:id="@+id/facebook_button"
 			android:layout_width="40dip"></ImageButton>
 		<ImageView
 			android:id="@+id/ImageViewPos6"
@@ -131,7 +131,6 @@
 			android:text="@string/pos4"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:id="@+id/TextView01"
 			android:layout_x="339dip"
 			android:layout_y="56dip"
 			android:id="@+id/main_score_tf4"></TextView>
@@ -163,8 +162,20 @@
 			android:id="@+id/main_score_tf5"
 			android:layout_x="400dip"
 			android:layout_y="56dip"></TextView>
-		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_start" android:layout_width="38dip" android:layout_height="38dip" android:id="@+id/start_game" android:layout_x="266dip" android:layout_y="182dip"></ImageButton>
-		<ImageButton android:background="@drawable/mosaic_pigeon_img_layer_help" android:layout_width="50dip" android:layout_height="50dip" android:id="@+id/help_button" android:layout_x="475dip" android:layout_y="188dip"></ImageButton>
+		<ImageButton 
+			android:background="@drawable/mosaic_pigeon_img_layer_start" 
+			android:layout_width="38dip" 
+			android:layout_height="38dip" 
+			android:id="@+id/start_game" 
+			android:layout_x="266dip" 
+			android:layout_y="182dip"></ImageButton>
+		<ImageButton 
+			android:background="@drawable/mosaic_pigeon_img_layer_help" 
+			android:layout_width="50dip" 
+			android:layout_height="50dip" 
+			android:id="@+id/help_button" 
+			android:layout_x="475dip" 
+			android:layout_y="188dip"></ImageButton>
 	</AbsoluteLayout>
 
 </AbsoluteLayout>

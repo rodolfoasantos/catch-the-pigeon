@@ -107,7 +107,6 @@
 
 		</SlidingDrawer>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
 			android:layout_width="28dip"
 			android:layout_height="27dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
@@ -115,7 +114,6 @@
 			android:layout_x="292dip"
 			android:layout_y="44dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
 			android:layout_width="28dip"
 			android:layout_height="27dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
@@ -165,7 +163,6 @@
 			android:layout_x="315dip"
 			android:layout_y="90dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
 			android:layout_width="28dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:id="@+id/transition_img_tf3"
@@ -180,7 +177,6 @@
 			android:layout_x="368dip"
 			android:layout_y="90dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
 			android:layout_width="28dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:id="@+id/transition_igm_tf4"
@@ -188,7 +184,6 @@
 			android:layout_x="318dip"
 			android:layout_y="93dip"></ImageView>
 		<ImageView
-			android:id="@+id/ImageViewPos6"
 			android:layout_width="28dip"
 			android:background="@drawable/mosaic_pigeon_ima_quadro_foto"
 			android:id="@+id/transition_img_tf5"
@@ -197,44 +192,39 @@
 			android:layout_y="92dip"></ImageView>
 		<TextView
 			android:layout_height="8dip"
-			android:textSize="5px"
 			android:layout_width="25dip"
 			android:text="@string/pos1"
 			android:id="@+id/transition_score_tf1"
 			android:layout_x="294dip"
-			android:layout_y="72dip"></TextView>
+			android:layout_y="72dip" android:textStyle="bold" android:textSize="1.5pt"></TextView>
 		<TextView
 			android:layout_height="8dip"
-			android:textSize="5px"
 			android:layout_width="25dip"
 			android:text="@string/pos4"
 			android:id="@+id/transition_score_tf2"
 			android:layout_x="345dip"
-			android:layout_y="73dip"></TextView>
+			android:layout_y="72dip" android:textStyle="bold" android:textSize="1.5pt"></TextView>
 		<TextView
 			android:layout_height="8dip"
-			android:textSize="5px"
 			android:layout_width="25dip"
 			android:text="@string/pos2"
 			android:id="@+id/transition_score_tf3"
-			android:layout_x="393dip"
-			android:layout_y="73dip"></TextView>
+			android:layout_x="394dip"
+			android:layout_y="72dip" android:textStyle="bold" android:textSize="1.5pt"></TextView>
 		<TextView
 			android:layout_height="8dip"
-			android:textSize="5px"
 			android:layout_width="25dip"
 			android:text="@string/pos3"
 			android:id="@+id/transition_score_tf4"
 			android:layout_x="321dip"
-			android:layout_y="121dip"></TextView>
+			android:layout_y="121dip" android:textStyle="bold" android:textSize="1.5pt"></TextView>
 		<TextView
 			android:layout_height="8dip"
-			android:textSize="5px"
 			android:layout_width="25dip"
 			android:text="@string/pos5"
 			android:id="@+id/transition_score_tf5"
 			android:layout_x="373dip"
-			android:layout_y="121dip"></TextView>
+			android:layout_y="121dip" android:textStyle="bold" android:textSize="1.5pt"></TextView>
 		<TextView android:text="50000" 
 			android:textStyle="bold" 
 			android:layout_height="wrap_content" 

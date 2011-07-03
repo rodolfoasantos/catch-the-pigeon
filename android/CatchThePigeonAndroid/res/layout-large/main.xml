@@ -94,21 +94,21 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/main_score_tf1"
 			android:layout_x="188dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip" android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/main_score_tf2"
 			android:layout_x="256dip"
-			android:layout_y="71dip"></TextView>
+			android:layout_y="71dip" android:textStyle="bold"></TextView>
 		<TextView
 			android:text="@string/pos4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/main_score_tf4"
 			android:layout_x="399dip"
-			android:layout_y="70dip"></TextView>
+			android:layout_y="71dip"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="wrap_content"
@@ -122,7 +122,8 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/main_score_tf3"
 			android:layout_x="331dip"
-			android:layout_y="70dip"></TextView>
+			android:layout_y="71dip" 
+			android:textStyle="bold"></TextView>
 
 
 		<SlidingDrawer
@@ -175,7 +176,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/twitter_button"
-			android:layout_x="30dip"
+			android:layout_x="27dip"
 			android:layout_y="254dip"></ImageButton>
 		<ImageButton
 			android:background="@drawable/mosaic_pigeon_img_layer_help"

@@ -91,40 +91,40 @@
 			android:layout_height="8dip"
 			android:id="@+id/main_score_tf1"
 			android:layout_x="135dip"
-			android:layout_y="62dip"
-			android:textSize="5px"></TextView>
+			android:layout_y="61dip"
+			android:textSize="1.5pt"></TextView>
 		<TextView
 			android:text="@string/pos2"
 			android:layout_width="25dip"
 			android:layout_height="8dip"
 			android:id="@+id/main_score_tf2"
 			android:layout_x="180dip"
-			android:layout_y="62dip"
-			android:textSize="5px"></TextView>
+			android:layout_y="61dip"
+			android:textSize="1.5pt"></TextView>
 		<TextView
 			android:text="@string/pos4"
 			android:layout_width="25dip"
 			android:layout_height="8dip"
 			android:id="@+id/main_score_tf3"
 			android:layout_x="225dip"
-			android:layout_y="62dip"
-			android:textSize="5px"></TextView>
+			android:layout_y="61dip"
+			android:textSize="1.5pt"></TextView>
 		<TextView
 			android:text="@string/pos5"
 			android:layout_width="25dip"
 			android:layout_height="8dip"
 			android:id="@+id/main_score_tf4"
 			android:layout_x="265dip"
-			android:layout_y="62dip"
-			android:textSize="5px"></TextView>
+			android:layout_y="61dip"
+			android:textSize="1.5pt"></TextView>
 		<TextView
 			android:text="@string/pos3"
 			android:layout_width="25dip"
 			android:layout_height="8dip"
 			android:id="@+id/main_score_tf5"
 			android:layout_x="310dip"
-			android:layout_y="62dip"
-			android:textSize="5px"></TextView>
+			android:layout_y="61dip"
+			android:textSize="1.5pt"></TextView>
 
 
 		<SlidingDrawer

@@ -169,14 +169,14 @@
 			android:layout_x="12dip"
 			android:layout_height="40dip"
 			android:background="@drawable/mosaic_pigeon_img_layer_twitter"
-			android:id="@+id/twitter_button_transition"
+			android:id="@+id/twitter_button"
 			android:layout_width="40dip"></ImageButton>
 		<ImageButton
 			android:layout_y="263dip"
 			android:layout_x="61dip"
 			android:layout_height="35dip"
 			android:background="@drawable/mosaic_pigeon_icon_audio_icon"
-			android:id="@+id/audio_button_transition"
+			android:id="@+id/audio_button"
 			android:layout_width="35dip"></ImageButton>
 		<ImageButton
 			android:layout_y="263dip"
