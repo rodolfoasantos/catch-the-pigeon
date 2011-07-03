@@ -60,7 +60,6 @@ import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
 import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import br.eng.mosaic.pigeon.client.infra.Config;
 import br.eng.mosaic.pigeon.client.infra.ConfigIF;
-import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
 
 public abstract class Stage extends BaseGameActivity implements IOnMenuItemClickListener {
 
@@ -107,7 +106,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public TextureRegion mParallaxLayerFront3;
 	public TextureRegion mCharacterLife;
 	public TextureRegion mHeart;
-	public TextureRegion mFacebook;
 
 	private Texture mFontTexture;
 	private Font mFont;
@@ -125,6 +123,10 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public static final int DIALOG_CHOOSE_MESSAGE = 0;
 	public static final int GAME_OVER = 1;
 
+	/* Calculate the coordinates for the face, so its centered on the camera. */
+	protected static int playerX;
+	protected static int playerY;
+	
 	public static String message;
 
 	@Override
@@ -161,12 +163,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		createCharacters();
 		mCharacterLife = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/" + (pigeon.getKindOfPigeon() == Pigeon.FIGEON ? "mosaic_pigeon_ima_figeon.png" : (pigeon.getKindOfPigeon() == Pigeon.SIGEON ? "mosaic_pigeon_ima_sigeon.png" : "mosaic_pigeon_ima_figean.png")), 352, 32);
 		mHeart = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_ima_life.png", 352, 84);
-		
-		String statusFb = "gfx/mosaic_pigeon_icon_facebook_off.png";
-		if ( PigeonSharedUser.get( this.getBaseContext()) != null ) {
-			statusFb = "gfx/mosaic_pigeon_icon_facebook_on.png";
-		}
-		mFacebook = TextureRegionFactory.createFromAsset(this.mTexture, this, statusFb, 352, 110);
 		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 				
