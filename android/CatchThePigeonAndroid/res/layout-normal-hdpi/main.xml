@@ -178,7 +178,7 @@
 			android:background="@drawable/mosaic_pigeon_img_layer_help" 
 			android:layout_width="50dip" 
 			android:layout_height="50dip" 
-			android:id="@+id/help_button_main" 
+			android:id="@+id/help_button" 
 			android:layout_x="476dip" 
 			android:layout_y="190dip"></ImageButton>
 	</AbsoluteLayout>

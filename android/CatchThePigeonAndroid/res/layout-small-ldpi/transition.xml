@@ -235,7 +235,7 @@
 			android:layout_y="121dip" 
 			android:textStyle="bold" 
 			android:textSize="1.5pt"></TextView>
-		<TextView android:text="50000" 
+		<TextView android:text="50000 pt" 
 			android:textStyle="bold" 
 			android:layout_height="wrap_content" 
 			android:id="@+id/transition_score" 
@@ -244,17 +244,8 @@
 			android:layout_x="216dip" 
 			android:layout_y="46dip" 
 			android:typeface="sans" 
-			android:textSize="3pt"></TextView>
-		<TextView android:layout_height="wrap_content" 
-			android:id="@+id/textView1" 
-			android:layout_width="wrap_content" 
-			android:layout_x="251dip" 
-			android:layout_y="47dip" 
-			android:typeface="sans" 
-			android:textSize="3pt" 
-			android:textStyle="bold" 
-			android:text="pt" 
-			android:textColor="#A0522D"></TextView>
+			android:textSize="4pt"></TextView>
+		
 		<TextView android:textSize="2.5pt" 
 			android:text="Level" 
 			android:textStyle="bold" 

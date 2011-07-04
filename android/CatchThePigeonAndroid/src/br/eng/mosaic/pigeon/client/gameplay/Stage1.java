@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.util.Log;
+import android.view.KeyEvent;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
@@ -16,6 +17,7 @@ import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 public class Stage1 extends Stage {
 
 	public String select;
+	private Boolean sair;
 		
 	@Override
 	protected void createCharacters() {
@@ -45,7 +47,8 @@ public class Stage1 extends Stage {
 	protected void nextStage() {
 		
 		super.profile.setScore(1);
-		String[] person_level = {select,"2"};
+		
+		String[] person_level = {select,"2",Integer.toString(profile.getScore())};
 		Intent i = new Intent(this,Transition.class);
 		i.putExtra("level", person_level);
 		startActivity(i);
@@ -83,6 +86,40 @@ public class Stage1 extends Stage {
 
 		this.mEngine.getTextureManager().loadTextures(this.mTexture,
 				this.mAutoParallaxBackgroundTexture);
+	}
+	/**
+	 * @author jamilson
+	 * @Description Implementation for button  back of Activity
+	 * @param Indentification of onclick for mouse
+	 * @return value boolean
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setMessage("Você realmente deseja sair ?")
+	               .setCancelable(false)
+	               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {                        
+	                       sair = true ;
+	                       startActivity(new Intent(getBaseContext(), SelectPerson.class));
+	                       
+	                   }
+	               })
+	               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                        dialog.cancel();
+	                   }
+	               });
+	        AlertDialog alert = builder.create();
+	        alert.show();
+	        return true;
+	    	
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 
 }

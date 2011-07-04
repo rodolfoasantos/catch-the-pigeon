@@ -1,9 +1,13 @@
 package br.eng.mosaic.pigeon.client.gui.menu;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -17,7 +21,8 @@ import br.eng.mosaic.pigeon.communication.StatusNetwork;
 public class MainActivity extends Activity {
 	
 	private StatusNetwork statusNetwork;
-	
+	private Boolean sair;
+
 	protected Drawable getDrawable(int id) {
     	return this.getResources().getDrawable( id );
     }
@@ -50,12 +55,25 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		findViewById(R.id.help_button).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				callHelp();
+			}
+		});
+		
 		findViewById(R.id.twitter_button_main).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				enviaMensagem();
 			}
 		});
 		
+	}
+	
+	private void callHelp() {
+		/*Intent i = new Intent(this, Help.class);
+		startActivity(i);*/
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=7PGLdk6FHnY")));
+
 	}
 	
 	private void startGame() {
@@ -95,7 +113,41 @@ public class MainActivity extends Activity {
 		startActivity(new Intent(this, SendMessage.class));
 	}
 	
-	@Override protected void onPause() {
+	/**
+	 * @author jamilson
+	 * @Description Implementation for button  back of Activity
+	 * @param Indentification of onclick for mouse
+	 * @return value boolean
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setMessage("Você realmente deseja sair ?")
+	               .setCancelable(false)
+	               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {                        
+	                       sair = true ;
+	                       finish();
+	                   }
+	               })
+	               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                        dialog.cancel();
+	                   }
+	               });
+	        AlertDialog alert = builder.create();
+	        alert.show();
+	        return true;
+	    	
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	protected void onPause() {
 		super.onPause();
 		setResult(RESULT_CANCELED);
 		finish(); // Close the screen

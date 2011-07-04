@@ -8,16 +8,18 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.communication.StatusNetwork;
 import br.eng.mosaic.pigeon.communication.ThreadScoreServer;
 
 public class Transition extends Activity{
-	
-	private ImageButton next,  back, audio, person;
-	private int cont;
-	
+
+	ImageButton next,  back, audio, person;
+	int cont;
+	TextView textscore, textLevel;
+
 	public static String[]  level;
 	public static int lev;
 	private StatusNetwork statusNetwork;
@@ -30,9 +32,13 @@ public class Transition extends Activity{
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
 		
-		statusNetwork = new StatusNetwork(this.getApplicationContext());
+		textLevel = (TextView) findViewById(R.id.transition_level);
+		textscore = (TextView) findViewById(R.id.transition_score);
+		textscore.setText(level[2].toString()+" pt");
+		textLevel.setText(level[1].toString());
 		
-		cont = 0;
+		statusNetwork = new  StatusNetwork(this.getBaseContext());
+		cont=0;
 		next  = (ImageButton) findViewById(R.id.next_level);
 		back = (ImageButton) findViewById(R.id.back_button_transition);
 		audio = (ImageButton) findViewById(R.id.audio_button_transition);

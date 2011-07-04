@@ -41,11 +41,10 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
@@ -57,9 +56,9 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
 import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
-import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import br.eng.mosaic.pigeon.client.infra.Config;
 import br.eng.mosaic.pigeon.client.infra.ConfigIF;
+import br.eng.mosaic.pigeon.communication.StatusNetwork;
 
 public abstract class Stage extends BaseGameActivity implements IOnMenuItemClickListener {
 
@@ -106,7 +105,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	public TextureRegion mParallaxLayerFront3;
 	public TextureRegion mCharacterLife;
 	public TextureRegion mHeart;
-
+	public TextureRegion rConnection;
+	
 	private Texture mFontTexture;
 	private Font mFont;
 
@@ -128,7 +128,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected static int playerY;
 	
 	public static String message;
-
+	
+	StatusNetwork statusNetwork;
+	
 	@Override
 	public Engine onLoadEngine() {
 		this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -140,7 +142,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	@Override
 	public void onLoadResources() {
 		this.scene = new Scene(1);
-					
+		statusNetwork = new StatusNetwork(this.getBaseContext());			
 		this.mTexture = new Texture(1024, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);		
 		
 		Stage.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_img_layer_pigeons.png", 0, 0, 3, 4);
@@ -157,12 +159,19 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.mEngine.getTextureManager().loadTexture(this.mFontTexture);
 		this.mEngine.getFontManager().loadFont(this.mFont);
 		// ---------------------
-
+		
 		setBackgroundParameter();
 
 		createCharacters();
 		mCharacterLife = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/" + (pigeon.getKindOfPigeon() == Pigeon.FIGEON ? "mosaic_pigeon_ima_figeon.png" : (pigeon.getKindOfPigeon() == Pigeon.SIGEON ? "mosaic_pigeon_ima_sigeon.png" : "mosaic_pigeon_ima_figean.png")), 352, 32);
 		mHeart = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_ima_life.png", 352, 84);
+		
+		if (statusNetwork. hasNetwork()) {
+			rConnection = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_icon_facebook_on.png", 352, 150);
+		} else {
+			rConnection = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_icon_facebook_off.png", 352, 150);
+		}
+		
 		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 				
@@ -229,6 +238,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 			@Override
 			public void onUpdate(final float pSecondsElapsed) {
+				//Log.i("aa", "Metodo onUpdate");
 				if (colisionLine.collidesWith(pigeon)) {
 					if (!nextStage) {
 						nextStage = true;
@@ -246,7 +256,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							birdDied(pigeon);
 							Stage.mPigeonDieSound.play();
 							Stage.mPigeonDieSound.setLooping(false);
-							
 							gameOver();
 							
 						}
@@ -285,7 +294,12 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			hud.getLastChild().attachChild(hearts.elementAt(i));		
 			posXLife += mHeart.getWidth() - 3;
 		}
-				
+		
+		Sprite rCon = new Sprite(0, 60, rConnection.getWidth(), rConnection.getHeight(), rConnection);		
+		hud.getLastChild().attachChild(rCon);
+		
+		
+		
 		mCamera.setHUD(hud);
 		//----------------------------------------------
 		
@@ -358,9 +372,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	
 	@Override
 	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+		
 		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
 			if(this.scene.hasChildScene()) {
 				/* Remove the menu and reset it. */
+				
 				this.mMenuScene.back();
 			} else {
 				/* Attach the menu. */
@@ -484,7 +500,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected abstract void setBackgroundParameter();
 	
 	protected void gameOver() {
-			Log.d("aa", "entrei");
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
@@ -495,7 +510,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			profile.setScore(-profile.getScore());
 			scoreText.setText("Score: " + profile.getScore());
 	}
-	
+
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();
