@@ -260,7 +260,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							birdDied(pigeon);
 							Stage.mPigeonDieSound.play();
 							Stage.mPigeonDieSound.setLooping(false);
-							Log.i("aa", "Teste antes gameOver()");
 							gameOver();
 							
 						}
@@ -377,9 +376,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	
 	@Override
 	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+		
 		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
 			if(this.scene.hasChildScene()) {
 				/* Remove the menu and reset it. */
+				
 				this.mMenuScene.back();
 			} else {
 				/* Attach the menu. */
@@ -503,7 +504,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected abstract void setBackgroundParameter();
 	
 	protected void gameOver() {
-			Log.i("aa", "entrei gameOver............................");
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
@@ -514,7 +514,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			profile.setScore(-profile.getScore());
 			scoreText.setText("Score: " + profile.getScore());
 	}
-	
+
 	protected abstract void createCharacters();
 
 	protected abstract void nextStage();

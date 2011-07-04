@@ -1,12 +1,15 @@
 package br.eng.mosaic.pigeon.client.gui.menu;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import br.eng.mosaic.pigeon.communication.ConnectionVerification;
 
 public class MainActivity extends Activity {
 	static final private int GET_CODE = 0;
+	private Boolean sair;
 	ConnectionVerification flagConnection;
 	protected Drawable getDrawable(int id) {
     	return this.getResources().getDrawable( id );
@@ -120,6 +124,40 @@ public class MainActivity extends Activity {
  	  
  	   return true;
  	}
+	
+	/**
+	 * @author jamilson
+	 * @Description Implementation for button  back of Activity
+	 * @param Indentification of onclick for mouse
+	 * @return value boolean
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setMessage("Você realmente deseja sair ?")
+	               .setCancelable(false)
+	               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {                        
+	                       sair = true ;
+	                       finish();
+	                   }
+	               })
+	               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                        dialog.cancel();
+	                   }
+	               });
+	        AlertDialog alert = builder.create();
+	        alert.show();
+	        return true;
+	    	
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 	
 	@Override
 	protected void onPause() {

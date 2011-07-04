@@ -4,13 +4,17 @@ import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.KeyEvent;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 
 public class Stage3 extends Stage {
 
 	public String select;
+	private Boolean sair;
 	
 	@Override
 	protected void createCharacters() {
@@ -73,4 +77,40 @@ public class Stage3 extends Stage {
 		this.mParallaxLayerFront3 = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, this,front3, 0, 900);
 		this.mEngine.getTextureManager().loadTextures(this.mTexture,this.mAutoParallaxBackgroundTexture);
 	}
+	
+	/**
+	 * @author jamilson
+	 * @Description Implementation for button  back of Activity
+	 * @param Indentification of onclick for mouse
+	 * @return value boolean
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setMessage("Você realmente deseja sair ?")
+	               .setCancelable(false)
+	               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {                        
+	                       sair = true ;
+	                       startActivity(new Intent(getBaseContext(), SelectPerson.class));
+	                       
+	                   }
+	               })
+	               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                        dialog.cancel();
+	                   }
+	               });
+	        AlertDialog alert = builder.create();
+	        alert.show();
+	        return true;
+	    	
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
+
 }
