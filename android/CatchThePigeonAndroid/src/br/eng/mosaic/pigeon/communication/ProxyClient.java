@@ -25,8 +25,6 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class ProxyClient {
 	
 	public enum Method {
@@ -103,7 +101,7 @@ public class ProxyClient {
 		HttpPost post = new HttpPost();
 		
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		BasicNameValuePair basic = new BasicNameValuePair("rafa", "valor");
+		BasicNameValuePair basic = new BasicNameValuePair("chave", "valor");
 		params.add( basic );
 		
 		UrlEncodedFormEntity encod = new UrlEncodedFormEntity(params, HTTP.UTF_8);

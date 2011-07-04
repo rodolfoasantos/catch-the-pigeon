@@ -3,7 +3,7 @@ package br.eng.mosaic.pigeon.communication;
 public class ServerConstants {
 
 	public static String getContextFromAndroid() {
-		return getContext("10.0.2.2"); 
+		return getContext("10.0.0.4"); 
 	}
 	
 	public static String getContextFromFacebook() {
@@ -12,7 +12,7 @@ public class ServerConstants {
 	}
 	
 	private static String getContext(String ip) {
-		return "http://" + ip + "/pigeon";
+		return "http://" + ip + ":8080/pigeon";
 	}
 	
 }

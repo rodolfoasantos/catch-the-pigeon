@@ -1,7 +1,5 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,66 +7,20 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
-import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
-import br.eng.mosaic.pigeon.communication.AsynCallback;
-import br.eng.mosaic.pigeon.communication.ConnectionVerification;
-import br.eng.mosaic.pigeon.communication.ProxyClient;
-import br.eng.mosaic.pigeon.communication.ServerConstants;
-import br.eng.mosaic.pigeon.communication.Source;
+import br.eng.mosaic.pigeon.communication.StatusNetwork;
+import br.eng.mosaic.pigeon.communication.ThreadScoreServer;
 
 public class Transition extends Activity{
-	ImageButton next,  back, audio, person;
-	int cont;
+	
+	private ImageButton next,  back, audio, person;
+	private int cont;
 	
 	public static String[]  level;
 	public static int lev;
-	
-	ConnectionVerification flagConnection;
-	
-	private void startThreadFromServer() {
-		new Thread() {
-			@Override public synchronized void start() {
-				
-					sendScore();
-				
-			}
-		}.start();
-	}
-	
-	private String[] getParams() {
-		String user = "" + PigeonSharedUser.get( this.getBaseContext() );
-		EditText edt = (EditText) findViewById(R.id.msg);
-		String message = edt.getText().toString();
-		message = (message == null || message.isEmpty()) 
-			? "mensagem n‹o especificada ... " + System.currentTimeMillis() : message;
-		String score = level[lev];
-		return new String[] { user, ""+score, message };	
-	}
-	
-	private String concatRealAddress(String uri) {
-		return ServerConstants.getContextFromAndroid() + "/" + uri;
-	}
-	
-	private  void sendScore() {
-		String[] params = getParams();
-		String url = Source.score.apply( params );
-		url = concatRealAddress(url);
-		
-		ProxyClient client = new ProxyClient();
-		client.execute(url, new AsynCallback() {
-			@Override public void onSucess(JSONObject json)  { 
-				Log.d("pigeon", "sucess:" + json.toString());
-			}
-			@Override public void onFailure(JSONObject json) {
-				Log.d("pigeon", "fail:" + json.toString());
-				//new QueueServer().exchange();
-			}
-		});
-	}
+	private StatusNetwork statusNetwork;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -78,8 +30,9 @@ public class Transition extends Activity{
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
 		
-		flagConnection = new ConnectionVerification();
-		cont=0;
+		statusNetwork = new StatusNetwork(this.getApplicationContext());
+		
+		cont = 0;
 		next  = (ImageButton) findViewById(R.id.next_level);
 		back = (ImageButton) findViewById(R.id.back_button_transition);
 		audio = (ImageButton) findViewById(R.id.audio_button_transition);
@@ -147,13 +100,20 @@ public class Transition extends Activity{
 			Log.e("Null", "audio button is null. See the names of the IDs in transition.xml");
 		}
 		
-		if (flagConnection.getFlagConnection())
-		{
-			startThreadFromServer();
+		if ( statusNetwork.hasNetwork() ) {
+			Log.d("rafa", "tem internet");
+			ThreadScoreServer thread = new ThreadScoreServer();
+			thread.configure(this, getScore());
+			thread.start();
 		}
 	}
 	
-
+	private String getScore() {
+		if (level == null) return null;
+		if ( lev > level.length || lev < 2 ) return null; 
+		return level[1];
+	}
+	
 	/**
 	 * @author jamilson
 	 * @Description Implementation for button  back of Activity
@@ -176,5 +136,4 @@ public class Transition extends Activity{
 		finish(); //Close the screen
 	}
 	
-
 }

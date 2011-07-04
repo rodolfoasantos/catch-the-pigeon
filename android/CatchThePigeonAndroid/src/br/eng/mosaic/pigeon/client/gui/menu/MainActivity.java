@@ -1,11 +1,8 @@
 package br.eng.mosaic.pigeon.client.gui.menu;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,11 +12,12 @@ import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.infra.SendMessage;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
-import br.eng.mosaic.pigeon.communication.ConnectionVerification;
+import br.eng.mosaic.pigeon.communication.StatusNetwork;
 
 public class MainActivity extends Activity {
-	static final private int GET_CODE = 0;
-	ConnectionVerification flagConnection;
+	
+	private StatusNetwork statusNetwork;
+	
 	protected Drawable getDrawable(int id) {
     	return this.getResources().getDrawable( id );
     }
@@ -30,19 +28,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		flagConnection = new ConnectionVerification();
-		flagConnection.setFlagConnection(false);
-		
-		findViewById(R.id.start_game).setOnClickListener(
-                new OnClickListener() {
-                    public void onClick(View v) {
-                        startGame();
-                    }
-                });
+		statusNetwork = new StatusNetwork( this.getApplicationContext() );
+		findViewById(R.id.start_game).setOnClickListener( new OnClickListener() {
+				public void onClick(View v) {
+					startGame();
+				}
+			});
 
-       
 		//showTopFive();
-		
         
         /*findViewById(R.id.high_score).setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -50,6 +43,7 @@ public class MainActivity extends Activity {
             }
         });
         */
+		
 		findViewById(R.id.facebook_button_main).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				loginFacebook();
@@ -61,7 +55,6 @@ public class MainActivity extends Activity {
 				enviaMensagem();
 			}
 		});
-		
 		
 	}
 	
@@ -81,48 +74,28 @@ public class MainActivity extends Activity {
 	}
 
 	private void showTopFive() {
-
 		Intent i = new Intent(this, TopFiveActivity.class);
 		startActivity(i);
 	}
 
 	private void showHighScore() {
-
 		Intent i = new Intent(this, HighScoreActivity.class);
 		startActivity(i);
 	}
 
 	private void loginFacebook() {
-		if (haveInternet(getBaseContext()))
-    	{
-			flagConnection.setFlagConnection(true);
+		if ( statusNetwork.hasNetwork() ) {
 			Intent i = new Intent(this, LoginFacebook.class);
 			startActivity(i);
-    	}else
-    	{
-    		flagConnection.setFlagConnection(false);
+		} else
     		Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
-    	}
 	}
 	
 	public void enviaMensagem() {
 		startActivity(new Intent(this, SendMessage.class));
 	}
 	
-	public static boolean haveInternet(Context ctx) {
- 	   NetworkInfo info = (NetworkInfo) ((ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
- 	   if (info == null || !info.isConnected()) {
- 	       return false;
- 	   }
- 	   if (info.isRoaming()) {
- 	       return false;
- 	   }
- 	  
- 	   return true;
- 	}
-	
-	@Override
-	protected void onPause() {
+	@Override protected void onPause() {
 		super.onPause();
 		setResult(RESULT_CANCELED);
 		finish(); // Close the screen

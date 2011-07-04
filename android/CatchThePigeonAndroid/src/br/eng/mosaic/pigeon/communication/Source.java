@@ -3,8 +3,6 @@ package br.eng.mosaic.pigeon.communication;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import android.util.Log;
-
 public enum Source {
 
 	score("param1/oauth/facebook/publish.do?score=param2&message=param3"),
@@ -33,7 +31,6 @@ public enum Source {
 				newUrl = newUrl.replace("param" + i++, param);
 			}
 			newUrl = newUrl + ";" + jsessionid;
-			Log.d("rafa", "limao:" + newUrl);
 			return newUrl;
 			
 		} catch (UnsupportedEncodingException e) {

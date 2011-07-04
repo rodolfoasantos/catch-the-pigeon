@@ -33,14 +33,11 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
-import br.eng.mosaic.pigeon.common.domain.Credential;
-import br.eng.mosaic.pigeon.common.domain.SocialNetwork;
 import br.eng.mosaic.pigeon.common.domain.User;
 
 import com.facebook.android.Facebook.DialogListener;
@@ -148,14 +145,9 @@ public class FbDialog extends Dialog {
 		}
 		
 		@Override
-		public void onReceivedError(WebView view, int errorCode,
-				String description, String failingUrl) {
+		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			super.onReceivedError(view, errorCode, description, failingUrl);
-			
-			Log.d("rafa", "fudeu:" + description + " : " + errorCode + " : " + failingUrl);
-			
-			mListener.onError(new DialogError(description, errorCode,
-					failingUrl));
+			mListener.onError(new DialogError(description, errorCode, failingUrl));
 			FbDialog.this.dismiss();
 		}
 
