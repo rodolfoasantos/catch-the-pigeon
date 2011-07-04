@@ -41,7 +41,7 @@ public class Stage2 extends Stage {
 		
 		super.profile.setScore(1);
 		
-		String[] person_level = {select,"3"};
+		String[] person_level = {select,"3",Integer.toString(profile.getScore())};
 		Intent i = new Intent(this,Transition.class);		
 		i.putExtra("level", person_level);
 		startActivity(i);

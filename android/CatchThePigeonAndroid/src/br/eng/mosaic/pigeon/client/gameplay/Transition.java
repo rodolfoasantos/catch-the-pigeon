@@ -2,6 +2,8 @@ package br.eng.mosaic.pigeon.client.gameplay;
 
 import org.json.JSONObject;
 
+import sun.font.TextSource;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.infra.PigeonSharedUser;
@@ -23,7 +26,7 @@ import br.eng.mosaic.pigeon.communication.Source;
 public class Transition extends Activity{
 	ImageButton next,  back, audio, person;
 	int cont;
-	
+	TextView textscore, textLevel;
 	public static String[]  level;
 	public static int lev;
 	
@@ -77,6 +80,11 @@ public class Transition extends Activity{
 		Intent intent = getIntent();
 		level = (String[]) intent.getSerializableExtra("level");
 		lev = Integer.parseInt(level[1]);
+		
+		textLevel = (TextView) findViewById(R.id.transition_level);
+		textscore = (TextView) findViewById(R.id.transition_score);
+		textscore.setText(level[2].toString()+" pt");
+		textLevel.setText(level[1].toString());
 		
 		flagConnection = new ConnectionVerification();
 		cont=0;
