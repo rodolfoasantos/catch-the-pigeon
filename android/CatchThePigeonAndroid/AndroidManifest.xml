@@ -63,6 +63,11 @@
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar" />
 		<activity
+			android:name=".gui.menu.Help"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar" />
+		<activity
 			android:name=".gameplay.Stage3"
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="landscape"

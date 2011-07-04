@@ -192,7 +192,7 @@
 			android:layout_x="17dip"
 			android:layout_y="234dip"></ImageButton>
 		<ImageButton
-			android:id="@+id/help_button_main"
+			android:id="@+id/help_button"
 			android:background="@drawable/mosaic_pigeon_img_layer_help"
 			android:layout_width="30dip"
 			android:layout_height="30dip"

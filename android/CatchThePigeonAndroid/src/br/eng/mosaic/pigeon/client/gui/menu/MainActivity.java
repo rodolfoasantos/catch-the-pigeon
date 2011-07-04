@@ -60,6 +60,12 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		findViewById(R.id.help_button).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				callHelp();
+			}
+		});
+		
 		findViewById(R.id.twitter_button_main).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				enviaMensagem();
@@ -67,6 +73,11 @@ public class MainActivity extends Activity {
 		});
 		
 		
+	}
+	
+	private void callHelp() {
+		Intent i = new Intent(this, Help.class);
+		startActivity(i);
 	}
 	
 	private void startGame() {
