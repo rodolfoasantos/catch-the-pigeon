@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,8 +73,10 @@ public class MainActivity extends Activity {
 	}
 	
 	private void callHelp() {
-		Intent i = new Intent(this, Help.class);
-		startActivity(i);
+		/*Intent i = new Intent(this, Help.class);
+		startActivity(i);*/
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=-fa8an6AZz0")));
+
 	}
 	
 	private void startGame() {
