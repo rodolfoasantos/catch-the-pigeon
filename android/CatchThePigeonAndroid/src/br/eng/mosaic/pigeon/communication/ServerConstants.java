@@ -15,4 +15,8 @@ public class ServerConstants {
 		return "http://" + ip + "/server";
 	}
 	
+	public static String getServerContext(){
+		return "http://www.mosaic.eng.br/server/topfive.do";
+	}
+	
 }
