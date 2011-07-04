@@ -9,7 +9,7 @@ import com.facebook.android.FbDialog;
 
 public class LoginFacebook extends Activity {
 	
-    public static final String APP_ID = "223093477704451";
+    public static final String APP_ID = "199453210096251";
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ public class LoginFacebook extends Activity {
     public void showDialog() throws Exception {
     	String url = "http://m.facebook.com/dialog/oauth/" +
     			"?scope=email,user_about_me,publish_stream" +
-    			"&client_id=114292618654468" +
+    			"&client_id=199453210096251" +
     			"&redirect_uri=" + ServerConstants.getContextFromFacebook() + "/oauth/facebook/callback.do";
     	new FbDialog(this, url, null).show();
     }

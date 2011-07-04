@@ -30,7 +30,7 @@ public class ThreadScoreServer extends Thread {
 	
 	private boolean hasValidMessage() {
 		String message = getMessage();
-		if ( message.trim().isEmpty() ) return false;
+		if ( message.trim().length() == 0 ) return false;
 		return true;
 	}
 	

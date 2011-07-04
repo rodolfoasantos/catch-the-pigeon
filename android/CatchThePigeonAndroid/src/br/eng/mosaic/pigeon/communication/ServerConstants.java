@@ -3,16 +3,16 @@ package br.eng.mosaic.pigeon.communication;
 public class ServerConstants {
 
 	public static String getContextFromAndroid() {
-		return getContext("10.0.0.4"); 
+		return getContext("mosaic.eng.br"); 
 	}
 	
 	public static String getContextFromFacebook() {
 		// informe aqui o ip/dns do server (sua maquina ou cloud)
-		return getContext("10.0.0.4");
+		return getContext("mosaic.eng.br");
 	}
 	
 	private static String getContext(String ip) {
-		return "http://" + ip + ":8080/pigeon";
+		return "http://" + ip + "/server";
 	}
 	
 }
