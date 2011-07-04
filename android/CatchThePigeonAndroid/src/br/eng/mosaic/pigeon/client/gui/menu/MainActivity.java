@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 	private void callHelp() {
 		/*Intent i = new Intent(this, Help.class);
 		startActivity(i);*/
-		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=-fa8an6AZz0")));
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=7PGLdk6FHnY")));
 
 	}
 	

@@ -161,7 +161,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.mEngine.getTextureManager().loadTexture(this.mFontTexture);
 		this.mEngine.getFontManager().loadFont(this.mFont);
 		// ---------------------
-
+		
 		setBackgroundParameter();
 
 		createCharacters();

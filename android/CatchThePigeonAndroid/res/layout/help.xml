@@ -7,6 +7,7 @@
     <VideoView 
         android:id="@+id/videoView" 
         android:layout_width="600px" 
-        android:layout_height="476px" />
+        android:layout_height="476px" 
+        />
         
 </LinearLayout> 
