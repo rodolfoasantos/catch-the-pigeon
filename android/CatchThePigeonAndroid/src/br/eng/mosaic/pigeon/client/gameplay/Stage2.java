@@ -44,8 +44,8 @@ public class Stage2 extends Stage {
 		
 	}
 
-	@Override
-	protected void gameOver() {}
+	//@Override
+	//protected void gameOver() {}
 
 	@Override
 	protected void setBackgroundParameter() {
