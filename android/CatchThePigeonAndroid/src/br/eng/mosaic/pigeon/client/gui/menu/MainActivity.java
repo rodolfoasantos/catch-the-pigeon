@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.SelectPerson;
+import br.eng.mosaic.pigeon.client.gameplay.SoundManager;
 import br.eng.mosaic.pigeon.client.gameplay.Stage;
 import br.eng.mosaic.pigeon.client.infra.SendMessage;
 import br.eng.mosaic.pigeon.client.infra.facebook.LoginFacebook;
@@ -28,7 +30,8 @@ import br.eng.mosaic.pigeon.communication.ServerConstants;
 import br.eng.mosaic.pigeon.communication.StatusNetwork;
 
 public class MainActivity extends Activity {
-
+	
+	private static SoundManager sm;
 	private StatusNetwork statusNetwork;
 	private Boolean sair;
 
@@ -41,6 +44,16 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+	    sm = SoundManager.getInstance(this);	   
+	    sm.addSound(R.raw.mosaic_pigeon_snd_intro); 
+	    sm.addSound(R.raw.mosaic_pigeon_snd_game);
+	    sm.addSound(R.raw.mosaic_pigeon_snd_transition);
+	    sm.addSound(R.raw.mosaic_pigeon_snd_punch_pigeon);
+	    sm.addSound(R.raw.mosaic_pigeon_snd_figeon);
+	    sm.addSound(R.raw.mosaic_pigeon_snd_figean);
+	    sm.addSound(R.raw.mosaic_pigeon_snd_sigeon);
 
 		statusNetwork = new StatusNetwork( this.getApplicationContext() );
 		

@@ -4,6 +4,7 @@ import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gui.menu.MainActivity;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,21 +16,32 @@ public class SelectPerson extends Activity {
 	
 	private ImageButton figeon, sigeon, figean, back, audio;
 	private int cont;
+	
+	public static int pigeonSelect;
+	public static boolean mute;
+	private static SoundManager sm;  
 		
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.char_select);
 		
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);  
+	    sm = SoundManager.getInstance(this);		
+	    mute = false;
 		figeon = (ImageButton) findViewById(R.id.selectFigeon);
 		sigeon = (ImageButton) findViewById(R.id.selectSigeon);
 		figean = (ImageButton) findViewById(R.id.selectFigean);
 		back = (ImageButton) findViewById(R.id.back_button_char);
 		audio = (ImageButton) findViewById(R.id.audio_button_char);
 		
+		sm.playSound(0);
+		
 		try {
 			figeon.setOnClickListener(new OnClickListener() {			
 				@Override
 				public void onClick(View v) {
+					sm.stopSounds();
+					pigeonSelect = 1;
 					Intent i = new Intent(SelectPerson.this, Stage1.class);
 					i.putExtra("select", "figeon");
 					startActivity(i);				
@@ -42,7 +54,9 @@ public class SelectPerson extends Activity {
 		try {
 			sigeon.setOnClickListener(new OnClickListener() {			
 				@Override
-				public void onClick(View v) {			
+				public void onClick(View v) {
+					sm.stopSounds();
+					pigeonSelect = 3;
 					Intent i = new Intent(SelectPerson.this, Stage1.class);
 					i.putExtra("select", "sigeon");
 					startActivity(i);
@@ -56,6 +70,8 @@ public class SelectPerson extends Activity {
 			figean.setOnClickListener(new OnClickListener() {			
 				@Override
 				public void onClick(View v) {
+					sm.stopSounds();
+					pigeonSelect = 2;
 					Intent i = new Intent(SelectPerson.this, Stage1.class);
 					i.putExtra("select", "figean");
 					startActivity(i);
@@ -69,6 +85,7 @@ public class SelectPerson extends Activity {
 			back.setOnClickListener(new OnClickListener() {			
 				@Override
 				public void onClick(View v) {
+					sm.stopSounds();
 					startActivity(new Intent(getBaseContext(), MainActivity.class));
 				}
 			});
@@ -82,9 +99,13 @@ public class SelectPerson extends Activity {
 				public void onClick(View v) { 
 					if (cont==0) {
 						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
+						mute = true;
+						sm.stopSounds();
 						cont++;
 					}else {
 						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);
+						mute = false;
+						sm.playSound(0);
 						cont=0;
 					} 				
 				}
@@ -105,6 +126,7 @@ public class SelectPerson extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 	    	startActivity(new Intent(getBaseContext(), MainActivity.class));
+	    	sm.stopSounds();
 	        return true;
 	    }
 	    return super.onKeyDown(keyCode, event);
