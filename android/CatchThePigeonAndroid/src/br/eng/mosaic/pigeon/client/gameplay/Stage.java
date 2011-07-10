@@ -45,6 +45,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
@@ -64,6 +65,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	public ConfigIF profile = Config.getInstance();
 	
+	private static SoundManager sm;
 	private ChangeableText scoreText;
 	private ChangeableText levelText;
 	
@@ -110,9 +112,9 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	private Texture mFontTexture;
 	private Font mFont;
 
-	public static Sound mExplosionSound;
-	public static Music mMainMusic;
-	public static Music mPigeonDieSound;
+	//public static Sound mExplosionSound;
+	//public static Music mMainMusic;
+	//public static Music mPigeonDieSound;
 
 	protected Vector<BadPigeon> badPigeons = new Vector<BadPigeon>();
 	protected Scene scene;
@@ -175,9 +177,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 				
-		mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
-		mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
-		mPigeonDieSound = AudioFactory.createMusic(mEngine, this, "mfx/mosaic_pigeon_snd_sigeon.ogg");	
+		//mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
+		//mMainMusic = AudioFactory.createMusic(mEngine, this, "mfx/sound_execution.ogg");
+		//mPigeonDieSound = AudioFactory.createMusic(mEngine, this, "mfx/mosaic_pigeon_snd_sigeon.ogg");
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);	          
+	    sm = SoundManager.getInstance(this);	
 	}
 
 	@Override
@@ -254,8 +258,8 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 							pigeon.setPosition(1000, -1000);
 							Pigeon.posX = 1000;
 							birdDied(pigeon);
-							Stage.mPigeonDieSound.play();
-							Stage.mPigeonDieSound.setLooping(false);
+							//Stage.mPigeonDieSound.play();
+							//Stage.mPigeonDieSound.setLooping(false);
 							gameOver();
 							
 						}
@@ -330,7 +334,11 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		scene.getLastChild().detachChild(bird);
 		badPigeons.remove(bird);
 		bird.setAlive(false);
-		Stage.mExplosionSound.play();
+		//Stage.mExplosionSound.play();
+		if (!SelectPerson.mute)
+			sm.playSound(3);
+		else
+			sm.stopSounds();
 	}
 
 	/**
@@ -356,18 +364,31 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 
 	@Override
 	public void onLoadComplete() {		
-		Stage.mMainMusic.play();		
+		if (!SelectPerson.mute){
+			//Stage.mMainMusic.play();
+			sm.playSound(1);
+			switch (SelectPerson.pigeonSelect){
+				case 1: sm.playSound(4);					
+					break;
+				case 2: sm.playSound(5);					
+					break;
+				case 3: sm.playSound(6);					
+					break;			
+			}			
+		}else{
+			sm.stopSounds();			
+		}	
 	}
 	public void onPause() {		
 		super.onPause();
-		Stage.mMainMusic.stop();
+		//Stage.mMainMusic.stop();
+		sm.stopSounds();
 		setResult(RESULT_CANCELED);
 		finish(); //Close the screen
 	}
 	
 	public void onStop() {
 		super.onStop();
-		Stage.mMainMusic.stop();
 	} 
 	
 	@Override
@@ -375,8 +396,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
 			if(this.scene.hasChildScene()) {
-				/* Remove the menu and reset it. */
-				
+				/* Remove the menu and reset it. */				
 				this.mMenuScene.back();
 			} else {
 				/* Attach the menu. */
@@ -398,6 +418,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 				/* Remove the menu and reset it. */
 				this.scene.clearChildScene();
 				this.mMenuScene.reset();
+				sm.playSound(1);
 				return true;
 			case MENU_QUIT:
 				/* End Activity. */

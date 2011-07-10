@@ -2,6 +2,7 @@ package br.eng.mosaic.pigeon.client.gameplay;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,10 +24,14 @@ public class Transition extends Activity{
 	public static String[]  level;
 	public static int lev;
 	private StatusNetwork statusNetwork;
+	private static SoundManager sm;  
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.transition);
+		
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);  
+	    sm = SoundManager.getInstance(this);
 	
 		Intent intent = getIntent();
 		level = (String[]) intent.getSerializableExtra("level");
@@ -43,6 +48,8 @@ public class Transition extends Activity{
 		back = (ImageButton) findViewById(R.id.back_button_transition);
 		audio = (ImageButton) findViewById(R.id.audio_button_transition);
 		person = (ImageButton) findViewById(R.id.level_person);
+		
+		sm.playSound(2);
 		
 		try {
 			if (level[0].equals("figean"))
@@ -61,11 +68,13 @@ public class Transition extends Activity{
 				@Override
 				public void onClick(View v) {
 					if (lev == 2) {
+						sm.stopSounds();
 						Intent i = new Intent(getBaseContext(),Stage2.class);
 						i.putExtra("select", level[0]);
 						startActivity(i);
 					}
 					if (lev == 3) {
+						sm.stopSounds();
 						Intent i = new Intent(getBaseContext(),Stage3.class);
 						i.putExtra("select", level[0]);
 						startActivity(i);					
@@ -83,6 +92,7 @@ public class Transition extends Activity{
 				public void onClick(View v) {
 					startActivity(new Intent(getBaseContext(), SelectPerson.class));
 					//Stage.mMainMusic.play();
+					sm.stopSounds();
 				}
 			});
 		} catch (NullPointerException np) {
@@ -95,9 +105,13 @@ public class Transition extends Activity{
 				public void onClick(View v) {
 					if (cont==0) {
 						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);					
+						SelectPerson.mute = true;
+						sm.stopSounds();	
 						cont++;
 					} else {
 						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_icon);					
+						SelectPerson.mute = false;
+						sm.playSound(2);
 						cont=0;
 					}
 				}
@@ -130,6 +144,7 @@ public class Transition extends Activity{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 	    	startActivity(new Intent(getBaseContext(), SelectPerson.class));
+	    	sm.stopSounds();
 	        return true;
 	    }
 	    return super.onKeyDown(keyCode, event);
