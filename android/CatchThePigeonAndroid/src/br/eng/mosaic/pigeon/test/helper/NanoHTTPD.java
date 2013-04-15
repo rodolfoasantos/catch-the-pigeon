@@ -1,5 +1,6 @@
 package br.eng.mosaic.pigeon.test.helper;
 
+import android.annotation.SuppressLint;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -72,7 +73,7 @@ import java.io.FileOutputStream;
  * See the end of the source file for distribution license (Modified BSD
  * licence)
  */
-@SuppressWarnings("unchecked")
+@SuppressLint("DefaultLocale")
 public class NanoHTTPD {
 
 	/*
@@ -101,6 +102,7 @@ public class NanoHTTPD {
 	 *            Header entries, percent decoded
 	 * @return HTTP response, see class Response for details
 	 */
+	@SuppressWarnings("rawtypes")
 	protected Response serve(String uri, String method, Properties header,
 			Properties parms, Properties files) {
 		System.out.println(method + " '" + uri + "' ");
@@ -600,14 +602,14 @@ public class NanoHTTPD {
 		public int[] getBoundaryPositions(byte[] b, byte[] boundary) {
 			int matchcount = 0;
 			int matchbyte = -1;
-			Vector matchbytes = new Vector();
+			Vector<Integer> matchbytes = new Vector<Integer>();
 			for (int i = 0; i < b.length; i++) {
 				if (b[i] == boundary[matchcount]) {
 					if (matchcount == 0)
 						matchbyte = i;
 					matchcount++;
 					if (matchcount == boundary.length) {
-						matchbytes.addElement(new Integer(matchbyte));
+						matchbytes.addElement(Integer.valueOf(matchbyte));
 						matchcount = 0;
 						matchbyte = -1;
 					}
@@ -743,7 +745,7 @@ public class NanoHTTPD {
 					pw.print("Date: " + gmtFrmt.format(new Date()) + "\r\n");
 
 				if (header != null) {
-					Enumeration e = header.keys();
+					Enumeration<Object> e = header.keys();
 					while (e.hasMoreElements()) {
 						String key = (String) e.nextElement();
 						String value = header.getProperty(key);
@@ -783,7 +785,6 @@ public class NanoHTTPD {
 	 * URL-encodes everything between "/"-characters. Encodes spaces as '%20'
 	 * instead of '+'.
 	 */
-	@SuppressWarnings("deprecation")
 	private String encodeUri(String uri) {
 		String newUri = "";
 		StringTokenizer st = new StringTokenizer(uri, "/ ", true);
@@ -950,7 +951,7 @@ public class NanoHTTPD {
 	/**
 	 * Hashtable mapping (String)FILENAME_EXTENSION -> (String)MIME_TYPE
 	 */
-	private static Hashtable theMimeTypes = new Hashtable();
+	private static Hashtable<String, String> theMimeTypes = new Hashtable<String, String>();
 	static {
 		StringTokenizer st = new StringTokenizer("css		text/css "
 				+ "js			text/javascript " + "htm		text/html "

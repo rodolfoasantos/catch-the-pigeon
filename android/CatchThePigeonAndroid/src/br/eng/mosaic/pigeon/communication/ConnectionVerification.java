@@ -8,6 +8,6 @@ public class ConnectionVerification {
 	}
 
 	public void setFlagConnection(Boolean flagConnection) {
-		this.flagConnection = flagConnection;
+		ConnectionVerification.flagConnection = flagConnection;
 	}
 }

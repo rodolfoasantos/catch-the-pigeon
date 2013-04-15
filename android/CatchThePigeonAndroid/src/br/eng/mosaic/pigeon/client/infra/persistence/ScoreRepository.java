@@ -49,13 +49,11 @@ public class ScoreRepository {
 
 	public long save(Score score) {
 		long id = score.id;
-
 		if (id != 0) {
 			update(score);
 		} else {
 			id = insert(score);
 		}
-
 		return id;
 	}
 

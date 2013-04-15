@@ -25,5 +25,6 @@
     <string name="start_game">Start Game</string> 
     <string name="top_five">Top Five</string>
     <string name="high_score">High Score</string>        
-
+	<string name="description">High Score</string>
+	<string name="is_sair">Você quer mesmo sair?</string>
 </resources>

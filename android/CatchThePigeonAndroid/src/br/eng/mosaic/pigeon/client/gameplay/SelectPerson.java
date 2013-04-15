@@ -14,7 +14,11 @@ import android.widget.ImageButton;
 
 public class SelectPerson extends Activity {
 	
-	private ImageButton figeon, sigeon, figean, back, audio;
+	private ImageButton figeon;
+	private ImageButton sigeon;
+	private ImageButton figean;
+	private ImageButton back;
+	private ImageButton audio;
 	private int cont;
 	
 	public static int pigeonSelect;
@@ -31,8 +35,8 @@ public class SelectPerson extends Activity {
 		figeon = (ImageButton) findViewById(R.id.selectFigeon);
 		sigeon = (ImageButton) findViewById(R.id.selectSigeon);
 		figean = (ImageButton) findViewById(R.id.selectFigean);
-		back = (ImageButton) findViewById(R.id.back_button_char);
-		audio = (ImageButton) findViewById(R.id.audio_button_char);
+		back = (ImageButton) findViewById(R.id.back_button);
+		audio = (ImageButton) findViewById(R.id.audio_button);
 		
 		sm.playSound(0);
 		
@@ -42,7 +46,8 @@ public class SelectPerson extends Activity {
 				public void onClick(View v) {
 					sm.stopSounds();
 					pigeonSelect = 1;
-					Intent i = new Intent(SelectPerson.this, Stage1.class);
+					Intent i = new Intent(getBaseContext(), Stage1.class);
+				//	i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					i.putExtra("select", "figeon");
 					startActivity(i);				
 				}
@@ -57,7 +62,7 @@ public class SelectPerson extends Activity {
 				public void onClick(View v) {
 					sm.stopSounds();
 					pigeonSelect = 3;
-					Intent i = new Intent(SelectPerson.this, Stage1.class);
+					Intent i = new Intent(getBaseContext(), Stage1.class);
 					i.putExtra("select", "sigeon");
 					startActivity(i);
 				}
@@ -72,7 +77,7 @@ public class SelectPerson extends Activity {
 				public void onClick(View v) {
 					sm.stopSounds();
 					pigeonSelect = 2;
-					Intent i = new Intent(SelectPerson.this, Stage1.class);
+					Intent i = new Intent(getBaseContext(), Stage1.class);
 					i.putExtra("select", "figean");
 					startActivity(i);
 				}
@@ -97,7 +102,7 @@ public class SelectPerson extends Activity {
 			audio.setOnClickListener(new OnClickListener() {			
 				@Override
 				public void onClick(View v) { 
-					if (cont==0) {
+					if (cont == 0) {
 						v.setBackgroundResource(R.drawable.mosaic_pigeon_icon_audio_mute);
 						mute = true;
 						sm.stopSounds();

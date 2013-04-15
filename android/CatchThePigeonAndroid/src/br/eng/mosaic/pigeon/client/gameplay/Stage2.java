@@ -3,18 +3,20 @@ package br.eng.mosaic.pigeon.client.gameplay;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import br.eng.mosaic.pigeon.client.R;
 import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
-import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 
-public class Stage2 extends Stage {
+public class Stage2 extends Stage implements View.OnClickListener {
 	
 	public String select;
-	private Boolean sair;
+	public Dialog dialog;
+	//private Boolean sair;
 	
 	@Override
 	protected void createCharacters() {
@@ -57,7 +59,7 @@ public class Stage2 extends Stage {
 		setBackgroundFront("gfx/mosaic_pigeon_ima_stage02_layer02.png");
 		setBackgroundFront2("gfx/mosaic_pigeon_ima_stage02_layer03.png");
 		setBackgroundFront3("gfx/mosaic_pigeon_ima_stage02_layer04.png");	
-	}	
+	}
 
 	public void createBackgroundTest(String back, String mid, String front, String front2, String front3){
 		this.mAutoParallaxBackgroundTexture = new Texture(1024, 1024, TextureOptions.DEFAULT);
@@ -77,31 +79,51 @@ public class Stage2 extends Stage {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		
-		
 	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	dialog = new Dialog(Stage2.this, android.R.style.Theme_Translucent);
+	    	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    	dialog.setCancelable(true);
+	    	dialog.setContentView(R.layout.dialog);
 	    	
-	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	        builder.setMessage("Você realmente deseja sair ?")
-	               .setCancelable(false)
-	               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {                        
-	                       sair = true ;
-	                       startActivity(new Intent(getBaseContext(), SelectPerson.class));
-	                       
-	                   }
-	               })
-	               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                        dialog.cancel();
-	                   }
-	               });
-	        AlertDialog alert = builder.create();
-	        alert.show();
+	    	Button btnYes = (Button) dialog.findViewById(R.id.btnsearch);
+	    	Button btnNo = (Button) dialog.findViewById(R.id.btncancel);
+	    	
+	    	btnYes.setOnClickListener(this);
+	    	btnNo.setOnClickListener(this);
+	    	dialog.show();
+	    	
+//	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	        builder.setMessage("Você realmente deseja sair ?")
+//	               .setCancelable(false)
+//	               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+//	                   public void onClick(DialogInterface dialog, int id) {                        
+//	                      // sair = true ;
+//	                       startActivity(new Intent(getBaseContext(), SelectPerson.class));
+//	                   }
+//	               })
+//	               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+//	                   public void onClick(DialogInterface dialog, int id) {
+//	                        dialog.cancel();
+//	                   }
+//	               });
+//	        AlertDialog alert = builder.create();
+//	        alert.setTitle("Estágio 1");
+//	        alert.setIcon(R.drawable.mosaic_pigeon_ima_icone);
+//    		alert.show();
 	        return true;
-	    	
 	    }
 	    return super.onKeyDown(keyCode, event);
 	}
 
-
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnsearch:
+			startActivity(new Intent(getBaseContext(), SelectPerson.class));
+			break;
+		case R.id.btncancel:
+			dialog.dismiss();
+			break;
+		}
+	}
 }

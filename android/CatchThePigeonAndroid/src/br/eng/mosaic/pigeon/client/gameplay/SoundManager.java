@@ -1,9 +1,7 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Stack;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;

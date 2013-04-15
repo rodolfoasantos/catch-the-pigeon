@@ -2,8 +2,6 @@ package br.eng.mosaic.pigeon.client.gameplay.cast;
 
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
-import android.util.Log;
-
 public class BadPigeon extends Ave {
 	
 	/** Velocidade da Ave */	
@@ -25,7 +23,7 @@ public class BadPigeon extends Ave {
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) { 
-		this.mPhysicsHandler.setVelocityX(this.velocity * (Pigeon.posX < this.getX() ? - 1: 1));
+		this.mPhysicsHandler.setVelocityX(BadPigeon.velocity * (Pigeon.posX < this.getX() ? - 1: 1));
 		//A perseguicao e feita calculando a diferenca de altura entre o pombo mau e o bom e em seguindo diminuindo a distancia entre eles com a porcentagem entre a distancia do pombo mau e o bom		
 		this.mPhysicsHandler.setVelocityY((Pigeon.posY - this.getY()) * (this.getX()/Pigeon.posX));
 		super.onManagedUpdate(pSecondsElapsed);

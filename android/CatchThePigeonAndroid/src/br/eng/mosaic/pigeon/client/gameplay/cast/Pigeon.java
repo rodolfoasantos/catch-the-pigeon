@@ -58,7 +58,7 @@ public class Pigeon extends Ave {
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
-		this.mPhysicsHandler.setVelocityX(this.velocity);
+		this.mPhysicsHandler.setVelocityX(Pigeon.velocity);
 		Pigeon.posX = this.getX();
 		Pigeon.posY = this.getY();
 		super.onManagedUpdate(pSecondsElapsed);

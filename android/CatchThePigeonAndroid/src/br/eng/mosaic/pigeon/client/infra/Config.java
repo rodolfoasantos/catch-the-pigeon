@@ -14,12 +14,11 @@ public class Config implements ConfigIF{
 	
 	private static ConfigIF singleton = null;
 	
-	private Activity context = null;
+	//private Activity context = null;
 	
 	private SharedPreferences settings;
 
-	private Config() {
-	}
+	private Config() {}
 
 	public static ConfigIF getInstance() {
 		if (singleton == null) {
@@ -29,7 +28,7 @@ public class Config implements ConfigIF{
 	}
 	
 	public void setContext(Activity context) {
-		this.context = context;
+		//this.context = context;
 		this.settings = context.getSharedPreferences(PREFS_NAME, 0);
 	}
 
@@ -51,20 +50,16 @@ public class Config implements ConfigIF{
 	@Override
 	public void login(String userOrEmail) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void login(String user, String email) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
 	public int getScore() {
 		return settings.getInt("score", 0);
-		
-		
 	}
 
 	@Override
@@ -74,7 +69,5 @@ public class Config implements ConfigIF{
 		editor.putInt("score", score);
 		// Commit the edits!
 		editor.commit();
-		
 	}
-
 }

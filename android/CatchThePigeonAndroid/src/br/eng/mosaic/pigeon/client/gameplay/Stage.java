@@ -1,11 +1,7 @@
 package br.eng.mosaic.pigeon.client.gameplay;
 
 import java.util.Vector;
-
 import javax.microedition.khronos.opengles.GL10;
-
-import org.anddev.andengine.audio.music.Music;
-import org.anddev.andengine.audio.sound.Sound;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.camera.hud.HUD;
@@ -15,7 +11,6 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.entity.scene.CameraScene;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
@@ -37,7 +32,6 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -55,7 +49,6 @@ import br.eng.mosaic.pigeon.client.gameplay.cast.BadPigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.Pigeon;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.BirdExplosion;
 import br.eng.mosaic.pigeon.client.gameplay.cast.anim.FeatherEvent;
-import br.eng.mosaic.pigeon.client.gameplay.util.AudioFactory;
 import br.eng.mosaic.pigeon.client.gameplay.util.GameUtil;
 import br.eng.mosaic.pigeon.client.infra.Config;
 import br.eng.mosaic.pigeon.client.infra.ConfigIF;
@@ -120,7 +113,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 	protected Scene scene;
 	protected static Pigeon pigeon;
 
-	private CameraScene mPauseScene;
+	//private CameraScene mPauseScene;
 
 	public static final int DIALOG_CHOOSE_MESSAGE = 0;
 	public static final int GAME_OVER = 1;
@@ -174,7 +167,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			rConnection = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/mosaic_pigeon_icon_facebook_off.png", 352, 150);
 		}
 		
-		
 		createBackgroundTest(backgroundBack, backgroundMid, backgroundFront,backgroundFront2, backgroundFront3);
 				
 		//mExplosionSound = AudioFactory.createSound(mEngine, this, "mfx/pigeon_snd_punch.ogg");
@@ -205,7 +197,7 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		this.scoreText = new ChangeableText(490, 10, this.mFont, "Score: " + profile.getScore(), "Highcore: XXXXX".length());
 		scene.getLastChild().attachChild(scoreText);
 		
-		// -------------- Criando Retangulo para colis√£o --------------------
+		// -------------- Criando Retangulo para colisão --------------------
 		final int rectangleX = (CAMERA_WIDTH) + 1;
 		final int rectangleY = (CAMERA_HEIGHT);
 		final Rectangle colisionLine = new Rectangle(rectangleX, 0, rectangleX + 1, rectangleY);
@@ -301,8 +293,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		
 		Sprite rCon = new Sprite(0, 60, rConnection.getWidth(), rConnection.getHeight(), rConnection);		
 		hud.getLastChild().attachChild(rCon);
-		
-		
 		
 		mCamera.setHUD(hud);
 		//----------------------------------------------
@@ -429,7 +419,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 		}
 	}
 	
-	
 	public void setBackgroundBack(String backgroundBack) {
 		this.backgroundBack = backgroundBack;
 	}
@@ -461,26 +450,28 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 			ipEditText.setText(message);
 			return new AlertDialog.Builder(this)
 				.setIcon(R.drawable.facebook_icon)
-				.setTitle("Your Message").setCancelable(false)
+				.setTitle("Sua Mensagem").setCancelable(false)
 				.setView(ipEditText)
-				.setPositiveButton("Send", new OnClickListener() {
+				.setPositiveButton("Enviar", new OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface pDialog,
 							final int pWhich) {
 						message = ipEditText.getText().toString();
 					}
-				}).setNegativeButton("Cancel", new OnClickListener() {
+				}).setNegativeButton("Cancelar", new OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface pDialog, final int pWhich) {
 						Stage.this.onResume();
 					}
 				}).create();
 		case GAME_OVER:
+			Dialog dialog = new Dialog(this);
+			
 			return new AlertDialog.Builder(this)
 			.setIcon(R.drawable.facebook_icon)
-			.setTitle("Game Over").setCancelable(false)
-			.setMessage("You Died!")
-			.setPositiveButton("Try Again", new OnClickListener() {
+			.setTitle("Fim de jogo").setCancelable(false)
+			.setMessage("Você morreu!")
+			.setPositiveButton("Tente de novo!", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Intent i = new Intent(getBaseContext(), Stage1.class);

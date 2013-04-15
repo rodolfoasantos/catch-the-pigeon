@@ -18,7 +18,6 @@ import android.util.Log;
 
 public class CommunicationUtil {
 
-
 	public static String getFileContent(String url) {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(url);

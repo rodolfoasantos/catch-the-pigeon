@@ -1,7 +1,5 @@
 package br.eng.mosaic.pigeon.client.gameplay.util;
 
-import java.io.IOException;
-
 import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.music.MusicFactory;
 import org.anddev.andengine.audio.sound.Sound;

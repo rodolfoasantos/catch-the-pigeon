@@ -13,7 +13,7 @@ public class SocialNetwork {
 	public SocialNetwork(String id, String name){
 		this.id = id;
 		this.name = name;
-		User u = new User();
+		//User u = new User();
 	}
 	
 	/**

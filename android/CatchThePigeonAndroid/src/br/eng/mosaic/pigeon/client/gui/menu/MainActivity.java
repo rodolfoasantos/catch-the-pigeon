@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 	
 	private static SoundManager sm;
 	private StatusNetwork statusNetwork;
-	private Boolean sair;
+	//private Boolean sair;
 
 	protected Drawable getDrawable(int id) {
 		return this.getResources().getDrawable( id );
@@ -116,18 +116,18 @@ public class MainActivity extends Activity {
 		startActivity(i);
 	}
 
-	private void showTopFive() {
-		Intent i = new Intent(this, TopFiveActivity.class);
-		startActivity(i);
-	}
-
-	private void showHighScore() {
-		Intent i = new Intent(this, HighScoreActivity.class);
-		startActivity(i);
-	}
+//	private void showTopFive() {
+//		Intent i = new Intent(this, TopFiveActivity.class);
+//		startActivity(i);
+//	}
+//
+//	private void showHighScore() {
+//		Intent i = new Intent(this, HighScoreActivity.class);
+//		startActivity(i);
+//	}
 
 	private void loginFacebook() {
-		if ( statusNetwork.hasNetwork() ) {
+		if (statusNetwork.hasNetwork()) {
 			Intent i = new Intent(this, LoginFacebook.class);
 			startActivity(i);
 		} else
@@ -150,15 +150,15 @@ public class MainActivity extends Activity {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Vocï¿½ realmente deseja sair ?")
+			builder.setMessage("Você realmente deseja sair?")
 			.setCancelable(false)
 			.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {                        
-					sair = true ;
+					//sair = true ;
 					finish();
 				}
 			})
-			.setNegativeButton("Nï¿½o", new DialogInterface.OnClickListener() {
+			.setNegativeButton("Não", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					dialog.cancel();
 				}

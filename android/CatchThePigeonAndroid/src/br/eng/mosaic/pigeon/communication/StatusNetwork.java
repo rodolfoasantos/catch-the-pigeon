@@ -29,8 +29,6 @@ public class StatusNetwork {
  	   if (info.isRoaming()) {
  	       return false;
  	   }
- 	  
  	   return true;
  	}
-
 }

@@ -2,17 +2,13 @@ package br.eng.mosaic.pigeon.client.gameplay.cast;
 
 import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
-
 import android.util.Log;
-import br.eng.mosaic.pigeon.client.gameplay.Stage;
 
 public abstract class Ave extends AnimatedSprite {
 	
 	protected final PhysicsHandler mPhysicsHandler;
-	private final TiledTextureRegion pTextureRegion;
+	//private final TiledTextureRegion pTextureRegion;
 	
 	protected boolean alive = true;
 	
@@ -24,7 +20,7 @@ public abstract class Ave extends AnimatedSprite {
 	public Ave(final float pX, final float pY, final TiledTextureRegion pTextureRegion, int life) {
 		super(pX, pY, pTextureRegion);
 		this.life = life;
-		this.pTextureRegion = pTextureRegion;
+		//this.pTextureRegion = pTextureRegion;
 		
 		this.setScale(2);
 		this.animate(new long[]{millisecondsByFrame, millisecondsByFrame, millisecondsByFrame}, 3, 5, true);
@@ -34,7 +30,7 @@ public abstract class Ave extends AnimatedSprite {
 	}
 	
 	/**
-	 * Quando a ave sofrer dano esse m√©todo ser√° chamado.
+	 * Quando a ave sofrer dano, esse mÈtodo ser· chamado.
 	 * @return O personagem morreu?
 	 */
 	public boolean sufferDamage() {

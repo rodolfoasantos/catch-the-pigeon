@@ -16,5 +16,4 @@ public interface ConfigIF {
 	
 	public void setScore(int count);
 
-
 }

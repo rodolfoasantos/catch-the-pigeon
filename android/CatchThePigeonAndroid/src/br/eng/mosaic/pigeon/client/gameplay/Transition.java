@@ -60,7 +60,7 @@ public class Transition extends Activity{
 				person.setBackgroundResource(R.drawable.mosaic_pigeon_ima_layer_figeon_noselection);
 		} catch (NullPointerException np) {
 			Log.e("Null", "person button is null. See the names of the IDs in transition.xml");
-		}	
+		}
 						
 		//Stage.mMainMusic.stop();
 		try {
@@ -78,6 +78,12 @@ public class Transition extends Activity{
 						Intent i = new Intent(getBaseContext(),Stage3.class);
 						i.putExtra("select", level[0]);
 						startActivity(i);					
+					}
+					if(lev == 4){
+						sm.stopSounds();
+						Intent i = new Intent(getBaseContext(),Stage4.class);
+						i.putExtra("select", level[0]);
+						startActivity(i);				
 					}
 					BadPigeon.velocity *= 1.5;
 				}
