@@ -63,7 +63,7 @@ public class Stage1 extends Stage implements View.OnClickListener{
 		setBackgroundFront("gfx/sorvete2.png");
 		setBackgroundFront2("gfx/sorvete2.png");
 		setBackgroundFront3("gfx/sorvete2.png");	
-		
+
 		//setBackgroundMid("gfx/parallax_background_layer_mid.png");		
 	}
 	

@@ -43,7 +43,7 @@ public class Stage4 extends Stage implements View.OnClickListener {
 		
 		super.profile.setScore(1);
 		
-		String[] person_level = {select,"1",Integer.toString(profile.getScore())};
+		String[] person_level = {select,"5",Integer.toString(profile.getScore())};
 		Intent i = new Intent(this,Transition.class);
 		i.putExtra("level", person_level);
 		startActivity(i);		
