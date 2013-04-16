@@ -465,8 +465,6 @@ public abstract class Stage extends BaseGameActivity implements IOnMenuItemClick
 					}
 				}).create();
 		case GAME_OVER:
-			Dialog dialog = new Dialog(this);
-			
 			return new AlertDialog.Builder(this)
 			.setIcon(R.drawable.facebook_icon)
 			.setTitle("Fim de jogo").setCancelable(false)

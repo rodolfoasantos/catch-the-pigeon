@@ -58,6 +58,7 @@ public class Stage1 extends Stage implements View.OnClickListener{
 
 	@Override
 	protected void setBackgroundParameter() {
+		
 		setBackgroundBack("gfx/mosaic_pigeon_ima_stage04_layer01.png");
 		setBackgroundFront("gfx/sorvete2.png");
 		setBackgroundFront2("gfx/sorvete2.png");
